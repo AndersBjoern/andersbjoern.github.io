@@ -11,6 +11,7 @@
 }
 :root {
   --contrast-color: #0a1392;
+  --pink: #7a2626;
   --dark-contrast-color: #180851;
 }
 
@@ -166,6 +167,7 @@ section.first h3 {
 }
 
 .Scroller-container {
+  margin-top: 150px;
   width: 100%;
   position: relative;
   overflow-y: hidden;
@@ -181,9 +183,8 @@ section.first h3 {
   left: 0;
   text-align: justify;
   color: black;
-  text-shadow: -1px -1px 0 var(--dark-contrast-color),
-    1px -1px 0 var(--dark-contrast-color), -1px 1px 0 var(--dark-contrast-color),
-    1px 1px 0 var(--dark-contrast-color);
+  text-shadow: -1px -1px 0 var(--pink), 1px -1px 0 var(--pink),
+    -1px 1px 0 var(--pink), 1px 1px 0 var(--pink);
   font-size: clamp(50px, 17vw, 300px);
   overflow-y: hidden;
 }
@@ -261,4 +262,8 @@ section.first h3 {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.skills-content {
+  padding: 40px;
 }
