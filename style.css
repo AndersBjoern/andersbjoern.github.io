@@ -171,8 +171,7 @@ section.first h3 {
 }
 
 #pdpImg {
-  position: absolute;
-  top: 50px;
+  object-position: center bottom;
 }
 
 .Scroller-container {
