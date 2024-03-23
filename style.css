@@ -11,7 +11,7 @@
 }
 :root {
   --contrast-color: #0a1392;
-  --pink: #7a2626;
+  --pink: #1e29be;
   --dark-contrast-color: #180851;
 }
 
@@ -99,6 +99,10 @@ section.first h3 {
   align-items: center;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+.hover-text p {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .img-container:hover .hover-text {
@@ -266,4 +270,21 @@ section.first h3 {
 
 .skills-content {
   padding: 40px;
+}
+
+.skills-content h1 {
+  font-family: "Caveat", sans-serif;
+  font-size: clamp(25px, 6vw, 40px);
+  font-weight: 400;
+}
+
+.skills-content h2 {
+  font-size: clamp(25px, 5vw, 35px);
+  font-weight: 600;
+}
+
+.skills-content p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.9;
 }
