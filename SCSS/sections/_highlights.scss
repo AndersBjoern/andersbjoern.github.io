@@ -1,0 +1,48 @@
+.highlights-section {
+  height: auto;
+  width: 100vw;
+  margin-bottom: 5vw;
+  .black-background {
+    width: 95vw;
+    height: auto;
+    color: black;
+    background-color: black;
+    .highlights-content {
+      height: auto;
+      width: 95vw;
+      padding: 5vw;
+      h2 {
+        font-family: "Caveat", sans-serif;
+        font-size: clamp(25px, 6vw, 40px);
+        font-weight: 400;
+      }
+
+      h3 {
+        font-size: clamp(25px, 5vw, 35px);
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1.9;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .highlights-section .black-background .highlights-content {
+    h2 {
+      font-size: clamp(20px, 6vw, 30px);
+    }
+
+    h3 {
+      font-size: clamp(18px, 5vw, 22px);
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+}

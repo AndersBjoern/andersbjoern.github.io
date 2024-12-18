@@ -1,0 +1,17 @@
+body {
+  background-color: black;
+  background-image: url("../Images/background.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color: white;
+  overflow-x: hidden;
+}
+
+.padding {
+  padding: 0 5vw;
+}
+
+.section-seperator {
+  height: 70px;
+  width: 100%;
+}

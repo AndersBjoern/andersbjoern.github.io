@@ -1,0 +1,81 @@
+.about-me-section {
+  width: 100%;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+.profile-picture-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.profile-pic {
+  height: 350px;
+  width: 350px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profile-pic img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.about-me-container {
+  box-shadow: 0 10px 30px rgba(13, 1, 32, 0.05);
+  padding: 40px;
+  border-radius: 15px;
+  background-color: #010413;
+  width: 100%;
+  border: 1px solid #0a1392;
+  color: #c8dff6;
+}
+
+.numbers-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
+}
+
+.numbers {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.numbers h3 {
+  font-size: clamp(30px, 6vw, 50px);
+  font-weight: 700;
+}
+
+p.about-me {
+  font-size: 20px;
+  line-height: 1.9;
+}
+
+.about-me b {
+  font-weight: 600;
+  font-size: 22px;
+  color: #02a2c4;
+}
+
+@media screen and (max-width: 900px) {
+  .profile-pic {
+    height: 150px;
+    width: 150px;
+  }
+
+  .about-me-container {
+    padding: 20px;
+  }
+
+  p.about-me {
+    font-size: 14px;
+  }
+
+  .about-me b {
+    font-size: 16px;
+  }
+}
