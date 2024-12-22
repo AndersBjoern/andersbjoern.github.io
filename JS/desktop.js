@@ -1,15 +1,53 @@
 // Lyt til 'sectionsLoaded' event
 window.addEventListener("sectionsLoaded", (event) => {
   const isMobile = event.detail.isMobile;
-
-  // Fjern alle ScrollTriggers relateret til .sticky-container, når du ikke er på mobil
   if (isMobile) {
     removeGridTriggers();
   } else {
-    // Initialiser grid triggers på desktop
+    horizontalScroller();
     initializeGridTriggers();
+    addTestimonialAnimation();
   }
 });
+
+function horizontalScroller() {
+  // horizonal scroll
+  const horizontalContainer = document.querySelector(".horizontal-section");
+
+  function getScrollAmount() {
+    let horizontalContainerWidth = horizontalContainer.scrollWidth;
+    return -(horizontalContainerWidth - window.innerWidth);
+  }
+
+  const tween = gsap.to(horizontalContainer, {
+    x: getScrollAmount,
+    duration: 3,
+    ease: "none",
+  });
+
+  const root = document.documentElement;
+  const contrastColor =
+    getComputedStyle(root).getPropertyValue("--contrast-color");
+
+  const horizontalScrollTrigger = ScrollTrigger.create({
+    trigger: ".horizontal",
+    start: "top 0%",
+    end: () => `+=${getScrollAmount() * -1}`,
+    pin: true,
+    animation: tween,
+    scrub: 1,
+    invalidateOnRefresh: true,
+    onEnter: () => {
+      gsap.to(horizontalContainer, {
+        background: `linear-gradient(90deg, rgba(2,0,36,0.695203081232493) 24%, rgba(21,9,100,1) 50%, ${contrastColor} 84%)`,
+        duration: 0.5,
+      });
+    },
+    onLeaveBack: () => {
+      gsap.to(horizontalContainer, { background: "none", duration: 0.5 });
+    },
+  });
+}
 
 // Funktion til at fjerne ScrollTriggers relateret til grid-effekten
 function removeGridTriggers() {
@@ -67,6 +105,48 @@ function initializeGridTriggers() {
       scale: 3.7,
       x: translateX,
       y: translateY,
+    });
+  });
+}
+
+function addTestimonialAnimation() {
+  const originalScroller = document.querySelector(".testimonials-scroller");
+  const container = originalScroller.parentElement;
+
+  for (let i = 0; i < 1; i++) {
+    const clonedScroller = originalScroller.cloneNode(true);
+    container.appendChild(clonedScroller);
+  }
+
+  const scrollers = document.querySelectorAll(".testimonials-scroller");
+
+  scrollers.forEach((scroller, index) => {
+    const direction = index === 1 ? "right" : "left";
+    scroller.setAttribute("data-direction", direction);
+
+    scroller.setAttribute("data-animated", true);
+
+    const scrollerInner = scroller.querySelector(
+      ".testimonials-scroller-inner"
+    );
+    const scrollerContent = Array.from(scrollerInner.children);
+
+    const startIndex = index === 1 ? 4 : index === 2 ? 2 : 0;
+
+    const rearrangedContent = [
+      ...scrollerContent.slice(startIndex),
+      ...scrollerContent.slice(0, startIndex),
+    ];
+
+    scrollerInner.innerHTML = "";
+    rearrangedContent.forEach((item) => {
+      scrollerInner.appendChild(item);
+    });
+
+    rearrangedContent.forEach((item) => {
+      const duplicatedItem = item.cloneNode(true);
+      duplicatedItem.setAttribute("aria-hidden", true);
+      scrollerInner.appendChild(duplicatedItem);
     });
   });
 }

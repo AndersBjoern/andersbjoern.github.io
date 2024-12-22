@@ -6,6 +6,16 @@ window.addEventListener("sectionsLoaded", (event) => {
   //! background color
   //! icons
 
+  document
+    .querySelector(".show-more-btn")
+    .addEventListener("click", function () {
+      const container = document.querySelector(".cert-container");
+      container.classList.toggle("show-all");
+      this.textContent = container.classList.contains("show-all")
+        ? "Show Less"
+        : "Show More";
+    });
+
   gsap.registerPlugin(ScrollTrigger);
 
   var text = document.querySelector("h1"),
@@ -32,43 +42,6 @@ window.addEventListener("sectionsLoaded", (event) => {
     repeat: -1,
     yoyo: true,
     stagger: 0.1,
-  });
-
-  // horizonal scroll
-  const horizontalContainer = document.querySelector(".horizontal-section");
-
-  function getScrollAmount() {
-    let horizontalContainerWidth = horizontalContainer.scrollWidth;
-    return -(horizontalContainerWidth - window.innerWidth);
-  }
-
-  const tween = gsap.to(horizontalContainer, {
-    x: getScrollAmount,
-    duration: 3,
-    ease: "none",
-  });
-
-  const root = document.documentElement;
-  const contrastColor =
-    getComputedStyle(root).getPropertyValue("--contrast-color");
-
-  const horizontalScrollTrigger = ScrollTrigger.create({
-    trigger: ".horizontal",
-    start: "top 0%",
-    end: () => `+=${getScrollAmount() * -1}`,
-    pin: true,
-    animation: tween,
-    scrub: 1,
-    invalidateOnRefresh: true,
-    onEnter: () => {
-      gsap.to(horizontalContainer, {
-        background: `linear-gradient(90deg, rgba(2,0,36,0.695203081232493) 24%, rgba(21,9,100,1) 50%, ${contrastColor} 84%)`,
-        duration: 0.5,
-      });
-    },
-    onLeaveBack: () => {
-      gsap.to(horizontalContainer, { background: "none", duration: 0.5 });
-    },
   });
 
   // "skills" animation:
@@ -101,6 +74,7 @@ window.addEventListener("sectionsLoaded", (event) => {
     trigger: skillsSection,
     start: "top center", // Justér dette efter dine behov
     end: "bottom center", // Justér dette efter dine behov
+    markers: true,
     onEnter: () => {
       // Animation, når sektionen er i visning
       gsap.to(body, { backgroundColor: "white", duration: 1 });
@@ -125,50 +99,46 @@ window.addEventListener("sectionsLoaded", (event) => {
     },
   });
 
-  const addTestimonialAnimation = () => {
-    const scrollers = document.querySelectorAll(".testimonials-scroller");
+  function animateCounter(element, targetNumber) {
+    const countDuration = 2; // Varighed på 2 sekunder
+    gsap.fromTo(
+      element,
+      { innerHTML: 0 },
+      {
+        innerHTML: targetNumber,
+        duration: countDuration,
+        ease: "power1.out",
+        snap: { innerHTML: 1 }, // Afrunder til nærmeste heltal
+        onUpdate: function () {
+          element.textContent = Math.round(this.targets()[0].innerHTML) + "+"; // Tilføj "+" efter tallet
+        },
+      }
+    );
+  }
 
-    scrollers.forEach((scroller, index) => {
-      const direction = index === 1 ? "right" : "left";
-      scroller.setAttribute("data-direction", direction);
+  // Vælg alle .numbers elementer
+  const numbers = document.querySelectorAll(".numbers");
 
-      scroller.setAttribute("data-animated", true);
+  numbers.forEach((number) => {
+    const h3 = number.querySelector("h3");
+    const target = parseInt(h3.dataset.target, 10); // Hent det ønskede mål fra data-target
 
-      const scrollerInner = scroller.querySelector(
-        ".testimonials-scroller-inner"
-      );
-      const scrollerContent = Array.from(scrollerInner.children);
-
-      const startIndex = index === 1 ? 4 : index === 2 ? 2 : 0;
-
-      const rearrangedContent = [
-        ...scrollerContent.slice(startIndex),
-        ...scrollerContent.slice(0, startIndex),
-      ];
-
-      scrollerInner.innerHTML = "";
-      rearrangedContent.forEach((item) => {
-        scrollerInner.appendChild(item);
-      });
-
-      rearrangedContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        duplicatedItem.setAttribute("aria-hidden", true);
-        scrollerInner.appendChild(duplicatedItem);
-      });
-    });
-  };
-
-  const duplicateTestimonialRows = () => {
-    const originalScroller = document.querySelector(".testimonials-scroller");
-    const container = originalScroller.parentElement;
-
-    for (let i = 0; i < 2; i++) {
-      const clonedScroller = originalScroller.cloneNode(true);
-      container.appendChild(clonedScroller);
-    }
-  };
-
-  duplicateTestimonialRows();
-  addTestimonialAnimation();
+    // Animer forstørrelse og opdater tal samtidigt
+    gsap.fromTo(
+      number,
+      { scale: 0.8, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: number,
+          start: "top 80%",
+          toggleActions: "play none none reset",
+          onEnter: () => animateCounter(h3, target), // Start tælling, når elementet kommer i view
+        },
+      }
+    );
+  });
 });

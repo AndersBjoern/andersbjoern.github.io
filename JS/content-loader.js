@@ -49,19 +49,6 @@ function init() {
   window.addEventListener("DOMContentLoaded", () => {
     loadSections(); // Initial load
   });
-
-  // Re-load only specific sections on resize, if screen size changes
-  let currentIsMobile = window.innerWidth <= MOBILE;
-  window.addEventListener(
-    "resize",
-    debounce(() => {
-      const newIsMobile = window.innerWidth <= MOBILE;
-      if (newIsMobile !== currentIsMobile) {
-        currentIsMobile = newIsMobile;
-        loadSections(true); // Reload only "specific" sections
-      }
-    }, 200)
-  );
 }
 
 init();

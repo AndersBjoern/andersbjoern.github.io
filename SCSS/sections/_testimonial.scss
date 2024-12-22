@@ -40,8 +40,8 @@
 }
 
 .testimonial-item {
-  min-width: 60vw;
-  height: auto;
+  width: clamp(450px, 50vw, 600px);
+  height: clamp(300px, 60vw, 350px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -61,7 +61,7 @@
 }
 
 .testimonial-quote {
-  font-size: 1.25rem;
+  font-size: clamp(16px, 3vw, 1.25rem);
   font-style: italic;
   text-align: center;
   margin-bottom: 20px;
@@ -76,8 +76,8 @@
 .testimonial-quote::before {
   content: "“";
   position: absolute;
-  top: 0px;
-  font-size: 40px;
+  top: -30px;
+  font-size: 70px;
   color: #02a2c4;
   font-family: "Alef", sans-serif;
   font-weight: 700;
@@ -89,7 +89,7 @@
 .testimonial-author {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: auto;
   cursor: pointer;
   text-decoration: none;

@@ -45,7 +45,8 @@ body {
   font-weight: 400;
 }
 .landing-section h1 {
-  margin-top: clamp(30px, 4.5vw, 50px);
+  margin-top: clamp(50px, 6vw, 80px);
+  margin-bottom: clamp(50px, 6vw, 80px);
   padding-left: 30px;
   font-size: clamp(20px, 8vw, 130px);
   position: relative;
@@ -81,7 +82,6 @@ body {
   background: linear-gradient(to bottom, #e83724, #2f00ff);
 }
 .landing-section h3 {
-  margin-top: 40px;
   font-size: clamp(25px, 7vw, 35px);
   color: #e8dcdc;
   font-weight: 300;
@@ -619,24 +619,44 @@ img {
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
+  position: relative;
 }
-
-.profile-pic {
-  height: 350px;
-  width: 350px;
+.profile-picture-container .outer-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 300px;
+  width: 300px;
+  background-image: linear-gradient(135deg, #02a2c4 10%, #0a1392 40%, #010413 70%);
+  border-radius: 50%;
+  animation: rotate 4s infinite linear;
+}
+.profile-picture-container .inner-ring .profile-pic {
+  height: 300px;
+  width: 300px;
   border-radius: 50%;
   overflow: hidden;
+  padding: 6px;
+  position: relative;
 }
-
-.profile-pic img {
+.profile-picture-container .inner-ring .profile-pic img {
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  border-radius: 50%;
 }
 
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
 .about-me-container {
-  box-shadow: 0 10px 30px rgba(13, 1, 32, 0.05);
   padding: 40px;
   border-radius: 15px;
   background-color: #010413;
@@ -644,33 +664,104 @@ img {
   border: 1px solid #0a1392;
   color: #c8dff6;
 }
-
-.numbers-container {
+.about-me-container .numbers-container {
   display: flex;
   justify-content: space-around;
   margin-bottom: 40px;
 }
-
-.numbers {
+.about-me-container .numbers-container .numbers {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-
-.numbers h3 {
+.about-me-container .numbers-container .numbers h3 {
   font-size: clamp(30px, 6vw, 50px);
   font-weight: 700;
 }
-
-p.about-me {
-  font-size: 20px;
+.about-me-container p.about-me {
+  font-size: clamp(16px, 3vw, 20px);
   line-height: 1.9;
 }
-
-.about-me b {
+.about-me-container p.about-me b {
+  font-size: clamp(17px, 3.2vw, 22px);
   font-weight: 600;
-  font-size: 22px;
   color: #02a2c4;
+}
+.about-me-container .certifications .cert-container {
+  max-height: 250px;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.5s ease;
+}
+.about-me-container .certifications .cert-container.show-all {
+  max-height: 1000px;
+}
+.about-me-container .certifications .cert-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(1, 4, 19, 0), #010413);
+  display: block;
+  transition: opacity 0.3s ease;
+}
+.about-me-container .certifications .cert-container.show-all::after {
+  opacity: 0;
+}
+.about-me-container .certifications .show-more-btn {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #0a1392;
+  color: #fff;
+  background-color: #010413;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.about-me-container .certifications .show-more-btn:hover {
+  background-color: #0a1392;
+}
+
+.cert-table {
+  width: 100%;
+  margin: 50px 0 0 0;
+  border-collapse: collapse;
+}
+.cert-table td {
+  padding: 10px;
+  vertical-align: top;
+}
+.cert-table td.icon-cell {
+  width: clamp(50px, 15%, 200px);
+  text-align: center;
+}
+.cert-table td.icon-cell i {
+  font-size: 1rem;
+  color: #fff;
+  border: 1px solid #02a2c4;
+  border-radius: 50%;
+  padding: 15px;
+  display: inline-block;
+}
+.cert-table td.info-cell {
+  word-wrap: break-word;
+}
+.cert-table td.info-cell .cert-name {
+  font-weight: bold;
+}
+.cert-table td.info-cell .issuer {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.cert-table td.info-cell .date {
+  display: block;
+  font-style: italic;
+  color: #9baab0;
+  margin-top: 5px;
 }
 
 @media screen and (max-width: 900px) {
@@ -684,7 +775,7 @@ p.about-me {
   p.about-me {
     font-size: 14px;
   }
-  .about-me b {
+  p.about-me b {
     font-size: 16px;
   }
 }
@@ -724,8 +815,8 @@ p.about-me {
 }
 
 .testimonial-item {
-  min-width: 60vw;
-  height: auto;
+  width: clamp(450px, 50vw, 600px);
+  height: clamp(300px, 60vw, 350px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -745,7 +836,7 @@ p.about-me {
 }
 
 .testimonial-quote {
-  font-size: 1.25rem;
+  font-size: clamp(16px, 3vw, 1.25rem);
   font-style: italic;
   text-align: center;
   margin-bottom: 20px;
@@ -760,8 +851,8 @@ p.about-me {
 .testimonial-quote::before {
   content: "“";
   position: absolute;
-  top: 0px;
-  font-size: 40px;
+  top: -30px;
+  font-size: 70px;
   color: #02a2c4;
   font-family: "Alef", sans-serif;
   font-weight: 700;
@@ -773,7 +864,7 @@ p.about-me {
 .testimonial-author {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: auto;
   cursor: pointer;
   text-decoration: none;

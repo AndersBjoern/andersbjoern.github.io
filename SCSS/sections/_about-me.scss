@@ -3,62 +3,181 @@
   margin-top: 10vh;
   margin-bottom: 10vh;
 }
+
 .profile-picture-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
+  position: relative; // Til at placere de roterende ringe korrekt
+
+  .outer-ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 300px;
+    width: 300px;
+    background-image: linear-gradient(
+      135deg,
+      #02a2c4 10%,
+      #0a1392 40%,
+      #010413 70%
+    );
+    border-radius: 50%;
+    animation: rotate 4s infinite linear;
+  }
+
+  .inner-ring {
+    .profile-pic {
+      height: 300px;
+      width: 300px;
+      border-radius: 50%;
+      overflow: hidden;
+      padding: 6px;
+      position: relative;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
 }
 
-.profile-pic {
-  height: 350px;
-  width: 350px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-.profile-pic img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 .about-me-container {
-  box-shadow: 0 10px 30px rgba(13, 1, 32, 0.05);
   padding: 40px;
   border-radius: 15px;
   background-color: #010413;
   width: 100%;
   border: 1px solid #0a1392;
   color: #c8dff6;
+
+  .numbers-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+
+    .numbers {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      h3 {
+        font-size: clamp(30px, 6vw, 50px);
+        font-weight: 700;
+      }
+    }
+  }
+
+  p.about-me {
+    font-size: clamp(16px, 3vw, 20px);
+    line-height: 1.9;
+
+    b {
+      font-size: clamp(17px, 3.2vw, 22px);
+      font-weight: 600;
+      color: #02a2c4;
+    }
+  }
+
+  .certifications {
+    .cert-container {
+      max-height: 250px;
+      overflow: hidden;
+      position: relative;
+      transition: max-height 0.5s ease;
+    }
+    .cert-container.show-all {
+      max-height: 1000px;
+    }
+    .cert-container::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(to bottom, rgba(1, 4, 19, 0), #010413);
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+    .cert-container.show-all::after {
+      opacity: 0;
+    }
+    .show-more-btn {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: 1px solid #0a1392;
+      color: #fff;
+      background-color: #010413;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .show-more-btn:hover {
+      background-color: #0a1392;
+    }
+  }
 }
 
-.numbers-container {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 40px;
-}
+.cert-table {
+  width: 100%;
+  margin: 50px 0 0 0;
+  border-collapse: collapse;
 
-.numbers {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
+  td {
+    padding: 10px;
+    vertical-align: top;
 
-.numbers h3 {
-  font-size: clamp(30px, 6vw, 50px);
-  font-weight: 700;
-}
+    &.icon-cell {
+      width: clamp(50px, 15%, 200px);
+      text-align: center;
 
-p.about-me {
-  font-size: 20px;
-  line-height: 1.9;
-}
+      i {
+        font-size: 1rem;
+        color: #fff;
+        border: 1px solid #02a2c4;
+        border-radius: 50%;
+        padding: 15px;
+        display: inline-block;
+      }
+    }
 
-.about-me b {
-  font-weight: 600;
-  font-size: 22px;
-  color: #02a2c4;
+    &.info-cell {
+      word-wrap: break-word;
+
+      .cert-name {
+        font-weight: bold;
+      }
+
+      .issuer {
+        margin-left: 10px;
+        margin-top: 5px;
+      }
+
+      .date {
+        display: block;
+        font-style: italic;
+        color: #9baab0;
+        margin-top: 5px;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -73,9 +192,9 @@ p.about-me {
 
   p.about-me {
     font-size: 14px;
-  }
 
-  .about-me b {
-    font-size: 16px;
+    b {
+      font-size: 16px;
+    }
   }
 }
