@@ -12,7 +12,7 @@ window.addEventListener("sectionsLoaded", (event) => {
 
 function horizontalScroller() {
   // horizonal scroll
-  const horizontalContainer = document.querySelector(".horizontal-section");
+  const horizontalContainer = document.querySelector(".section-wrapper");
 
   function getScrollAmount() {
     let horizontalContainerWidth = horizontalContainer.scrollWidth;
@@ -69,13 +69,10 @@ function initializeGridTriggers() {
   ScrollTrigger.getAll().forEach((trigger) => {
     if (trigger.vars.trigger === gridContainer) {
       trigger.kill();
-      console.log("Killed previous triggers before re-initializing");
     }
   });
 
   gridItems.forEach(function (item, index) {
-    console.log("Creating trigger for grid-item", index);
-
     var translateX, translateY;
     if (index % 3 < 1) {
       translateX = "-100vw";

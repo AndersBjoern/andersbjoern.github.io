@@ -1,9 +1,6 @@
 window.addEventListener("sectionsLoaded", (event) => {
-  //! fix mærkelig height af horisontal scroll
-  //! fix videoplayer
+  //! variabler i SCSS : farver, 900px width
   //! tilføj videoplayer Moesgaard
-  //! text animation (50% ----> 75% VR training) & lego: Digital Empowerment black color white outline
-  //! background color
   //! icons
 
   document
@@ -64,40 +61,42 @@ window.addEventListener("sectionsLoaded", (event) => {
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     addAnimation();
   }
-
-  const skillsSection = document.querySelector(".highlights-section");
+  const highlightsSection = document.querySelector(".highlights-section");
   const blackBackground = document.querySelector(".black-background");
   const body = document.body;
 
-  // Opret en ScrollTrigger
-  ScrollTrigger.create({
-    trigger: skillsSection,
-    start: "top center", // Justér dette efter dine behov
-    end: "bottom center", // Justér dette efter dine behov
-    markers: true,
-    onEnter: () => {
-      // Animation, når sektionen er i visning
-      gsap.to(body, { backgroundColor: "white", duration: 1 });
-      gsap.to(blackBackground, {
-        color: "white",
-        width: "95vw",
-        borderTopRightRadius: "40px",
-        borderBottomRightRadius: "40px",
-        duration: 1,
-      });
-    },
-    onLeaveBack: () => {
-      // Animation, når sektionen forlader visning
-      gsap.to(body, { backgroundColor: "black", duration: 1 });
-      gsap.to(blackBackground, {
-        color: "black",
-        width: "100vw",
-        borderTopRightRadius: "0",
-        borderBottomRightRadius: "0",
-        duration: 1,
-      });
-    },
-  });
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.6,
+  };
+
+  const observerCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        body.style.transition = "background-color 1s ease";
+        body.style.backgroundColor = "white";
+
+        blackBackground.style.transition = "all 1s ease";
+        blackBackground.style.color = "white";
+        blackBackground.style.width = "95vw";
+        blackBackground.style.borderTopRightRadius = "40px";
+        blackBackground.style.borderBottomRightRadius = "40px";
+      } else {
+        body.style.transition = "background-color 1s ease";
+        body.style.backgroundColor = "black";
+
+        blackBackground.style.transition = "all 1s ease";
+        blackBackground.style.color = "black";
+        blackBackground.style.width = "100vw";
+        blackBackground.style.borderTopRightRadius = "0";
+        blackBackground.style.borderBottomRightRadius = "0";
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  observer.observe(highlightsSection);
 
   function animateCounter(element, targetNumber) {
     const countDuration = 2; // Varighed på 2 sekunder
@@ -108,22 +107,20 @@ window.addEventListener("sectionsLoaded", (event) => {
         innerHTML: targetNumber,
         duration: countDuration,
         ease: "power1.out",
-        snap: { innerHTML: 1 }, // Afrunder til nærmeste heltal
+        snap: { innerHTML: 1 },
         onUpdate: function () {
-          element.textContent = Math.round(this.targets()[0].innerHTML) + "+"; // Tilføj "+" efter tallet
+          element.textContent = Math.round(this.targets()[0].innerHTML) + "+";
         },
       }
     );
   }
 
-  // Vælg alle .numbers elementer
   const numbers = document.querySelectorAll(".numbers");
 
   numbers.forEach((number) => {
     const h3 = number.querySelector("h3");
-    const target = parseInt(h3.dataset.target, 10); // Hent det ønskede mål fra data-target
+    const target = parseInt(h3.dataset.target, 10);
 
-    // Animer forstørrelse og opdater tal samtidigt
     gsap.fromTo(
       number,
       { scale: 0.8, opacity: 0 },
@@ -136,7 +133,7 @@ window.addEventListener("sectionsLoaded", (event) => {
           trigger: number,
           start: "top 80%",
           toggleActions: "play none none reset",
-          onEnter: () => animateCounter(h3, target), // Start tælling, når elementet kommer i view
+          onEnter: () => animateCounter(h3, target),
         },
       }
     );
