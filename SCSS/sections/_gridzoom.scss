@@ -63,4 +63,8 @@ img {
   .centerImage {
     grid-column: span 2;
   }
+
+  div:has(> .scale) {
+    border-radius: 0px;
+  }
 }

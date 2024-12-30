@@ -1,21 +1,20 @@
-// Lyt til 'sectionsLoaded' event
 window.addEventListener("sectionsLoaded", (event) => {
   const isMobile = event.detail.isMobile;
   if (isMobile) {
     removeGridTriggers();
   } else {
-    horizontalScroller();
+    initializeHorizontalScroller();
     initializeGridTriggers();
-    addTestimonialAnimation();
+    initializeTestimonialAnimation();
   }
 });
 
-function horizontalScroller() {
-  // horizonal scroll
+function initializeHorizontalScroller() {
   const horizontalContainer = document.querySelector(".section-wrapper");
+  if (!horizontalContainer) return;
 
   function getScrollAmount() {
-    let horizontalContainerWidth = horizontalContainer.scrollWidth;
+    const horizontalContainerWidth = horizontalContainer.scrollWidth;
     return -(horizontalContainerWidth - window.innerWidth);
   }
 
@@ -29,7 +28,7 @@ function horizontalScroller() {
   const contrastColor =
     getComputedStyle(root).getPropertyValue("--contrast-color");
 
-  const horizontalScrollTrigger = ScrollTrigger.create({
+  ScrollTrigger.create({
     trigger: ".horizontal",
     start: "top 0%",
     end: () => `+=${getScrollAmount() * -1}`,
@@ -49,46 +48,30 @@ function horizontalScroller() {
   });
 }
 
-// Funktion til at fjerne ScrollTriggers relateret til grid-effekten
 function removeGridTriggers() {
   ScrollTrigger.getAll().forEach((trigger) => {
-    if (trigger.vars.trigger === document.querySelector(".sticky-container")) {
+    const stickyContainer = document.querySelector(".sticky-container");
+    if (trigger.vars.trigger === stickyContainer) {
       console.log("Killing trigger for .sticky-container");
       trigger.kill();
     }
   });
 }
 
-// Funktion til at initialisere ScrollTriggers
 function initializeGridTriggers() {
-  var gridItems = document.querySelectorAll(".grid-item");
-  var gridContainer = document.querySelector(".sticky-container");
-  var blockContainer = document.querySelector(".block-container");
+  const gridItems = document.querySelectorAll(".grid-item");
+  const gridContainer = document.querySelector(".sticky-container");
+  const blockContainer = document.querySelector(".block-container");
+  if (!gridContainer || !blockContainer || gridItems.length === 0) return;
 
-  // Fjern eventuelle eksisterende triggers, hvis de allerede er til stede
   ScrollTrigger.getAll().forEach((trigger) => {
     if (trigger.vars.trigger === gridContainer) {
       trigger.kill();
     }
   });
 
-  gridItems.forEach(function (item, index) {
-    var translateX, translateY;
-    if (index % 3 < 1) {
-      translateX = "-100vw";
-    } else if (index % 3 > 1) {
-      translateX = "100vw";
-    } else {
-      translateX = "0";
-    }
-
-    if (index < 3) {
-      translateY = "-100vh";
-    } else if (index > 5) {
-      translateY = "100vh";
-    } else {
-      translateY = "0";
-    }
+  gridItems.forEach((item, index) => {
+    const { translateX, translateY } = calculateGridTranslation(index);
 
     gsap.to(item, {
       scrollTrigger: {
@@ -106,10 +89,17 @@ function initializeGridTriggers() {
   });
 }
 
-function addTestimonialAnimation() {
-  const originalScroller = document.querySelector(".testimonials-scroller");
-  const container = originalScroller.parentElement;
+function calculateGridTranslation(index) {
+  const translateX = index % 3 < 1 ? "-100vw" : index % 3 > 1 ? "100vw" : "0";
+  const translateY = index < 3 ? "-100vh" : index > 5 ? "100vh" : "0";
+  return { translateX, translateY };
+}
 
+function initializeTestimonialAnimation() {
+  const originalScroller = document.querySelector(".testimonials-scroller");
+  if (!originalScroller) return;
+
+  const container = originalScroller.parentElement;
   for (let i = 0; i < 1; i++) {
     const clonedScroller = originalScroller.cloneNode(true);
     container.appendChild(clonedScroller);
@@ -120,42 +110,30 @@ function addTestimonialAnimation() {
   scrollers.forEach((scroller, index) => {
     const direction = index === 1 ? "right" : "left";
     scroller.setAttribute("data-direction", direction);
-
     scroller.setAttribute("data-animated", true);
 
-    const scrollerInner = scroller.querySelector(
-      ".testimonials-scroller-inner"
-    );
-    const scrollerContent = Array.from(scrollerInner.children);
-
-    const startIndex = index === 1 ? 4 : index === 2 ? 2 : 0;
-
-    const rearrangedContent = [
-      ...scrollerContent.slice(startIndex),
-      ...scrollerContent.slice(0, startIndex),
-    ];
-
-    scrollerInner.innerHTML = "";
-    rearrangedContent.forEach((item) => {
-      scrollerInner.appendChild(item);
-    });
-
-    rearrangedContent.forEach((item) => {
-      const duplicatedItem = item.cloneNode(true);
-      duplicatedItem.setAttribute("aria-hidden", true);
-      scrollerInner.appendChild(duplicatedItem);
-    });
+    initializeScrollerContent(scroller, index);
   });
 }
 
-// Lyt til resize event for at opdatere triggers
-window.addEventListener("resize", () => {
-  const isMobile = window.matchMedia("(max-width: 900px)").matches;
+function initializeScrollerContent(scroller, index) {
+  const scrollerInner = scroller.querySelector(".testimonials-scroller-inner");
+  const scrollerContent = Array.from(scrollerInner.children);
+  const startIndex = index === 1 ? 4 : index === 2 ? 2 : 0;
 
-  // Re-initialiser triggers ved resize, baseret på mobilstatus
-  if (isMobile) {
-    removeGridTriggers();
-  } else {
-    initializeGridTriggers();
-  }
-});
+  const rearrangedContent = [
+    ...scrollerContent.slice(startIndex),
+    ...scrollerContent.slice(0, startIndex),
+  ];
+
+  scrollerInner.innerHTML = "";
+  rearrangedContent.forEach((item) => {
+    scrollerInner.appendChild(item);
+  });
+
+  rearrangedContent.forEach((item) => {
+    const duplicatedItem = item.cloneNode(true);
+    duplicatedItem.setAttribute("aria-hidden", true);
+    scrollerInner.appendChild(duplicatedItem);
+  });
+}

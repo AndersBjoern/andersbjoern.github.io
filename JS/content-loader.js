@@ -1,5 +1,6 @@
 const MOBILE = 900;
 const QUERYSELECTOR = "main section";
+let initialWidth = window.innerWidth;
 
 async function loadSectionContent(section, url) {
   try {
@@ -22,10 +23,8 @@ async function loadSections(forceReloadSpecificOnly = false) {
     let src = null;
 
     if (type === "common" && !forceReloadSpecificOnly) {
-      // Load common sections only if full reload is required
       src = section.dataset.src;
     } else if (type === "specific") {
-      // Always determine specific sections based on current view (mobile/desktop)
       if (isMobile && section.dataset.mobile) {
         src = section.dataset.mobile;
       } else if (!isMobile && section.dataset.desktop) {
@@ -40,15 +39,37 @@ async function loadSections(forceReloadSpecificOnly = false) {
 
   await Promise.all(loadPromises);
 
-  // Log før eventen bliver afsendt
   const event = new CustomEvent("sectionsLoaded", { detail: { isMobile } });
   window.dispatchEvent(event);
 }
 
+function resetContentOnResize() {
+  let currentWidth = window.innerWidth;
+  if (
+    (initialWidth <= MOBILE && currentWidth > MOBILE) ||
+    (initialWidth > MOBILE && currentWidth <= MOBILE)
+  ) {
+    initialWidth = currentWidth;
+    const main = document.querySelector("main");
+
+    const preservedSections = Array.from(main.children).map(
+      (child) => child.outerHTML
+    );
+
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+    main.innerHTML = preservedSections.join("");
+
+    loadSections();
+  }
+}
+
 function init() {
   window.addEventListener("DOMContentLoaded", () => {
-    loadSections(); // Initial load
+    loadSections();
   });
+
+  window.addEventListener("resize", resetContentOnResize);
 }
 
 init();

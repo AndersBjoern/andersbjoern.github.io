@@ -70,8 +70,10 @@
     margin-bottom: 40px;
 
     .numbers {
+      width: 30vw;
       display: flex;
       flex-direction: column;
+      justify-content: start;
       text-align: center;
 
       h3 {
