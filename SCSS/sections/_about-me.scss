@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
-  position: relative; // Til at placere de roterende ringe korrekt
+  position: relative;
 
   .outer-ring {
     position: absolute;
@@ -83,9 +83,19 @@
     }
   }
 
-  p.about-me {
-    font-size: clamp(16px, 3vw, 20px);
-    line-height: 1.9;
+  .about-me-text {
+    font-size: clamp(18px, 3vw, 20px);
+    line-height: 70px;
+
+    .inline-image {
+      height: 70px;
+      width: 120px;
+      border-radius: 50px;
+      object-fit: cover;
+      border: 1px solid white;
+      vertical-align: middle;
+      margin: 0 10px;
+    }
 
     b {
       font-size: clamp(17px, 3.2vw, 22px);

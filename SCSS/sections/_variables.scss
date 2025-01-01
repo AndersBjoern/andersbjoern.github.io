@@ -9,9 +9,25 @@
   --border-radius-small: 10px;
   --border-radius-tiny: 5px;
   --font-size-large: 26px;
+  --font-size-medium: 18px;
   --font-weight-bold: 600;
   --background-color-dark: #010413;
   --border-color: rgba(10, 19, 146, 0.62);
+  --lego-background: linear-gradient(
+    180deg,
+    #be3a4b 0%,
+    var(--background-color-dark) 30%
+  );
+  --moesgaard-background: linear-gradient(
+    180deg,
+    #bb6cdb 0%,
+    var(--background-color-dark) 30%
+  );
+  --pdp-background: linear-gradient(
+    180deg,
+    #077bc3 0%,
+    var(--background-color-dark) 30%
+  );
   --video-bg-color: #e8e7ed;
   --video-padding: 5px;
 }

@@ -20,9 +20,25 @@
   --border-radius-small: 10px;
   --border-radius-tiny: 5px;
   --font-size-large: 26px;
+  --font-size-medium: 18px;
   --font-weight-bold: 600;
   --background-color-dark: #010413;
   --border-color: rgba(10, 19, 146, 0.62);
+  --lego-background: linear-gradient(
+    180deg,
+    #be3a4b 0%,
+    var(--background-color-dark) 30%
+  );
+  --moesgaard-background: linear-gradient(
+    180deg,
+    #bb6cdb 0%,
+    var(--background-color-dark) 30%
+  );
+  --pdp-background: linear-gradient(
+    180deg,
+    #077bc3 0%,
+    var(--background-color-dark) 30%
+  );
   --video-bg-color: #e8e7ed;
   --video-padding: 5px;
 }
@@ -209,7 +225,9 @@ div:has(> .scale) .scale:hover {
   left: 0;
   width: 100%;
   height: 150px;
-  background-color: var(--hover-bg-color);
+  background: radial-gradient(circle at top left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   color: var(--text-color);
   display: flex;
   padding: var(--padding);
@@ -221,7 +239,6 @@ div:has(> .scale) .scale:hover {
   border-bottom-right-radius: var(--border-radius-large);
 }
 .img-container .hover-text p {
-  font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
 }
 .img-container > img {
@@ -401,9 +418,13 @@ div:has(> .scale) .scale:hover {
   section.horizontal .section-wrapper .project-seperation .img-container img {
     border-radius: var(--border-radius-large);
   }
+  section.horizontal .section-wrapper article .img-container .hover-text p,
+  section.horizontal .section-wrapper .project-seperation .img-container .hover-text p {
+    font-size: var(--font-size-large);
+  }
   section.horizontal .section-wrapper .project-seperation {
     height: 100%;
-    width: 50px;
+    width: 200px;
   }
   section.horizontal .section-wrapper .project-seperation .seperation {
     height: 100%;
@@ -421,15 +442,19 @@ div:has(> .scale) .scale:hover {
   }
 }
 @media screen and (max-width: 900px) {
-  .section-wrapper {
-    padding: 5vw;
+  .section-wrapper #lego {
+    background: var(--lego-background);
+  }
+  .section-wrapper #moesgaard {
+    background: var(--moesgaard-background);
+  }
+  .section-wrapper #pdp {
+    background: var(--pdp-background);
   }
   .section-wrapper > article {
     padding: 2.5vw;
-    background-color: var(--background-color-dark);
-    border: 5px solid var(--border-color);
     border-radius: var(--border-radius-medium);
-    margin-bottom: 50px;
+    margin-bottom: 100px;
   }
   .section-wrapper > article .lego-bottom-part {
     width: 100%;
@@ -465,11 +490,14 @@ div:has(> .scale) .scale:hover {
     border-bottom-left-radius: var(--border-radius-small);
     border-bottom-right-radius: var(--border-radius-small);
   }
+  .section-wrapper > article .img-container .hover-text p {
+    font-size: var(--font-size-medium);
+  }
   .section-wrapper > article .img-container img {
     border-radius: var(--border-radius-small);
   }
   .section-wrapper article .img-container {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     border-radius: var(--border-radius-small);
   }
   .section-wrapper article > *:last-child .img-container {
@@ -482,7 +510,7 @@ div:has(> .scale) .scale:hover {
     background-color: var(--video-bg-color);
     padding: var(--video-padding);
     border-radius: var(--border-radius-small);
-    margin-bottom: 50px;
+    margin-bottom: 25px;
   }
   .section-wrapper article .videoplayer-container video,
   .section-wrapper article .videoplayer-container iframe {
@@ -712,11 +740,21 @@ img {
   font-size: clamp(30px, 6vw, 50px);
   font-weight: 700;
 }
-.about-me-container p.about-me {
-  font-size: clamp(16px, 3vw, 20px);
-  line-height: 1.9;
+.about-me-container .about-me-text {
+  font-size: clamp(18px, 3vw, 20px);
+  line-height: 70px;
 }
-.about-me-container p.about-me b {
+.about-me-container .about-me-text .inline-image {
+  height: 70px;
+  width: 120px;
+  border-radius: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 1px solid white;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+.about-me-container .about-me-text b {
   font-size: clamp(17px, 3.2vw, 22px);
   font-weight: 600;
   color: #02a2c4;

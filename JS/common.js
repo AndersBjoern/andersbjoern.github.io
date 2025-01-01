@@ -3,25 +3,12 @@
 //! icons
 
 window.addEventListener("sectionsLoaded", () => {
-  initializeShowMoreButton();
   initializeGSAPAnimations();
+  initializeShowMoreButton();
   setupSkillsAnimation();
   setupNumberAnimations();
   setupHighlightsObserver();
 });
-
-function initializeShowMoreButton() {
-  const showMoreButton = document.querySelector(".show-more-btn");
-  if (showMoreButton) {
-    showMoreButton.addEventListener("click", function () {
-      const container = document.querySelector(".cert-container");
-      container.classList.toggle("show-all");
-      this.textContent = container.classList.contains("show-all")
-        ? "Show Less"
-        : "Show More";
-    });
-  }
-}
 
 function initializeGSAPAnimations() {
   gsap.registerPlugin(ScrollTrigger);
@@ -49,6 +36,18 @@ function initializeGSAPAnimations() {
       yoyo: true,
       stagger: 0.1,
     });
+}
+function initializeShowMoreButton() {
+  const showMoreButton = document.querySelector(".show-more-btn");
+  if (showMoreButton) {
+    showMoreButton.addEventListener("click", function () {
+      const container = document.querySelector(".cert-container");
+      container.classList.toggle("show-all");
+      this.textContent = container.classList.contains("show-all")
+        ? "Show Less"
+        : "Show More";
+    });
+  }
 }
 
 function setupSkillsAnimation() {
@@ -110,8 +109,8 @@ function setupNumberAnimations() {
 }
 
 function animateCounter(element, targetNumber) {
-  const countDuration = 2000; // Duration in ms
-  const frameRate = 30; // Updates per second
+  const countDuration = 2000;
+  const frameRate = 30;
   const totalFrames = Math.round((countDuration / 1000) * frameRate);
   const increment = targetNumber / totalFrames;
 
