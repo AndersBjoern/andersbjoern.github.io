@@ -1,7 +1,3 @@
-//! variabler i SCSS : farver, 900px width
-//! tilføj videoplayer Moesgaard
-//! icons
-
 window.addEventListener("sectionsLoaded", () => {
   initializeGSAPAnimations();
   initializeShowMoreButton();

@@ -38,11 +38,13 @@ img {
 @media screen and (max-width: 900px) {
   .block-container {
     height: auto;
+    padding: var(--mobile-padding);
   }
   .sticky-container {
     position: static;
     display: block;
     height: auto;
+    width: 100%;
   }
   .grid-container {
     display: grid;

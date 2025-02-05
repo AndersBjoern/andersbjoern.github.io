@@ -30,4 +30,121 @@
   );
   --video-bg-color: #e8e7ed;
   --video-padding: 5px;
+  --contrast-color-1: #9be0f4;
+  --mobile-padding: 0 2vw;
 }
+
+/*
+@import url('https://fonts.googleapis.com/css2?family=Expletus+Sans:wght@300;500;700&family=Nunito+Sans:wght@300;500;700&family=Roboto:wght@300;500;700&display=swap');
+ROBOTO, NUNITO SANS
+
+--font-expletus: 'Expletus Sans', sans-serif;
+  --font-nunito: 'Nunito Sans', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
+
+  --font-size-h1: clamp(2rem, 4vw, 4rem);
+  --font-size-h2: clamp(1.75rem, 3.5vw, 3rem);
+  --font-size-h3: clamp(1.5rem, 3vw, 2.5rem);
+  --font-size-h4: clamp(1.25rem, 2.5vw, 2rem);
+  --font-size-h5: clamp(1rem, 2vw, 1.5rem);
+  --font-size-h6: clamp(0.875rem, 1.5vw, 1.25rem);
+  --font-size-p: clamp(1rem, 2vw, 1.25rem);
+
+  --font-weight-light: 300;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+@mixin font-style($size, $weight, $font) {
+  font-size: $size;
+  font-weight: $weight;
+  font-family: $font;
+  line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1rem;
+}
+
+h1 {
+  @include font-style(var(--font-size-h1), var(--font-weight-bold), var(--font-nunito));
+}
+
+h2 {
+  @include font-style(var(--font-size-h2), var(--font-weight-bold), var(--font-nunito));
+}
+
+h3 {
+  @include font-style(var(--font-size-h3), var(--font-weight-medium), var(--font-nunito));
+}
+
+h4 {
+  @include font-style(var(--font-size-h4), var(--font-weight-medium), var(--font-nunito));
+}
+
+h5 {
+  @include font-style(var(--font-size-h5), var(--font-weight-light), var(--font-nunito));
+}
+
+h6 {
+  @include font-style(var(--font-size-h6), var(--font-weight-light), var(--font-nunito));
+}
+
+p {
+  @include font-style(var(--font-size-p), var(--font-weight-light), var(--font-nunito));
+}
+
+// Expletus Sans
+.expletus h1 { @include font-style(var(--font-size-h1), var(--font-weight-bold), var(--font-expletus)); }
+.expletus h2 { @include font-style(var(--font-size-h2), var(--font-weight-medium), var(--font-expletus)); }
+.expletus h3 { @include font-style(var(--font-size-h3), var(--font-weight-light), var(--font-expletus)); }
+
+// Roboto
+.roboto h1 { @include font-style(var(--font-size-h1), var(--font-weight-bold), var(--font-roboto)); }
+.roboto h2 { @include font-style(var(--font-size-h2), var(--font-weight-medium), var(--font-roboto)); }
+.roboto h3 { @include font-style(var(--font-size-h3), var(--font-weight-light), var(--font-roboto)); }
+
+// Ændre font-weight i specifikke sektioner
+.light h1, .light h2, .light h3 { font-weight: var(--font-weight-light); }
+.medium h1, .medium h2, .medium h3 { font-weight: var(--font-weight-medium); }
+.bold h1, .bold h2, .bold h3 { font-weight: var(--font-weight-bold); }
+
+.super-title.expletus {
+  font-family: var(--font-expletus);
+}
+
+.super-title.nunito {
+  font-family: var(--font-nunito);
+}
+
+.super-title.roboto {
+  font-family: var(--font-roboto);
+}
+
+:root {
+  --font-size-super-title: clamp(3rem, 8vw, 8rem); // Minimum 3rem, maks 8rem
+}
+
+<!-- Standard (Nunito Sans) -->
+<div>
+  <h1>Standard (Nunito Sans) H1</h1>
+  <h2>Standard H2</h2>
+</div>
+
+<!-- Expletus Sans med Light Weight -->
+<div class="expletus light">
+  <h1>Expletus Sans - Light H1</h1>
+  <h2>Expletus Sans - Light H2</h2>
+</div>
+
+<!-- Roboto med Medium Weight -->
+<div class="roboto medium">
+  <h1>Roboto - Medium H1</h1>
+  <h2>Roboto - Medium H2</h2>
+</div>
+
+<!-- Expletus Sans med Bold -->
+<div class="expletus bold">
+  <h1>Expletus Sans - Bold H1</h1>
+  <h2>Expletus Sans - Bold H2</h2>
+</div>
+*/

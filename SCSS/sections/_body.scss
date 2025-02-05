@@ -11,6 +11,20 @@ body {
   padding: 0 5vw;
 }
 
+.expand {
+  transition: transform 0.3s ease;
+}
+
+.expand:hover {
+  --scale-factor: 1.5;
+}
+
+@media screen and (max-width: 900px) {
+  .padding {
+    padding: var(--mobile-padding);
+  }
+}
+
 .section-seperator {
   height: 70px;
   width: 100%;

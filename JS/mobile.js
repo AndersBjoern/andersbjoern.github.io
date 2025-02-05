@@ -2,6 +2,10 @@ window.addEventListener("sectionsLoaded", (event) => {
   if (event.detail.isMobile) {
     initializeVideoScrollTrigger();
     initializeTestimonialAnimation();
+    videoplayerFunctions();
+    videoScrollerPlay();
+    initializeGallery();
+    initializeImagePerspective();
   }
 });
 
@@ -54,4 +58,106 @@ function initializeScrollerContent(scroller, index) {
     duplicatedItem.setAttribute("aria-hidden", true);
     scrollerInner.appendChild(duplicatedItem);
   });
+}
+
+function videoplayerFunctions() {
+  const video = document.getElementById("DigitalEmpowermentVideo");
+  const playIcon = document.getElementById("playIcon");
+  const videoContainer = document.querySelector(".videoplayer-container");
+
+  playIcon.addEventListener("click", () => {
+    video.play();
+    videoContainer.classList.add("playing");
+  });
+
+  video.addEventListener("pause", () => {
+    videoContainer.classList.remove("playing");
+  });
+
+  video.addEventListener("play", () => {
+    videoContainer.classList.add("playing");
+    document
+      .querySelector(".project-description")
+      .classList.add("video-playing");
+  });
+
+  video.addEventListener("pause", () => {
+    videoContainer.classList.remove("playing");
+    document
+      .querySelector(".project-description")
+      .classList.remove("video-playing");
+  });
+}
+
+function videoScrollerPlay() {
+  let video = document.getElementById("scroll-video");
+  video.addEventListener("loadeddata", () => {
+    video.pause(); // Stopper autoplay for at styre det selv
+
+    let scrollTrigger = ScrollTrigger.create({
+      trigger: ".video-scroll-player-container",
+      start: "top bottom",
+      end: "top 0",
+      scrub: 1,
+      onUpdate: (self) => {
+        let progress = self.progress; // Scroll progress (0 til 1)
+        video.currentTime = progress * video.duration; // Opdater video jævnt
+      },
+    });
+  });
+}
+
+function initializeGallery() {
+  const featuredImage = document.getElementById("featuredImage");
+  const thumbnails = document.querySelectorAll(
+    ".thumbnail-gallery .gallery-item img"
+  );
+
+  thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener("click", () => {
+      featuredImage.src = thumbnail.src;
+      thumbnails.forEach((thumb) =>
+        thumb.parentElement.classList.remove("active")
+      );
+      thumbnail.parentElement.classList.add("active");
+    });
+  });
+}
+
+function initializeImagePerspective() {
+  const perspectiveImage = document.querySelector(".perspective-image");
+
+  const startThreshold = window.innerHeight * 0.8;
+  const endThreshold = window.innerHeight * 0.3;
+
+  const handleScroll = () => {
+    const rect = perspectiveImage.getBoundingClientRect();
+    const scrollProgress = Math.min(
+      Math.max(
+        (startThreshold - rect.top) / (startThreshold - endThreshold),
+        0
+      ),
+      1
+    );
+
+    const rotation = 40 * (1 - scrollProgress);
+    perspectiveImage.style.transform = `perspective(800px) rotateX(${rotation}deg)`;
+
+    perspectiveImage.style.opacity = scrollProgress;
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        window.addEventListener("scroll", handleScroll);
+      } else {
+        window.removeEventListener("scroll", handleScroll);
+      }
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  observer.observe(perspectiveImage);
 }

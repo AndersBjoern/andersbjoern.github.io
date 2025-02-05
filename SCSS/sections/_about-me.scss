@@ -67,7 +67,7 @@
   .numbers-container {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 40px;
+    padding: 40px 0;
 
     .numbers {
       width: 30vw;
@@ -77,8 +77,13 @@
       text-align: center;
 
       h3 {
-        font-size: clamp(30px, 6vw, 50px);
+        font-size: clamp(30px, 7vw, 70px);
         font-weight: 700;
+      }
+
+      p {
+        font-size: clamp(22px, 3vw, 25px);
+        font-weight: 500;
       }
     }
   }
@@ -106,7 +111,7 @@
 
   .certifications {
     .cert-container {
-      max-height: 250px;
+      max-height: 300px;
       overflow: hidden;
       position: relative;
       transition: max-height 0.5s ease;
@@ -120,7 +125,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 100px;
+      height: 250px;
       background: linear-gradient(to bottom, rgba(1, 4, 19, 0), #010413);
       display: block;
       transition: opacity 0.3s ease;
@@ -149,11 +154,11 @@
 
 .cert-table {
   width: 100%;
-  margin: 50px 0 0 0;
+  margin-top: 80px;
   border-collapse: collapse;
 
   td {
-    padding: 10px;
+    padding: 20px 0;
     vertical-align: top;
 
     &.icon-cell {
@@ -163,7 +168,7 @@
       i {
         font-size: 1rem;
         color: #fff;
-        border: 1px solid #02a2c4;
+        border: 2px solid #02a2c4;
         border-radius: 50%;
         padding: 15px;
         display: inline-block;
@@ -171,6 +176,7 @@
     }
 
     &.info-cell {
+      padding-left: 30px;
       word-wrap: break-word;
 
       .cert-name {
