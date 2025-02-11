@@ -58,8 +58,7 @@
       width: fit-content;
       display: flex;
       flex-wrap: nowrap;
-      padding: var(--padding);
-      padding-left: 5vw;
+      padding: var(--container-padding);
 
       article,
       .project-seperation {
@@ -235,7 +234,8 @@
         .seperation::after {
           content: "";
           position: absolute;
-          width: 3px;
+          border-radius: var(--border-radius-medium);
+          width: 5px;
           height: 20%;
           bottom: 40%;
           left: 50%;
@@ -250,46 +250,40 @@
   .section-wrapper {
     padding: var(--mobile-padding);
     --article-padding: 2.5vw;
+    --gradient-start: 30%;
+    --gradient-end: 80%;
 
-    & > article {
-      border: 1px solid #ffffff22;
-
-      box-shadow: 0 7px 20px 5px #00000088;
+    article {
       border-radius: var(--border-radius-medium);
-      backdrop-filter: blur(7px);
-      -webkit-backdrop-filter: blur(7px);
-      transition: 0.5s all;
       padding: var(--article-padding);
       margin-bottom: 170px;
-      position: relative;
-
       &#lego {
-        background: linear-gradient(
-          0deg,
-          rgba(190, 58, 68, 1) 0%,
-          rgba(17, 0, 32, 0.5) 100%
+        //box-shadow: 0 7px 20px 5px #00000088;
+        //backdrop-filter: blur(7px);
+        //-webkit-backdrop-filter: blur(7px);
+        background: radial-gradient(
+          ellipse at bottom left,
+          var(--secondary-color-1) var(--gradient-start),
+          black var(--gradient-end)
         );
-        /*
-        background: linear-gradient(
-          0deg,
-          rgba(40, 44, 52, 1) 0%,
-          rgba(17, 0, 32, 0.5) 100%
-        );*/
+        border: 2px solid var(--secondary-color-1);
       }
 
       &#moesgaard {
-        background: linear-gradient(
-          0deg,
-          rgba(187, 108, 219, 1) 0%,
-          rgba(17, 0, 32, 0.5) 100%
+        border: 2px solid var(--secondary-color-2);
+        background: radial-gradient(
+          ellipse at bottom left,
+          var(--secondary-color-2) var(--gradient-start),
+          black var(--gradient-end)
         );
       }
 
       &#pdp {
-        background: linear-gradient(
-          0deg,
-          rgba(7, 123, 195, 1) 0%,
-          rgba(17, 0, 32, 0.5) 100%
+        border: 2px solid var(--secondary-color-3);
+        background: radial-gradient(
+          ellipse at bottom left,
+          var(--secondary-color-3) var(--gradient-start),
+          black var(--gradient-end)
         );
       }
 
@@ -299,6 +293,8 @@
       }
 
       .article-content-wrapper {
+        position: relative;
+
         & > div {
           width: 100%;
           overflow: hidden;
@@ -392,8 +388,6 @@
         .project-description {
           --column-width: 110px;
           --column-margin: 30px;
-          --light-red: rgba(175, 39, 51, 0.696);
-          --dark-red: #551f2c;
 
           position: relative;
           margin-bottom: 50px;
@@ -444,7 +438,7 @@
             display: flex;
             align-items: center;
             margin: 30px 0;
-            background-color: var(--dark-red);
+            background-color: var(--backdrop-color);
             padding: 20px 0;
             border-radius: var(--border-radius-medium);
 
@@ -481,10 +475,11 @@
           }
         }
         .project-results {
-          background-color: rgba(175, 39, 51, 0.696);
+          background-color: var(--backdrop-color);
+          border: 1px solid #3f3f3f;
           border-radius: var(--border-radius-medium);
           padding: 30px 20px;
-          box-shadow: 0 4px 12px rgba(55, 2, 18, 0.4);
+          //box-shadow: 0 4px 12px rgba(55, 2, 18, 0.4);
 
           .result-wrapper {
             display: flex;

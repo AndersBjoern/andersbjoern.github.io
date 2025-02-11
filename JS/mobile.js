@@ -6,6 +6,7 @@ window.addEventListener("sectionsLoaded", (event) => {
     videoScrollerPlay();
     initializeGallery();
     initializeImagePerspective();
+    animateClasses();
   }
 });
 
@@ -160,4 +161,39 @@ function initializeImagePerspective() {
   );
 
   observer.observe(perspectiveImage);
+}
+
+function animateClasses() {
+  const animatedClasses = [
+    ".icon-text-pair",
+    ".project-results",
+    ".video-scroll-player-container",
+    ".main-image",
+    ".thumbnail-gallery",
+    ".text-over-image-container",
+  ];
+
+  animatedClasses.forEach((cls) => {
+    const elements = gsap.utils.toArray(cls);
+
+    elements.forEach((element) => {
+      gsap.fromTo(
+        element,
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: element,
+            start: "top 80%",
+            end: "top 20%",
+
+            toggleActions: "play reverse play reverse",
+          },
+        }
+      );
+    });
+  });
 }
