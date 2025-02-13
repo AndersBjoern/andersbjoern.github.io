@@ -25,8 +25,11 @@ function initializeHorizontalScroller() {
   });
 
   const root = document.documentElement;
-  const contrastColor =
-    getComputedStyle(root).getPropertyValue("--contrast-color");
+  const backgroundcolor = getComputedStyle(root).getPropertyValue(
+    "--horizontal-scroller-background"
+  );
+
+  console.log(backgroundcolor);
 
   ScrollTrigger.create({
     trigger: ".horizontal",
@@ -38,7 +41,7 @@ function initializeHorizontalScroller() {
     invalidateOnRefresh: true,
     onEnter: () => {
       gsap.to(horizontalContainer, {
-        background: `linear-gradient(90deg, rgba(2,0,36,0.695203081232493) 24%, rgba(21,9,100,1) 50%, ${contrastColor} 84%)`,
+        background: backgroundcolor,
         duration: 0.5,
       });
     },

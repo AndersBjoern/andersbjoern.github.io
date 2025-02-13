@@ -1,0 +1,16 @@
+.highlights-section {
+  height: auto;
+  width: 100vw;
+  margin-bottom: var(--desktop-padding);
+  .black-background {
+    width: 95vw;
+    height: auto;
+    color: black;
+    background-color: black;
+    .highlights-content {
+      height: auto;
+      width: 95vw;
+      padding: var(--desktop-padding);
+    }
+  }
+}

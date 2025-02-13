@@ -19,12 +19,7 @@
     transform: translate(-50%, -50%);
     height: 300px;
     width: 300px;
-    background-image: linear-gradient(
-      135deg,
-      #02a2c4 10%,
-      #0a1392 40%,
-      #010413 70%
-    );
+    background-image: var(--about-me-profile-outer-ring);
     border-radius: 50%;
     animation: rotate 4s infinite linear;
   }
@@ -59,10 +54,9 @@
 .about-me-container {
   padding: 40px;
   border-radius: 15px;
-  background-color: #010413;
+  background-color: var(--about-me-background-color);
   width: 100%;
-  border: 1px solid #0a1392;
-  color: #c8dff6;
+  border: 1px solid var(--about-me-border-color);
 
   .numbers-container {
     display: flex;
@@ -75,37 +69,23 @@
       flex-direction: column;
       justify-content: start;
       text-align: center;
-
-      h3 {
-        font-size: clamp(30px, 7vw, 70px);
-        font-weight: 700;
-      }
-
-      p {
-        font-size: clamp(22px, 3vw, 25px);
-        font-weight: 500;
-      }
     }
   }
 
   .about-me-text {
-    font-size: clamp(18px, 3vw, 20px);
-    line-height: 70px;
-
+    line-height: var(--about-me-p-line-height);
     .inline-image {
       height: 70px;
       width: 120px;
       border-radius: 50px;
       object-fit: cover;
-      border: 1px solid white;
+      border: 1px solid var(--font-color);
       vertical-align: middle;
       margin: 0 10px;
     }
 
     b {
-      font-size: clamp(17px, 3.2vw, 22px);
-      font-weight: 600;
-      color: #02a2c4;
+      color: var(--font-bold-color);
     }
   }
 
@@ -191,7 +171,7 @@
       .date {
         display: block;
         font-style: italic;
-        color: #9baab0;
+        color: var(--font-color-dark);
         margin-top: 5px;
       }
     }

@@ -20,7 +20,9 @@ $headings: (h1, var(--font-size-h1)), (h2, var(--font-size-h2)),
 $fonts: (nunito, var(--font-nunito)), (roboto, var(--font-roboto)),
   (expletus, var(--font-expletus));
 
-p {
+p,
+b,
+td {
   @include font-style(var(--font-size-p));
   font-family: var(--font-roboto);
   font-weight: var(--font-weight-medium);
@@ -42,19 +44,19 @@ $weights: (light, var(--font-weight-light)), (medium, var(--font-weight-medium))
 }
 
 .super-title {
-  font-size: clamp(180px, 20vw, 20rem);
+  font-size: var(--font-size-super-title);
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
 }
 
 body {
   background-color: black;
-  color: white;
+  color: var(--font-color);
   overflow-x: hidden;
 }
 
 .padding {
-  padding: 0 5vw;
+  padding: var(--section-padding);
 }
 
 .expand {

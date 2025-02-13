@@ -62,7 +62,7 @@
 
       article,
       .project-seperation {
-        height: calc(100dvh - 80px);
+        height: calc(100vh - 80px);
         display: flex;
         flex-direction: row;
 
@@ -130,20 +130,6 @@
               display: flex;
               flex-direction: column;
               justify-content: center;
-
-              h3 {
-                letter-spacing: 2px;
-                font-size: 4vw;
-                font-weight: var(--font-weight-bold);
-                text-shadow: -1px -1px 0 var(--text-color),
-                  1px -1px 0 var(--text-color), -1px 1px 0 var(--text-color),
-                  1px 1px 0 var(--text-color);
-                color: black;
-              }
-
-              p {
-                font-size: 16px;
-              }
             }
           }
         }
@@ -216,9 +202,6 @@
         .img-container img {
           border-radius: var(--border-radius-large);
         }
-        .img-container .hover-text p {
-          font-size: var(--font-size-large);
-        }
       }
 
       .project-seperation {
@@ -239,7 +222,7 @@
           height: 20%;
           bottom: 40%;
           left: 50%;
-          background: linear-gradient(to bottom, #e83724, #2f00ff);
+          background: var(--horizontal-dividers-background);
         }
       }
     }

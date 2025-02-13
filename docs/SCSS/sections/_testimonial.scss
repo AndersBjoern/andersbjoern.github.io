@@ -12,14 +12,8 @@
 
 .testimonials-scroller[data-animated="true"] {
   overflow: hidden;
-  -webkit-mask: linear-gradient(
-    90deg,
-    transparent,
-    black 20%,
-    black 80%,
-    transparent
-  );
-  mask: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+  -webkit-mask: var(--testimonials-card-background);
+  mask: var(--testimonials-card-background);
 }
 
 .testimonials-scroller[data-animated="true"] .testimonials-scroller-inner {
@@ -45,13 +39,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #0a0a0a;
   padding: 30px;
   margin-right: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--testimonials-card-shadow);
   overflow: hidden;
-  border: 1px solid #333;
+  background-color: black;
+  border: var(--testimonials-card-border);
 }
 
 .testimonial-content {
@@ -61,11 +55,9 @@
 }
 
 .testimonial-quote {
-  font-size: clamp(16px, 3vw, 1.25rem);
   font-style: italic;
   text-align: center;
   margin-bottom: 20px;
-  color: #f0f0f0;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -75,10 +67,11 @@
 
 .testimonial-quote::before {
   content: "“";
+  z-index: 100;
   position: absolute;
   top: -30px;
   font-size: 70px;
-  color: #02a2c4;
+  color: var(--testimonials-qoute-color);
   font-family: "Alef", sans-serif;
   font-weight: 700;
   font-style: normal;
@@ -113,18 +106,16 @@
 }
 
 .author-name {
-  font-size: 16px;
-  color: #3dcced;
+  color: var(--testimonials-author-color);
 }
 
 .author-title {
-  font-size: 0.875rem;
-  color: #c1c1c1;
+  color: var(--testimonials-author-job);
 }
 
 .linkedin-logo {
   font-size: 1.25rem;
-  color: #0077b5;
+  color: var(--linkedin-logo-color);
   margin-left: 20px;
 }
 

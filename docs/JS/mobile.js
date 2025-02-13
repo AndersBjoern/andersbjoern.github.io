@@ -188,7 +188,7 @@ function animateClasses() {
           scrollTrigger: {
             trigger: element,
             start: "top 80%",
-            end: "top 20%",
+            end: "bottom 20%",
 
             toggleActions: "play reverse play reverse",
           },

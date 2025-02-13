@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     .skills-text-behind-scroller {
+      font-size: var(--font-size-skills-section);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -63,9 +64,9 @@
   .tag-list li {
     font-size: clamp(16px, 2vw, 2rem);
     padding: 1rem 1.5rem;
-    background-color: var(--contrast-color);
+    background-color: var(--skills-section-tags);
     border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem -0.25rem var(--dark-contrast-color);
+    box-shadow: 0 0.5rem 1rem -0.25rem var(--skills-section-tags-shadow);
   }
 }
 
