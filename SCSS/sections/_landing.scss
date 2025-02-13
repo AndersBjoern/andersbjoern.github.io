@@ -20,6 +20,7 @@
     content: "";
     position: absolute;
     left: 50%;
+    transform: translateX(-50%);
     top: -20%;
 
     --size: max(70vh, 70vw);
