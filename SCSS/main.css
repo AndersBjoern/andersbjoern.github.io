@@ -248,7 +248,6 @@ div:has(> .scale) .scale:hover {
   overflow: hidden;
 }
 .landing-section:before {
-  z-index: -1;
   content: "";
   position: absolute;
   top: -20%;
