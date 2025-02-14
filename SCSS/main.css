@@ -14,13 +14,25 @@
   --secondary-color-1: hsl(5, 85%, 18%);
   --secondary-color-2: hsl(257, 83%, 28%);
   --secondary-color-3: hsl(210, 86%, 36%);
-  --backdrop-color: #0000004d;
-  --background-color-dark: #010413;
+  --background-color-dark: #020202;
+  --backdrop-color: #00000076;
   --border-color: rgba(10, 19, 146, 0.62);
+  /* videoplayer-before: linear-gradient(
+              to bottom,
+              rgba(1, 4, 19, 1) 0%,
+              rgba(1, 4, 19, 1) 30%,
+              rgba(1, 4, 19, 0) 80%
+            ); */
   --hover-bg-color: rgba(10, 19, 146, 0.62);
+  --card-border: 0.5px solid #3f3f3f;
   --font-color: #c8dff6;
   --font-color-dark: #9baab0;
   --font-bold-color: #02a2c4;
+  --landing-title-line: linear-gradient(
+    to bottom,
+    var(--secondary-color-1),
+    var(--secondary-color-2)
+  );
   --horizontal-dividers-background: linear-gradient(
     to bottom,
     #e83724,
@@ -28,7 +40,7 @@
   );
   --horizontal-scroller-background: linear-gradient(
     90deg,
-    rgba(2, 0, 36, 0.695203081232493) 24%,
+    rgba(0, 0, 0, 0) 24%,
     rgba(21, 9, 100, 1) 50%,
     #0a1392 84%
   );
@@ -44,13 +56,7 @@
     #0a1392 40%,
     #010413 70%
   );
-  --testimonials-card-background: linear-gradient(
-    90deg,
-    transparent,
-    black 20%,
-    black 80%,
-    transparent
-  );
+  --testimonials-card-background: var(--background-color-dark);
   --testimonials-card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --testimonials-card-border: 1px solid #333;
   --testimonials-qoute-color: #02a2c4;
@@ -64,11 +70,14 @@
   --mobile-padding: 0 2vw;
   --video-padding: 5px;
   --section-padding: 0 5vw;
+  --article-margin: clamp(30px, 10)
   --border-radius-large: 20px;
   --border-radius-medium: 20px;
   --border-radius-small: 10px;
   --border-radius-tiny: 5px;
+  --p-line-height: 2;
   --about-me-p-line-height: 70px;
+  --super-title-line-height: 1.2;
   --font-expletus: "Expletus Sans", sans-serif;
   --font-nunito: "Nunito Sans", sans-serif;
   --font-roboto: "Roboto", sans-serif;
@@ -84,12 +93,11 @@
   --font-weight-medium: 400;
   --font-weight-bold: 700;
   --font-size-super-title: clamp(30px, 7vw, 70px);
-  --font-size-skills-section: clamp(180px, 20vw, 20rem);
+  --font-size-skills-section: clamp(100px, 20vw, 20rem);
 }
 
 h1 {
   font-size: var(--font-size-h1);
-  line-height: 1.4;
   margin: 0 0 1rem;
   font-family: var(--font-nunito);
   font-weight: var(--font-weight-medium);
@@ -97,7 +105,6 @@ h1 {
 
 h2 {
   font-size: var(--font-size-h2);
-  line-height: 1.4;
   margin: 0 0 1rem;
   font-family: var(--font-nunito);
   font-weight: var(--font-weight-medium);
@@ -105,7 +112,6 @@ h2 {
 
 h3 {
   font-size: var(--font-size-h3);
-  line-height: 1.4;
   margin: 0 0 1rem;
   font-family: var(--font-nunito);
   font-weight: var(--font-weight-medium);
@@ -113,7 +119,6 @@ h3 {
 
 h4 {
   font-size: var(--font-size-h4);
-  line-height: 1.4;
   margin: 0 0 1rem;
   font-family: var(--font-nunito);
   font-weight: var(--font-weight-medium);
@@ -121,7 +126,6 @@ h4 {
 
 h5 {
   font-size: var(--font-size-h5);
-  line-height: 1.4;
   margin: 0 0 1rem;
   font-family: var(--font-nunito);
   font-weight: var(--font-weight-medium);
@@ -129,7 +133,6 @@ h5 {
 
 h6 {
   font-size: var(--font-size-h6);
-  line-height: 1.4;
   margin: 0 0 1rem;
   font-family: var(--font-nunito);
   font-weight: var(--font-weight-medium);
@@ -137,7 +140,6 @@ h6 {
 
 button {
   font-size: var(--font-size-button);
-  line-height: 1.4;
   margin: 0 0 1rem;
   font-family: var(--font-nunito);
   font-weight: var(--font-weight-medium);
@@ -147,10 +149,10 @@ p,
 b,
 td {
   font-size: var(--font-size-p);
-  line-height: 1.4;
   margin: 0 0 1rem;
   font-family: var(--font-roboto);
   font-weight: var(--font-weight-medium);
+  line-height: var(--p-line-height);
 }
 
 .nunito {
@@ -180,7 +182,7 @@ td {
 .super-title {
   font-size: var(--font-size-super-title);
   font-weight: var(--font-weight-bold);
-  line-height: 1.2;
+  line-height: var(--super-title-line-height);
 }
 
 html,
@@ -269,8 +271,8 @@ div:has(> .scale) .scale:hover {
 .landing-section .landing-section-container .dynamic-title {
   margin-top: clamp(50px, 6vw, 80px);
   margin-bottom: clamp(50px, 6vw, 80px);
-  padding-left: 30px;
-  font-size: clamp(20px, 8vw, 130px);
+  padding-left: clamp(10px, 2vw, 30px);
+  font-size: clamp(15px, 7.5vw, 130px);
   font-weight: var(--font-weight-bold);
   position: relative;
   display: flex;
@@ -293,15 +295,16 @@ div:has(> .scale) .scale:hover {
   transform: translateY(-110%);
   color: #fff;
 }
-.landing-section .landing-section-container .dynamic-title::after {
+.landing-section .landing-section-container .dynamic-title::before {
   content: "";
   position: absolute;
   width: 4px;
   height: 100%;
   bottom: 0;
-  z-index: -1;
+  z-index: 0;
   left: 0px;
-  background: linear-gradient(to bottom, var(--secondary-color-1), var(--secondary-color-2));
+  background: var(--landing-title-line);
+  border-radius: var(--border-radius-small);
 }
 .landing-section .landing-section-container .contact-button {
   margin: 140px 0;
@@ -613,14 +616,14 @@ div:has(> .scale) .scale:hover {
   .section-wrapper article .article-content-wrapper > div {
     width: 100%;
     overflow: hidden;
-    margin: clamp(60px, 12vw, 90px) 0;
+    margin: clamp(40px, 8vw, 80px) 0;
   }
   .section-wrapper article .article-content-wrapper > div:last-of-type {
     margin-bottom: 0;
   }
   .section-wrapper article .article-content-wrapper .videoplayer-container {
     position: relative;
-    height: 300px;
+    aspect-ratio: 16/9;
     border-radius: var(--border-radius-medium);
   }
   .section-wrapper article .article-content-wrapper .videoplayer-container::before {
@@ -632,14 +635,14 @@ div:has(> .scale) .scale:hover {
     height: 100%;
     pointer-events: none;
     z-index: 0;
-    background: linear-gradient(to bottom, rgb(1, 4, 19) 0%, rgb(1, 4, 19) 30%, rgba(1, 4, 19, 0) 80%);
+    background: black;
   }
   .section-wrapper article .article-content-wrapper .videoplayer-container.playing .play-icon {
     display: none;
   }
   .section-wrapper article .article-content-wrapper .videoplayer-container.playing video {
-    mask-size: 400%;
-    -webkit-mask-size: 400%;
+    mask-size: 700%;
+    -webkit-mask-size: 700%;
   }
   .section-wrapper article .article-content-wrapper .videoplayer-container video,
   .section-wrapper article .article-content-wrapper .videoplayer-container iframe {
@@ -651,9 +654,9 @@ div:has(> .scale) .scale:hover {
     -webkit-mask-image: radial-gradient(circle at 50% -150%, rgb(0, 0, 0) 50%, rgba(0, 0, 0, 0) 70%);
     mask-position: center;
     -webkit-mask-position: center;
-    mask-size: 200%;
-    -webkit-mask-size: 200%;
-    transition: mask-size 1s ease, -webkit-mask-size 1s ease;
+    mask-size: 250%;
+    -webkit-mask-size: 250%;
+    transition: mask-size 2s ease, -webkit-mask-size 2s ease;
   }
   .section-wrapper article .article-content-wrapper .videoplayer-container .play-icon {
     position: absolute;
@@ -680,7 +683,7 @@ div:has(> .scale) .scale:hover {
     border-bottom: 10px solid transparent;
   }
   .section-wrapper article .article-content-wrapper .project-description {
-    --column-width: 110px;
+    --column-width: min(110px, 20vw);
     --column-margin: 30px;
     position: relative;
     margin-bottom: 50px;
@@ -694,7 +697,7 @@ div:has(> .scale) .scale:hover {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 100px;
+    margin-bottom: 5rem;
   }
   .section-wrapper article .article-content-wrapper .project-description .image-text-container .project-logo {
     flex-shrink: 0;
@@ -726,7 +729,8 @@ div:has(> .scale) .scale:hover {
     align-items: center;
     margin: 30px 0;
     background-color: var(--backdrop-color);
-    padding: 20px 0;
+    border: var(--card-border);
+    padding: 20px 20px 20px 0;
     border-radius: var(--border-radius-medium);
   }
   .section-wrapper article .article-content-wrapper .project-description .icon-text-pair:last-of-type {
@@ -737,7 +741,6 @@ div:has(> .scale) .scale:hover {
     display: flex;
     justify-content: center;
     width: var(--column-width);
-    margin-right: var(--column-margin);
   }
   .section-wrapper article .article-content-wrapper .project-description .icon-text-pair .icon-circle-wrapper .icon-circle {
     display: flex;
@@ -753,12 +756,9 @@ div:has(> .scale) .scale:hover {
     font-size: 30px;
     color: var(--text-color);
   }
-  .section-wrapper article .article-content-wrapper .project-description .icon-text-pair p {
-    line-height: 2;
-  }
   .section-wrapper article .article-content-wrapper .project-results {
     background-color: var(--backdrop-color);
-    border: 1px solid #3f3f3f;
+    border: var(--card-border);
     border-radius: var(--border-radius-medium);
     padding: 30px 20px;
   }
@@ -767,20 +767,14 @@ div:has(> .scale) .scale:hover {
     width: 100%;
   }
   .section-wrapper article .article-content-wrapper .project-results .result-wrapper .column {
-    padding-right: 20px;
+    display: flex;
+    align-items: center;
   }
   .section-wrapper article .article-content-wrapper .project-results .result-wrapper .column h2 {
-    font-size: clamp(35px, 19vw, 120px);
+    font-size: clamp(15px, 10vw, 120px);
     font-weight: 100;
     line-height: 0.9;
-  }
-  .section-wrapper article .article-content-wrapper .project-results .result-wrapper .column h3 {
-    font-size: clamp(20px, 3.5vw, 80px);
-    font-weight: 400;
-    margin-left: 30px;
-  }
-  .section-wrapper article .article-content-wrapper .project-results .result-wrapper .column h3 span {
-    font-weight: bold;
+    margin-right: clamp(10px, 5vw, 70px);
   }
   .section-wrapper article .article-content-wrapper .project-gallery {
     display: flex;
@@ -1316,7 +1310,7 @@ img {
   border-radius: 10px;
   box-shadow: var(--testimonials-card-shadow);
   overflow: hidden;
-  background-color: black;
+  background-color: var(--testimonials-card-background);
   border: var(--testimonials-card-border);
 }
 

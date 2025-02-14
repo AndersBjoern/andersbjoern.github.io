@@ -5,7 +5,6 @@ window.addEventListener("sectionsLoaded", (event) => {
     videoplayerFunctions();
     videoScrollerPlay();
     initializeGallery();
-    initializeImagePerspective();
     animateClasses();
   }
 });
@@ -123,44 +122,6 @@ function initializeGallery() {
       thumbnail.parentElement.classList.add("active");
     });
   });
-}
-
-function initializeImagePerspective() {
-  const perspectiveImage = document.querySelector(".perspective-image");
-
-  const startThreshold = window.innerHeight * 0.8;
-  const endThreshold = window.innerHeight * 0.3;
-
-  const handleScroll = () => {
-    const rect = perspectiveImage.getBoundingClientRect();
-    const scrollProgress = Math.min(
-      Math.max(
-        (startThreshold - rect.top) / (startThreshold - endThreshold),
-        0
-      ),
-      1
-    );
-
-    const rotation = 40 * (1 - scrollProgress);
-    perspectiveImage.style.transform = `perspective(800px) rotateX(${rotation}deg)`;
-
-    perspectiveImage.style.opacity = scrollProgress;
-  };
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) {
-        window.addEventListener("scroll", handleScroll);
-      } else {
-        window.removeEventListener("scroll", handleScroll);
-      }
-    },
-    {
-      threshold: 0.1,
-    }
-  );
-
-  observer.observe(perspectiveImage);
 }
 
 function animateClasses() {

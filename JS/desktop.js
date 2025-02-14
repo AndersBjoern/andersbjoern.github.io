@@ -29,8 +29,6 @@ function initializeHorizontalScroller() {
     "--horizontal-scroller-background"
   );
 
-  console.log(backgroundcolor);
-
   ScrollTrigger.create({
     trigger: ".horizontal",
     start: "top 0%",

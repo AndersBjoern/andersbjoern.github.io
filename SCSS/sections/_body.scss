@@ -1,6 +1,5 @@
 @mixin font-style($size) {
   font-size: $size;
-  line-height: 1.4;
   margin: 0 0 1rem;
 }
 
@@ -26,6 +25,7 @@ td {
   @include font-style(var(--font-size-p));
   font-family: var(--font-roboto);
   font-weight: var(--font-weight-medium);
+  line-height: var(--p-line-height);
 }
 
 @each $name, $font in $fonts {
@@ -46,7 +46,7 @@ $weights: (light, var(--font-weight-light)), (medium, var(--font-weight-medium))
 .super-title {
   font-size: var(--font-size-super-title);
   font-weight: var(--font-weight-bold);
-  line-height: 1.2;
+  line-height: var(--super-title-line-height);
 }
 
 html,

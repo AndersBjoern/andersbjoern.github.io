@@ -41,8 +41,8 @@
     .dynamic-title {
       margin-top: clamp(50px, 6vw, 80px);
       margin-bottom: clamp(50px, 6vw, 80px);
-      padding-left: 30px;
-      font-size: clamp(20px, 8vw, 130px);
+      padding-left: clamp(10px, 2vw, 30px);
+      font-size: clamp(15px, 7.5vw, 130px);
       font-weight: var(--font-weight-bold);
       position: relative;
       display: flex;
@@ -67,19 +67,16 @@
         }
       }
 
-      &::after {
+      &::before {
         content: "";
         position: absolute;
         width: 4px;
         height: 100%;
         bottom: 0;
-        z-index: -1;
+        z-index: 0;
         left: 0px;
-        background: linear-gradient(
-          to bottom,
-          var(--secondary-color-1),
-          var(--secondary-color-2)
-        );
+        background: var(--landing-title-line);
+        border-radius: var(--border-radius-small);
       }
     }
 
