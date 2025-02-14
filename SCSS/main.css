@@ -183,6 +183,7 @@ td {
   line-height: 1.2;
 }
 
+html,
 body {
   background-color: black;
   color: var(--font-color);
