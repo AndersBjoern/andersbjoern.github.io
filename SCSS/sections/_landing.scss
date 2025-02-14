@@ -14,19 +14,18 @@
   align-items: start;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 
   &:before {
     z-index: -1;
     content: "";
     position: absolute;
+    top: -20%;
     left: 50%;
     transform: translateX(-50%);
-    top: -20%;
-
     --size: max(70vh, 70vw);
     --speed: 15s;
     --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
-
     width: var(--size);
     height: var(--size);
     filter: blur(calc(var(--size) / 5));
