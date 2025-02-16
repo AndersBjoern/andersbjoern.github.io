@@ -17,13 +17,8 @@
     left: 0;
     width: 100%;
     height: 150px;
-    background: radial-gradient(
-      circle at top left,
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.2)
-    );
+    background: var(--hover-blur-effect);
     backdrop-filter: blur(10px);
-
     color: var(--text-color);
     display: flex;
     padding: var(--padding);
@@ -239,7 +234,7 @@
     article {
       border-radius: var(--border-radius-medium);
       padding: var(--article-padding);
-      margin-bottom: 170px;
+
       &#lego {
         //box-shadow: 0 7px 20px 5px #00000088;
         //backdrop-filter: blur(7px);
@@ -253,6 +248,8 @@
       }
 
       &#moesgaard {
+        margin-top: clamp(300px, 30vh, 400px);
+        margin-bottom: clamp(100px, 15vh, 150px);
         border: 2px solid var(--secondary-color-2);
         background: radial-gradient(
           ellipse at bottom left,
@@ -270,18 +267,13 @@
         );
       }
 
-      & > div:first-child {
-        position: relative;
-        margin-top: -200px;
-      }
-
       .article-content-wrapper {
         position: relative;
 
         & > div {
           width: 100%;
           overflow: hidden;
-          margin: clamp(40px, 8vw, 80px) 0;
+          margin-bottom: clamp(40px, 8vw, 80px) 0;
         }
 
         & > div:last-of-type {
@@ -289,6 +281,7 @@
         }
 
         .videoplayer-container {
+          margin-top: -200px;
           position: relative;
           aspect-ratio: 16/9;
           border-radius: var(--border-radius-medium);
@@ -494,8 +487,7 @@
 
           .main-image {
             width: 100%;
-            height: 400px;
-            overflow: hidden;
+            aspect-ratio: 16/9;
             border-radius: var(--border-radius-medium);
             img {
               width: 100%;
@@ -506,7 +498,7 @@
           .thumbnail-gallery {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: clamp(10px, 2vw, 20px);
 
             .gallery-item {
               flex: 1;
@@ -514,7 +506,7 @@
               overflow: hidden;
               border-radius: var(--border-radius-small);
               cursor: pointer;
-              height: 120px;
+              aspect-ratio: 1/1;
 
               img {
                 width: 100%;
@@ -528,67 +520,25 @@
               }
               &::after {
                 content: "Click to view";
+                font-family: var(--font-roboto);
+                font-weight: var(--font-weight-medium);
+                line-height: var(--p-line-height);
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 position: absolute;
                 bottom: 0;
                 left: 0;
-                right: 0;
-                background: rgba(0, 0, 0, 0.6);
-                color: white;
-                text-align: center;
-                padding: 5px;
-                font-size: 14px;
-                opacity: 0;
+                height: 100%;
+                width: 100%;
+                backdrop-filter: blur(10px);
+                border-radius: var(--border-radius-small);
+                background: var(--hover-blur-effect);
+                opacity: 1;
                 transition: opacity 0.3s ease;
               }
               &:hover::after {
-                opacity: 1;
-              }
-            }
-          }
-        }
-        .project-methodology {
-          .sticky-note-wrapper {
-            display: flex;
-            gap: 2vw;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 10px;
-
-            .sticky-note {
-              padding: 2%;
-              background-color: #fdfd96;
-              font-family: "Patrick Hand", cursive;
-              font-size: clamp(10px, 3vw, 20px);
-              color: #333;
-              transform: rotate(var(--tilt-angle, 0deg));
-              box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-              border-radius: 5px;
-              transition: transform 0.3s ease;
-              cursor: pointer;
-
-              &:hover {
-                transform: scale(1.1) rotate(0deg);
-              }
-
-              &:nth-child(1) {
-                --tilt-angle: -2deg;
-                background-color: #ffdab9;
-              }
-              &:nth-child(2) {
-                --tilt-angle: 3deg;
-                background-color: #add8e6;
-              }
-              &:nth-child(3) {
-                --tilt-angle: -4deg;
-                background-color: #90ee90;
-              }
-              &:nth-child(4) {
-                --tilt-angle: 1deg;
-                background-color: #ffa07a;
-              }
-              &:nth-child(5) {
-                --tilt-angle: -1deg;
-                background-color: #f0e68c;
+                opacity: 0;
               }
             }
           }
@@ -634,7 +584,6 @@
       }
 
       .img-container {
-        margin-bottom: 25px;
         border-radius: var(--border-radius-small);
 
         .hover-text {

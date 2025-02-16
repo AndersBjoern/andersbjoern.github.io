@@ -34,18 +34,32 @@
 }
 
 .testimonial-item {
-  width: clamp(450px, 50vw, 600px);
-  height: clamp(300px, 60vw, 350px);
+  position: relative;
+  width: clamp(350px, 50vw, 600px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 1;
   padding: 30px;
+  padding-top: 60px;
   margin-right: 20px;
   border-radius: 10px;
   box-shadow: var(--testimonials-card-shadow);
-  overflow: hidden;
   background-color: var(--testimonials-card-background);
   border: var(--testimonials-card-border);
+
+  &::after {
+    content: "“";
+    z-index: 100;
+    position: absolute;
+    top: -30px;
+    font-size: clamp(4rem, 10vw, 120px);
+    color: var(--testimonials-qoute-color);
+    font-family: "Alef", sans-serif;
+    font-weight: 700;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .testimonial-content {
@@ -62,21 +76,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-}
-
-.testimonial-quote::before {
-  content: "“";
-  z-index: 100;
-  position: absolute;
-  top: -30px;
-  font-size: 70px;
-  color: var(--testimonials-qoute-color);
-  font-family: "Alef", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .testimonial-author {
@@ -111,12 +110,14 @@
 
 .author-title {
   color: var(--testimonials-author-job);
+  margin-bottom: 0;
 }
 
 .linkedin-logo {
   font-size: 1.25rem;
   color: var(--linkedin-logo-color);
   margin-left: 20px;
+  margin-bottom: var(--font-margin-bottom);
 }
 
 .testimonials-scroller:hover .testimonials-scroller-inner {

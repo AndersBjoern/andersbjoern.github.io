@@ -44,6 +44,12 @@
     #0a1392 84%
   );
 
+  --hover-blur-effect: radial-gradient(
+    circle at top left,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.2)
+  );
+
   --video-bg-color: #e8e7ed;
   --contrast-color-1: #9be0f4;
 
@@ -85,6 +91,7 @@
   --p-line-height: 2;
   --about-me-p-line-height: 70px;
   --super-title-line-height: 1.2;
+  --font-margin-bottom: 0 0 1rem;
 
   --font-expletus: "Expletus Sans", sans-serif;
   --font-nunito: "Nunito Sans", sans-serif;
