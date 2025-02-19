@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: -70px;
   position: relative;
 
   .outer-ring {
@@ -61,7 +61,7 @@
   .numbers-container {
     display: flex;
     justify-content: space-around;
-    padding: 40px 0;
+    padding: 90px 0 40px 0;
 
     .numbers {
       width: 30vw;
@@ -74,6 +74,7 @@
 
   .about-me-text {
     line-height: var(--about-me-p-line-height);
+    margin-bottom: clamp(40px, 7vw, 80px);
     .inline-image {
       height: 70px;
       width: 120px;
@@ -134,7 +135,6 @@
 
 .cert-table {
   width: 100%;
-  margin-top: 80px;
   border-collapse: collapse;
 
   td {

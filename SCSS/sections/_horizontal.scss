@@ -94,7 +94,7 @@
             justify-content: center;
             align-items: center;
             gap: 40px;
-            margin-bottom: 20px;
+            margin-bottom: var(--margin-bottom);
 
             .top-image {
               width: calc(50% - 20px);
@@ -148,7 +148,7 @@
 
           .img-container-wrapper {
             height: calc(50% - 20px);
-            margin-bottom: 40px;
+            margin-bottom: var(--margin-bottom);
 
             .img-container img {
               border-radius: var(--border-radius-large);
@@ -164,7 +164,7 @@
           grid-template-areas:
             "top-left top-right top-right"
             "bottom-left bottom-left bottom-right";
-          width: clamp(800px, 120vw, 1600px);
+          width: clamp(1200px, 200vw, 2000px);
 
           .grid-top-left {
             grid-area: top-left;
@@ -230,6 +230,7 @@
     --article-padding: 2.5vw;
     --gradient-start: 30%;
     --gradient-end: 80%;
+    --margin-bottom: 30px;
 
     article {
       border-radius: var(--border-radius-medium);
@@ -248,8 +249,7 @@
       }
 
       &#moesgaard {
-        margin-top: clamp(300px, 30vh, 400px);
-        margin-bottom: clamp(100px, 15vh, 150px);
+        margin: clamp(60px, 15vh, 150px) 0;
         border: 2px solid var(--secondary-color-2);
         background: radial-gradient(
           ellipse at bottom left,
@@ -273,7 +273,7 @@
         & > div {
           width: 100%;
           overflow: hidden;
-          margin-bottom: clamp(40px, 8vw, 80px) 0;
+          margin-bottom: clamp(30px, 8vw, 80px) 0;
         }
 
         & > div:last-of-type {
@@ -281,7 +281,7 @@
         }
 
         .videoplayer-container {
-          margin-top: -200px;
+          margin-top: -100px;
           position: relative;
           aspect-ratio: 16/9;
           border-radius: var(--border-radius-medium);
@@ -309,8 +309,11 @@
             }
           }
 
-          video,
-          iframe {
+          video {
+            margin-bottom: calc(2 * var(--margin-bottom));
+          }
+
+          video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -356,12 +359,18 @@
             }
           }
         }
+
+        .iframe-container {
+          aspect-ratio: 16/9;
+          border-radius: var(--border-radius-medium);
+          margin-bottom: var(--margin-bottom);
+        }
         .project-description {
           --column-width: min(110px, 20vw);
-          --column-margin: 30px;
+          --column-margin: var(--margin-bottom);
 
           position: relative;
-          margin-bottom: 50px;
+          margin-bottom: var(--margin-bottom);
           margin-top: -110px;
           transition: margin-top 1s ease;
 
@@ -373,7 +382,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            margin-bottom: 5rem;
+            margin-bottom: calc(2 * var(--margin-bottom));
 
             .project-logo {
               flex-shrink: 0;
@@ -446,6 +455,7 @@
           border: var(--card-border);
           border-radius: var(--border-radius-medium);
           padding: 30px 20px;
+          margin-bottom: var(--margin-bottom);
 
           .result-wrapper {
             display: flex;
@@ -464,17 +474,19 @@
           }
         }
         .project-gallery {
-          display: flex;
-          flex-direction: column;
-          gap: 40px;
-          border-radius: var(--border-radius-small);
+          & > div {
+            margin-bottom: var(--margin-bottom);
 
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
           .video-scroll-player-container {
-            border-radius: var(--border-radius-large);
             background-color: #2f00ff;
             aspect-ratio: 16/9;
             position: relative;
             overflow: hidden;
+            border-radius: var(--border-radius-medium);
             .video-scroll-player {
               video {
                 width: 100%;
@@ -488,8 +500,8 @@
           .main-image {
             width: 100%;
             aspect-ratio: 16/9;
-            border-radius: var(--border-radius-medium);
             img {
+              border-radius: var(--border-radius-medium);
               width: 100%;
               height: 100%;
               object-fit: cover;
@@ -548,7 +560,7 @@
             position: relative;
             display: inline-block;
             width: 100%;
-            margin-bottom: 50px;
+            margin-bottom: var(--margin-bottom);
             img {
               width: 100%;
               height: auto;
@@ -570,7 +582,6 @@
             }
           }
         }
-
         .perspective-image {
           transform: perspective(800px) rotateX(30deg);
           transform-origin: bottom;
@@ -598,10 +609,6 @@
         img {
           border-radius: var(--border-radius-small);
         }
-      }
-
-      > *:last-child .img-container {
-        margin-bottom: 0;
       }
     }
   }

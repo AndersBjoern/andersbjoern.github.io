@@ -1,11 +1,11 @@
 window.addEventListener("sectionsLoaded", (event) => {
   if (event.detail.isMobile) {
     initializeVideoScrollTrigger();
-    initializeTestimonialAnimation();
     videoplayerFunctions();
     videoScrollerPlay();
-    initializeGallery();
     animateClasses();
+    initializeGallery();
+    initializeTestimonialAnimation();
   }
 });
 
@@ -21,42 +21,6 @@ function initializeVideoScrollTrigger() {
     onLeave: () => video.pause(),
     onEnterBack: () => video.play(),
     onLeaveBack: () => video.pause(),
-  });
-}
-
-function initializeTestimonialAnimation() {
-  const scrollers = document.querySelectorAll(".testimonials-scroller");
-
-  scrollers.forEach((scroller, index) => {
-    const direction = index === 1 ? "right" : "left";
-    scroller.setAttribute("data-direction", direction);
-    scroller.setAttribute("data-animated", true);
-
-    initializeScrollerContent(scroller, index);
-  });
-}
-
-function initializeScrollerContent(scroller, index) {
-  const scrollerInner = scroller.querySelector(".testimonials-scroller-inner");
-  if (!scrollerInner) return;
-
-  const scrollerContent = Array.from(scrollerInner.children);
-  const startIndex = index === 1 ? 4 : index === 2 ? 2 : 0;
-
-  const rearrangedContent = [
-    ...scrollerContent.slice(startIndex),
-    ...scrollerContent.slice(0, startIndex),
-  ];
-
-  scrollerInner.innerHTML = "";
-  rearrangedContent.forEach((item) => {
-    scrollerInner.appendChild(item);
-  });
-
-  rearrangedContent.forEach((item) => {
-    const duplicatedItem = item.cloneNode(true);
-    duplicatedItem.setAttribute("aria-hidden", true);
-    scrollerInner.appendChild(duplicatedItem);
   });
 }
 
@@ -92,7 +56,7 @@ function videoplayerFunctions() {
 function videoScrollerPlay() {
   let video = document.getElementById("scroll-video");
   video.addEventListener("loadeddata", () => {
-    video.pause(); // Stopper autoplay for at styre det selv
+    video.pause();
 
     let scrollTrigger = ScrollTrigger.create({
       trigger: ".video-scroll-player-container",
@@ -100,26 +64,9 @@ function videoScrollerPlay() {
       end: "top 0",
       scrub: 1,
       onUpdate: (self) => {
-        let progress = self.progress; // Scroll progress (0 til 1)
-        video.currentTime = progress * video.duration; // Opdater video jævnt
+        let progress = self.progress;
+        video.currentTime = progress * video.duration;
       },
-    });
-  });
-}
-
-function initializeGallery() {
-  const featuredImage = document.getElementById("featuredImage");
-  const thumbnails = document.querySelectorAll(
-    ".thumbnail-gallery .gallery-item img"
-  );
-
-  thumbnails.forEach((thumbnail) => {
-    thumbnail.addEventListener("click", () => {
-      featuredImage.src = thumbnail.src;
-      thumbnails.forEach((thumb) =>
-        thumb.parentElement.classList.remove("active")
-      );
-      thumbnail.parentElement.classList.add("active");
     });
   });
 }
@@ -156,5 +103,58 @@ function animateClasses() {
         }
       );
     });
+  });
+}
+
+function initializeGallery() {
+  const featuredImage = document.getElementById("featuredImage");
+  const thumbnails = document.querySelectorAll(
+    ".thumbnail-gallery .gallery-item img"
+  );
+
+  thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener("click", () => {
+      featuredImage.src = thumbnail.src;
+      thumbnails.forEach((thumb) =>
+        thumb.parentElement.classList.remove("active")
+      );
+      thumbnail.parentElement.classList.add("active");
+    });
+  });
+}
+
+function initializeScrollerContent(scroller, index) {
+  const scrollerInner = scroller.querySelector(".testimonials-scroller-inner");
+  if (!scrollerInner) return;
+
+  const scrollerContent = Array.from(scrollerInner.children);
+  const startIndex = index === 1 ? 4 : index === 2 ? 2 : 0;
+
+  const rearrangedContent = [
+    ...scrollerContent.slice(startIndex),
+    ...scrollerContent.slice(0, startIndex),
+  ];
+
+  scrollerInner.innerHTML = "";
+  rearrangedContent.forEach((item) => {
+    scrollerInner.appendChild(item);
+  });
+
+  rearrangedContent.forEach((item) => {
+    const duplicatedItem = item.cloneNode(true);
+    duplicatedItem.setAttribute("aria-hidden", true);
+    scrollerInner.appendChild(duplicatedItem);
+  });
+}
+
+function initializeTestimonialAnimation() {
+  const scrollers = document.querySelectorAll(".testimonials-scroller");
+
+  scrollers.forEach((scroller, index) => {
+    const direction = index === 1 ? "right" : "left";
+    scroller.setAttribute("data-direction", direction);
+    scroller.setAttribute("data-animated", true);
+
+    initializeScrollerContent(scroller, index);
   });
 }

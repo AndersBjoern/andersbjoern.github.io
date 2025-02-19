@@ -33,6 +33,7 @@ function initializeGSAPAnimations() {
       stagger: 0.1,
     });
 }
+
 function initializeShowMoreButton() {
   const showMoreButton = document.querySelector(".show-more-btn");
   if (showMoreButton) {

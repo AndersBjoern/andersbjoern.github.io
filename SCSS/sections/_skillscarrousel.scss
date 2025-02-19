@@ -1,5 +1,5 @@
 .skills-section {
-  margin: clamp(80px, 120px, 200px) 0;
+  margin: clamp(40px, 10vw, 200px) 0;
   width: 100%;
   position: relative;
   overflow-y: hidden;
@@ -23,20 +23,8 @@
 
   .skills-scroller[data-animated="true"] {
     overflow: hidden;
-    -webkit-mask: linear-gradient(
-      90deg,
-      transparent,
-      black 20%,
-      black 80%,
-      transparent
-    );
-    mask: linear-gradient(
-      90deg,
-      transparent,
-      black 20%,
-      black 80%,
-      transparent
-    );
+    -webkit-mask: var(--infinite-gradient);
+    mask: var(--infinite-gradient);
     .scroller_inner {
       width: fit-content;
       flex-wrap: nowrap;

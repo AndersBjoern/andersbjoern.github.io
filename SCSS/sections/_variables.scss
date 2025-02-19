@@ -65,6 +65,14 @@
     #010413 70%
   );
 
+  --infinite-gradient: linear-gradient(
+    90deg,
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
+  );
+
   --testimonials-card-background: var(--background-color-dark);
   --testimonials-card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --testimonials-card-border: 1px solid #333;
@@ -81,10 +89,10 @@
   --video-padding: 5px;
   --section-padding: 0 5vw;
 
-  --article-margin: clamp(30px, 10)
+  --article-margin: clamp(30px, 10);
 
   --border-radius-large: 20px;
-  --border-radius-medium: 20px;
+  --border-radius-medium: 15px;
   --border-radius-small: 10px;
   --border-radius-tiny: 5px;
 
@@ -111,5 +119,5 @@
   --font-weight-bold: 700;
 
   --font-size-super-title: clamp(30px, 7vw, 70px);
-  --font-size-skills-section: clamp(100px, 20vw, 20rem);
+  --font-size-skills-section: clamp(120px, 25vw, 20rem);
 }
