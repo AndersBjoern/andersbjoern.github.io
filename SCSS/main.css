@@ -852,12 +852,13 @@ div:has(> .scale) .scale:hover {
     filter: brightness(0.8);
   }
   .section-wrapper article .article-content-wrapper .project-gallery .thumbnail-gallery .gallery-item::after {
+    pointer-events: none;
     content: "Click to view";
     font-family: var(--font-roboto);
     font-weight: var(--font-weight-medium);
-    line-height: var(--p-line-height);
     display: flex;
     justify-content: center;
+    text-align: center;
     align-items: center;
     position: absolute;
     bottom: 0;
@@ -1161,6 +1162,7 @@ img {
   max-height: 1000px;
 }
 .about-me-container .certifications .cert-container::after {
+  pointer-events: none;
   content: "";
   position: absolute;
   bottom: 0;
@@ -1194,15 +1196,18 @@ img {
   width: 100%;
   border-collapse: collapse;
 }
-.cert-table td {
+.cert-table tr {
+  cursor: pointer;
+}
+.cert-table tr td {
   padding: 20px 0;
   vertical-align: top;
 }
-.cert-table td.icon-cell {
+.cert-table tr td.icon-cell {
   width: clamp(50px, 15%, 200px);
   text-align: center;
 }
-.cert-table td.icon-cell i {
+.cert-table tr td.icon-cell i {
   font-size: 1rem;
   color: #fff;
   border: 2px solid #02a2c4;
@@ -1210,18 +1215,18 @@ img {
   padding: 15px;
   display: inline-block;
 }
-.cert-table td.info-cell {
+.cert-table tr td.info-cell {
   padding-left: 30px;
   word-wrap: break-word;
 }
-.cert-table td.info-cell .cert-name {
+.cert-table tr td.info-cell .cert-name {
   font-weight: bold;
 }
-.cert-table td.info-cell .issuer {
+.cert-table tr td.info-cell .issuer {
   margin-left: 10px;
   margin-top: 5px;
 }
-.cert-table td.info-cell .date {
+.cert-table tr td.info-cell .date {
   display: block;
   font-style: italic;
   color: var(--font-color-dark);

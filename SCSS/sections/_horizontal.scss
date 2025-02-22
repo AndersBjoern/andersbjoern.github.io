@@ -531,12 +531,13 @@
                 filter: brightness(0.8);
               }
               &::after {
+                pointer-events: none;
                 content: "Click to view";
                 font-family: var(--font-roboto);
                 font-weight: var(--font-weight-medium);
-                line-height: var(--p-line-height);
                 display: flex;
                 justify-content: center;
+                text-align: center;
                 align-items: center;
                 position: absolute;
                 bottom: 0;

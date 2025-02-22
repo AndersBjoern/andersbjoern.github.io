@@ -72,17 +72,10 @@ function videoScrollerPlay() {
 }
 
 function animateClasses() {
-  const animatedClasses = [
-    ".icon-text-pair",
-    ".project-results",
-    ".video-scroll-player-container",
-    ".main-image",
-    ".thumbnail-gallery",
-    ".text-over-image-container",
-  ];
+  const animatedClasses = [".fade-effect"];
 
   animatedClasses.forEach((cls) => {
-    const elements = gsap.utils.toArray(cls);
+    const elements = gsap.utils.toArray(document.querySelectorAll(cls));
 
     elements.forEach((element) => {
       gsap.fromTo(
@@ -95,8 +88,8 @@ function animateClasses() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: element,
-            start: "top 80%",
-            end: "bottom 20%",
+            start: "top 85%",
+            end: "bottom 10%",
 
             toggleActions: "play reverse play reverse",
           },
