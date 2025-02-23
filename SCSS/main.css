@@ -808,6 +808,12 @@ div:has(> .scale) .scale:hover {
     line-height: 0.9;
     margin-right: clamp(10px, 5vw, 70px);
   }
+  .section-wrapper article .article-content-wrapper .project-gallery > div {
+    margin-bottom: var(--margin-bottom);
+  }
+  .section-wrapper article .article-content-wrapper .project-gallery > div:last-of-type {
+    margin-bottom: 0;
+  }
   .section-wrapper article .article-content-wrapper .project-gallery .video-scroll-player-container {
     margin-top: var(--margin-bottom);
     margin-bottom: calc(2 * var(--margin-bottom));

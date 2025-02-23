@@ -469,6 +469,14 @@
           }
         }
         .project-gallery {
+          & > div {
+            margin-bottom: var(--margin-bottom);
+
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
+
           .video-scroll-player-container {
             margin-top: var(--margin-bottom);
             margin-bottom: calc(2 * var(--margin-bottom));
