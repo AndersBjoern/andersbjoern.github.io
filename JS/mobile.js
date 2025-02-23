@@ -70,32 +70,29 @@ function videoScrollerPlay() {
     });
   });
 }
+
 function animateClasses() {
-  const animatedClasses = [".fade-effect"];
+  const fadeElements = document.querySelectorAll(".fade-effect");
 
-  animatedClasses.forEach((cls) => {
-    const elements = gsap.utils.toArray(cls);
-
-    elements.forEach((element) => {
-      gsap.fromTo(
-        element,
-        { opacity: 0, scale: 0.8 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: element,
-            start: "top 85%",
-            end: "bottom 10%",
-
-            toggleActions: "play reverse play reverse",
-          },
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("entry", entry);
+          entry.target.classList.remove("fade-out");
+          entry.target.classList.add("fade-in");
+        } else {
+          entry.target.classList.remove("fade-in");
+          entry.target.classList.add("fade-out");
         }
-      );
-    });
-  });
+      });
+    },
+    {
+      threshold: 0.2,
+    }
+  );
+
+  fadeElements.forEach((el) => observer.observe(el));
 }
 
 function initializeGallery() {
