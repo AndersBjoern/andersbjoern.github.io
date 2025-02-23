@@ -2,7 +2,7 @@ window.addEventListener("sectionsLoaded", (event) => {
   if (event.detail.isMobile) {
     initializeVideoScrollTrigger();
     videoplayerFunctions();
-    videoScrollerPlay();
+    //videoScrollerPlay();
     animateClasses();
     initializeGallery();
     initializeTestimonialAnimation();
@@ -46,7 +46,7 @@ function videoplayerFunctions() {
       .classList.remove("video-playing");
   });
 }
-
+/*
 function videoScrollerPlay() {
   let video = document.getElementById("scroll-video");
   video.addEventListener("canplaythrough", () => {
@@ -64,7 +64,7 @@ function videoScrollerPlay() {
     });
   });
 }
-
+*/
 function animateClasses() {
   const fadeElements = document.querySelectorAll(".fade-effect");
 
