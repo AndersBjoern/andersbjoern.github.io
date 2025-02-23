@@ -78,11 +78,9 @@ function animateClasses() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("Element er synligt: ", entry.target);
           entry.target.classList.remove("fade-out");
           entry.target.classList.add("fade-in");
         } else {
-          console.log("Element er ikke synligt: ", entry.target);
           entry.target.classList.remove("fade-in");
           entry.target.classList.add("fade-out");
         }
