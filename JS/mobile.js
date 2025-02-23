@@ -71,30 +71,30 @@ function videoScrollerPlay() {
   });
 }
 function animateClasses() {
-  const elements = document.querySelectorAll(".fade-effect");
+  const animatedClasses = [".fade-effect"];
 
-  elements.forEach((element, index) => {
-    const uniqueId = `fade-effect-${index}`;
-    element.setAttribute("id", uniqueId);
+  animatedClasses.forEach((cls) => {
+    const elements = gsap.utils.toArray(cls);
 
-    gsap.fromTo(
-      element,
-      { opacity: 0, scale: 0.8 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: `#${uniqueId}`,
-          start: "top 85%",
-          end: "bottom 10%",
-          toggleActions: "play reverse play reverse",
-          id: `fadeTrigger-${index}`,
-          once: false,
-        },
-      }
-    );
+    elements.forEach((element) => {
+      gsap.fromTo(
+        element,
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: element,
+            start: "top 85%",
+            end: "bottom 10%",
+
+            toggleActions: "play reverse play reverse",
+          },
+        }
+      );
+    });
   });
 }
 
