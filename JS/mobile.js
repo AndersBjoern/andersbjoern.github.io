@@ -50,8 +50,6 @@ function videoplayerFunctions() {
 function videoScrollerPlay() {
   let video = document.getElementById("scroll-video");
   video.addEventListener("canplaythrough", () => {
-    video.pause();
-
     let scrollTrigger = ScrollTrigger.create({
       trigger: ".video-scroll-player-container",
       start: "top bottom",
