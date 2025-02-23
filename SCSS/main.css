@@ -665,9 +665,6 @@ div:has(> .scale) .scale:hover {
     z-index: 0;
     background: black;
   }
-  .section-wrapper article .article-content-wrapper .videoplayer-container.playing .play-icon {
-    display: none;
-  }
   .section-wrapper article .article-content-wrapper .videoplayer-container.playing video {
     mask-size: 700%;
     -webkit-mask-size: 700%;
@@ -719,14 +716,13 @@ div:has(> .scale) .scale:hover {
   }
   .section-wrapper article .article-content-wrapper .project-description {
     --column-width: min(110px, 20vw);
-    --column-margin: var(--margin-bottom);
     position: relative;
     margin-bottom: var(--margin-bottom);
     margin-top: -110px;
     transition: margin-top 1s ease;
   }
   .section-wrapper article .article-content-wrapper .project-description.video-playing {
-    margin-top: 0;
+    margin-top: var(--margin-bottom);
   }
   .section-wrapper article .article-content-wrapper .project-description .image-text-container {
     display: flex;
@@ -738,7 +734,7 @@ div:has(> .scale) .scale:hover {
     flex-shrink: 0;
     width: var(--column-width);
     height: var(--column-width);
-    margin-right: var(--column-margin);
+    margin-right: 30px;
   }
   .section-wrapper article .article-content-wrapper .project-description .image-text-container .project-logo img {
     width: 100%;
@@ -812,14 +808,9 @@ div:has(> .scale) .scale:hover {
     line-height: 0.9;
     margin-right: clamp(10px, 5vw, 70px);
   }
-  .section-wrapper article .article-content-wrapper .project-gallery > div {
-    margin-bottom: var(--margin-bottom);
-  }
-  .section-wrapper article .article-content-wrapper .project-gallery > div:last-of-type {
-    margin-bottom: 0;
-  }
   .section-wrapper article .article-content-wrapper .project-gallery .video-scroll-player-container {
-    background-color: #2f00ff;
+    margin-top: var(--margin-bottom);
+    margin-bottom: calc(2 * var(--margin-bottom));
     aspect-ratio: 16/9;
     position: relative;
     overflow: hidden;
@@ -835,6 +826,7 @@ div:has(> .scale) .scale:hover {
   .section-wrapper article .article-content-wrapper .project-gallery .main-image {
     width: 100%;
     aspect-ratio: 16/9;
+    margin-bottom: clamp(10px, 2vw, 20px);
   }
   .section-wrapper article .article-content-wrapper .project-gallery .main-image img {
     border-radius: var(--border-radius-medium);

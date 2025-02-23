@@ -26,13 +26,7 @@ function initializeVideoScrollTrigger() {
 
 function videoplayerFunctions() {
   const video = document.getElementById("DigitalEmpowermentVideo");
-  const playIcon = document.getElementById("playIcon");
   const videoContainer = document.querySelector(".videoplayer-container");
-
-  playIcon.addEventListener("click", () => {
-    video.play();
-    videoContainer.classList.add("playing");
-  });
 
   video.addEventListener("pause", () => {
     videoContainer.classList.remove("playing");
