@@ -108,7 +108,11 @@
       left: 0;
       right: 0;
       height: 250px;
-      background: linear-gradient(to bottom, rgba(1, 4, 19, 0), #010413);
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        var(--about-me-background-color)
+      );
       display: block;
       transition: opacity 0.3s ease;
     }
@@ -120,16 +124,16 @@
       margin: 10px auto;
       padding: 10px 20px;
       font-size: 16px;
-      border: 1px solid #0a1392;
+      border: 1px solid var(--primary-color);
       color: #fff;
-      background-color: #010413;
+      background-color: var(--about-me-background-color);
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
     .show-more-btn:hover {
-      background-color: #0a1392;
+      background-color: var(--primary-color);
     }
   }
 }

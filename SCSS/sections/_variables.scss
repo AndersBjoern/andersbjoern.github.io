@@ -1,26 +1,17 @@
 :root {
   --primary-color: hsl(222, 84%, 60%);
   --primary-color-light: hsl(164, 79%, 71%);
-  --primary-color-dark: hsl(246, 71%, 41%);
-  // #e83724, #2f00ff
+  --primary-color-dark: hsl(246, 71%, 41%); // coffee button
 
   --secondary-color-1: hsl(5, 85%, 18%);
   --secondary-color-2: hsl(257, 83%, 28%);
   --secondary-color-3: hsl(210, 86%, 36%);
 
+  --background-color: #0a0a0a;
   --background-color-dark: #020202;
-  --backdrop-color: #00000076;
+  --backdrop-color: #0000004d; // mobile
   --border-color: rgba(10, 19, 146, 0.62);
 
-  //--contrast-color: #0a1392;
-  //--dark-contrast-color: #180851;
-  /* videoplayer-before: linear-gradient(
-              to bottom,
-              rgba(1, 4, 19, 1) 0%,
-              rgba(1, 4, 19, 1) 30%,
-              rgba(1, 4, 19, 0) 80%
-            ); */
-  // box-shadow: 0 4px 12px rgba(55, 2, 18, 0.4);
   --hover-bg-color: rgba(10, 19, 146, 0.62);
   --card-border: 0.5px solid #3f3f3f;
   --font-color: #c8dff6;
@@ -44,6 +35,18 @@
     #0a1392 84%
   );
 
+  --gradient-start: 30%;
+  --gradient-end: 80%;
+  --lego-background: radial-gradient(hsl(0, 59%, 44%) 1px, transparent 1px);
+  --lego-border: 2px solid #343434;
+  --moesgaard-background: radial-gradient(
+    hsl(253, 94%, 67%) 1px,
+    transparent 1px
+  );
+  --moesgaard-border: 2px solid #343434;
+  --pdp-background: radial-gradient(hsl(222, 84%, 60%) 1px, transparent 1px);
+  --pdp-border: 2px solid #343434;
+
   --hover-blur-effect: radial-gradient(
     circle at top left,
     rgba(0, 0, 0, 0.5),
@@ -56,7 +59,7 @@
   --skills-section-tags: #0a1392;
   --skills-section-tags-shadow: #180851;
 
-  --about-me-background-color: #010413;
+  --about-me-background-color: var(--background-color-dark);
   --about-me-border-color: #0a1392;
   --about-me-profile-outer-ring: linear-gradient(
     135deg,
@@ -111,7 +114,7 @@
   --font-size-h4: clamp(1.25rem, 2.5vw, 2rem);
   --font-size-h5: clamp(1rem, 2vw, 1.5rem);
   --font-size-h6: clamp(0.875rem, 1.5vw, 1.25rem);
-  --font-size-p: clamp(1rem, 2vw, 1.25rem);
+  --font-size-p: clamp(16px, 2vw, 1.25rem);
   --font-size-button: clamp(1rem, 2vw, 1.25rem);
 
   --font-weight-light: 300;

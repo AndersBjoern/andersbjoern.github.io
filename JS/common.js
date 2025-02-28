@@ -132,6 +132,11 @@ function setupHighlightsObserver() {
   const blackBackground = document.querySelector(".black-background");
   const body = document.body;
 
+  const root = document.documentElement;
+  const backgroundcolor =
+    getComputedStyle(root).getPropertyValue("--background-color");
+  const fontColor = getComputedStyle(root).getPropertyValue("--font-color");
+
   if (!highlightsSection || !blackBackground) return;
 
   const observerOptions = {
@@ -149,13 +154,13 @@ function setupHighlightsObserver() {
 
       if (isIntersecting) {
         body.style.backgroundColor = "white";
-        blackBackground.style.color = "white";
+        blackBackground.style.color = fontColor;
         blackBackground.style.width = "95vw";
         blackBackground.style.borderTopRightRadius = "40px";
         blackBackground.style.borderBottomRightRadius = "40px";
       } else {
-        body.style.backgroundColor = "black";
-        blackBackground.style.color = "black";
+        body.style.backgroundColor = backgroundcolor;
+        blackBackground.style.color = backgroundcolor;
         blackBackground.style.width = "100vw";
         blackBackground.style.borderTopRightRadius = "0";
         blackBackground.style.borderBottomRightRadius = "0";
