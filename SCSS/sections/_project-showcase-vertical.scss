@@ -238,7 +238,7 @@
 
             #legoLogo {
               aspect-ratio: 1/1;
-              width: 100%;
+              width: var(--column-width);
             }
 
             &--vertical {

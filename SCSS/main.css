@@ -828,7 +828,7 @@ body {
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #legoLogo {
     aspect-ratio: 1/1;
-    width: 100%;
+    width: var(--column-width);
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container--vertical {
     flex-direction: column;
