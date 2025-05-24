@@ -52,6 +52,8 @@
   --moesgaard-border: 2px solid #343434;
   --pdp-background: radial-gradient(hsl(222, 84%, 60%) 1px, transparent 1px);
   --pdp-border: 2px solid #343434;
+  --sdu-background: radial-gradient(hsl(0, 0%, 95%) 1px, transparent 1px);
+  --sdu-border: 2px solid #343434;
 
   --hover-blur-effect: radial-gradient(
     circle at top left,
@@ -98,6 +100,7 @@
   --mobile-padding: 0 2vw;
   --video-padding: 5px;
   --section-padding: 0 5vw;
+  --connect-button-padding: 2vw;
 
   --article-margin: clamp(30px, 10);
 

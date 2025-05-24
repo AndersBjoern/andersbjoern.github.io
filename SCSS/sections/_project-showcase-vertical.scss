@@ -93,6 +93,13 @@
         }
       }
 
+      &#sdu-game {
+        border: var(--sdu-border);
+        &::before {
+          background-image: var(--sdu-background);
+        }
+      }
+
       .read-more {
         position: absolute;
         bottom: 10px;
@@ -173,31 +180,6 @@
             -webkit-mask-size: 250%;
             transition: mask-size 2s ease, -webkit-mask-size 2s ease;
           }
-
-          .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 2;
-            &::before {
-              content: "";
-              display: block;
-              width: 0;
-              height: 0;
-              border-left: 15px solid white;
-              border-top: 10px solid transparent;
-              border-bottom: 10px solid transparent;
-            }
-          }
         }
 
         .iframe-container {
@@ -236,9 +218,17 @@
               }
             }
 
-            #legoLogo {
+            #legoLogo,
+            #sduLogo {
               aspect-ratio: 1/1;
               width: var(--column-width);
+              object-fit: contain;
+            }
+
+            #pdpLogo {
+              background-color: #fff;
+              padding: 10px;
+              border-radius: var(--border-radius-small);
             }
 
             &--vertical {

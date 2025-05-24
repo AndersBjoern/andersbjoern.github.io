@@ -1,8 +1,8 @@
 window.addEventListener("sectionsLoaded", (event) => {
   if (event.detail.isMobile) {
+    initializeContactButtonEffect();
     initializeVideoScrollTrigger();
-    videoplayerFunctions();
-    //videoScrollerPlay();
+    initializeVideoMaskEffect();
     projectShowcaseButtons();
     animateClasses();
     initializeGallery();
@@ -10,43 +10,71 @@ window.addEventListener("sectionsLoaded", (event) => {
   }
 });
 
-function initializeVideoScrollTrigger() {
-  const video = document.getElementById("DigitalEmpowermentVideo");
-  if (!video) return;
-
+function initializeContactButtonEffect() {
   ScrollTrigger.create({
-    trigger: video,
-    start: "top center",
-    end: "bottom center",
-    onEnter: () => video.play(),
-    onLeave: () => video.pause(),
-    onEnterBack: () => video.play(),
-    onLeaveBack: () => video.pause(),
+    trigger: ".contact-button",
+    start: "top bottom",
+    end: "bottom top",
+    onEnter: () => {
+      document.querySelector(".connect-button").style.opacity = "0";
+      document.querySelector(".connect-button").style.pointerEvents = "none";
+    },
+    onLeaveBack: () => {
+      document.querySelector(".connect-button").style.opacity = "1";
+      document.querySelector(".connect-button").style.pointerEvents = "auto";
+    },
+    onLeave: () => {
+      document.querySelector(".connect-button").style.opacity = "1";
+      document.querySelector(".connect-button").style.pointerEvents = "auto";
+    },
+    onEnterBack: () => {
+      document.querySelector(".connect-button").style.opacity = "0";
+      document.querySelector(".connect-button").style.pointerEvents = "none";
+    },
   });
 }
 
-function videoplayerFunctions() {
-  const video = document.getElementById("DigitalEmpowermentVideo");
-  const videoContainer = document.querySelector(".videoplayer-container");
+function initializeVideoScrollTrigger() {
+  const videos = document.querySelectorAll(".scroll-trigger-video");
+  if (!videos.length) return;
 
-  video.addEventListener("pause", () => {
-    videoContainer.classList.remove("playing");
-  });
-
-  video.addEventListener("play", () => {
-    videoContainer.classList.add("playing");
-    document
-      .querySelector(".project-description")
-      .classList.add("video-playing");
-  });
-
-  video.addEventListener("pause", () => {
-    videoContainer.classList.remove("playing");
-    document
-      .querySelector(".project-description")
-      .classList.remove("video-playing");
+  videos.forEach((video) => {
+    ScrollTrigger.create({
+      trigger: video,
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => video.play(),
+      onLeave: () => video.pause(),
+      onEnterBack: () => video.play(),
+      onLeaveBack: () => video.pause(),
+    });
   });
 }
+
+function initializeVideoMaskEffect() {
+  const videos = document.querySelectorAll(".scroll-trigger-video");
+  if (!videos.length) return;
+
+  videos.forEach((video) => {
+    const videoContainer = video.closest(".videoplayer-container");
+    const projectArticle = video.closest("article.project-article");
+    const projectDescription = projectArticle?.querySelector(
+      ".project-description"
+    );
+
+    video.addEventListener("play", () => {
+      if (videoContainer) videoContainer.classList.add("playing");
+      if (projectDescription) projectDescription.classList.add("video-playing");
+    });
+
+    video.addEventListener("pause", () => {
+      if (videoContainer) videoContainer.classList.remove("playing");
+      if (projectDescription)
+        projectDescription.classList.remove("video-playing");
+    });
+  });
+}
+
 /*
 function videoScrollerPlay() {
   let video = document.getElementById("scroll-video");
