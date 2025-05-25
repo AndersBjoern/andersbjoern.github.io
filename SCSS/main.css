@@ -830,7 +830,7 @@ body {
   .section-wrapper .project-article .article-content-wrapper .project-description {
     --column-width: min(110px, 20vw);
     position: relative;
-    margin-bottom: var(--margin-bottom);
+    margin-top: -110px;
     transition: margin-top 1s ease;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description.video-playing {
