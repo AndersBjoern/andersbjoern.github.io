@@ -117,7 +117,7 @@ a {
   --font-roboto: "Roboto", sans-serif;
   --font-size-h1: clamp(2rem, 4vw, 4rem);
   --font-size-h2: clamp(1.75rem, 3.5vw, 3rem);
-  --font-size-h3: clamp(1.5rem, 3vw, 2.5rem);
+  --font-size-h3: clamp(1.5rem, 2.5vw, 2rem);
   --font-size-h4: clamp(1.25rem, 2.5vw, 2rem);
   --font-size-h5: clamp(1rem, 2vw, 1.5rem);
   --font-size-h6: clamp(0.875rem, 1.5vw, 1.25rem);
@@ -335,10 +335,10 @@ body {
   }
 }
 .landing-section {
-  height: clamp(800px, 90vh, 1500px);
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
@@ -361,6 +361,13 @@ body {
 }
 .landing-section .landing-section-container {
   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.landing-section .landing-section-container h2 {
+  margin-top: clamp(40px, 5vw, 140px) 0;
 }
 .landing-section .landing-section-container .dynamic-title {
   margin-top: clamp(50px, 6vw, 80px);
@@ -401,11 +408,11 @@ body {
   border-radius: var(--border-radius-small);
 }
 .landing-section .landing-section-container .contact-button {
-  margin: 140px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin: clamp(40px, 5vw, 140px) 0;
 }
 .landing-section .landing-section-container .contact-button button {
   padding: var(--button-padding);
@@ -443,63 +450,55 @@ body {
   opacity: 1;
 }
 
-@media screen and (max-width: 900px) {
-  .landing-section {
-    min-height: 65vh;
-  }
-  .landing-section .contact-button {
-    margin: 90px 0;
-  }
-  .landing-section .contact-button button {
-    width: auto;
-    padding: 20px 40px;
-  }
-  .landing-section .connect-button {
-    position: fixed;
-    bottom: var(--connect-button-padding);
-    right: var(--connect-button-padding);
-    height: 40px;
-    width: 40px;
-    z-index: 9999;
-    -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 50%;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    padding: 0;
-    transition: opacity 0.3s ease;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .landing-section .connect-button a,
-  .landing-section .connect-button button {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--connect-button-padding);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-            user-select: none;
-    transition: background-color 0.3s ease;
-    margin: 0;
-  }
-  .landing-section .connect-button a .linkedin-logo,
-  .landing-section .connect-button button .linkedin-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    color: #0a66c2;
-    margin-left: 0;
-    margin-bottom: 0;
-  }
+.connect-button {
+  opacity: 0;
+  pointer-events: none;
 }
+
+.landing-section .connect-button {
+  position: fixed;
+  bottom: var(--connect-button-padding);
+  right: var(--connect-button-padding);
+  height: 40px;
+  width: 40px;
+  z-index: 9999;
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+.landing-section .connect-button a,
+.landing-section .connect-button button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--connect-button-padding);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition: background-color 0.3s ease;
+  margin: 0;
+}
+.landing-section .connect-button a .linkedin-logo,
+.landing-section .connect-button button .linkedin-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: #0a66c2;
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
 @media screen and (min-width: 901px) {
   section.horizontal {
     overflow: hidden;
@@ -685,7 +684,7 @@ body {
     --margin-bottom: 30px;
   }
   .section-wrapper > .project-article:first-of-type {
-    margin-top: -10vh;
+    margin-top: 0;
   }
   .section-wrapper .project-article {
     width: 100%;
@@ -832,7 +831,6 @@ body {
     --column-width: min(110px, 20vw);
     position: relative;
     margin-bottom: var(--margin-bottom);
-    margin-top: -100px;
     transition: margin-top 1s ease;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description.video-playing {
@@ -893,12 +891,10 @@ body {
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .text-content h3 {
     margin-bottom: 0;
   }
-  .section-wrapper .project-article .article-content-wrapper .project-results {
-    margin-bottom: var(--margin-bottom);
-  }
   .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper {
     display: flex;
     gap: var(--margin-bottom);
+    margin-bottom: var(--margin-bottom);
     justify-content: center;
   }
   .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper .stat-box {
@@ -1025,14 +1021,11 @@ body {
   .section-wrapper .project-article .icon-text-pair {
     display: flex;
     align-items: center;
-    margin: 30px 0;
+    margin: var(--margin-bottom) 0;
     background-color: var(--backdrop-color);
     border: var(--card-border);
     padding: 20px 20px 20px 0;
     border-radius: var(--border-radius-medium);
-  }
-  .section-wrapper .project-article .icon-text-pair:last-of-type {
-    margin-bottom: 0;
   }
   .section-wrapper .project-article .icon-text-pair .icon-circle-wrapper {
     flex-shrink: 0;
