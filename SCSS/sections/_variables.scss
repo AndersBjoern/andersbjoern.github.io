@@ -1,80 +1,28 @@
 :root {
-  --primary-color: hsl(222, 84%, 60%);
-  --primary-color-light: hsl(164, 79%, 71%);
-  --primary-color-dark: hsl(246, 71%, 41%); // coffee button
-
-  --secondary-color-1: hsl(5, 85%, 18%);
-  --secondary-color-2: hsl(257, 83%, 28%);
-  --secondary-color-3: hsl(210, 86%, 36%);
-
-  --background-color: #0a0a0a;
+  /* COLORS */
+  /* General */
   --background-color-dark: #020202;
-  --backdrop-color: #0000004d; // mobile
-  --border-color: rgba(10, 19, 146, 0.62);
-
-  --hover-bg-color: rgba(10, 19, 146, 0.62);
-  --card-border: 0.5px solid #3f3f3f;
+  --card-background: #101112;
   --font-color: #c8dff6;
-  --font-grey-color: #666;
-  --font-color-dark: #9baab0;
-  --font-bold-color: #02a2c4;
+  --font-color-muted: #9baab0;
+  --font-color-highlight: var(--accent-color-3);
+  --border-color: #343434;
 
-  --landing-title-line: linear-gradient(
+  --accent-color-1: hsl(222, 84%, 60%);
+  --accent-color-2: hsl(222, 83%, 35%);
+  --accent-color-3: hsl(217, 73%, 56%);
+  --accent-color-4: hsl(203, 74%, 29%);
+
+  --card-shadow: 0 0.5rem 1rem -0.25rem var(--background-color-dark);
+
+  --icon-background: var(--card-background);
+  --icon-border: 1px solid var(--accent-color-2);
+  --icon-font-color: var(--accent-color-1);
+  --transparent-gradient: linear-gradient(
     to bottom,
-    var(--secondary-color-1),
-    var(--secondary-color-2)
+    rgba(255, 0, 0, 0),
+    var(--card-background)
   );
-  --horizontal-dividers-background: linear-gradient(
-    to bottom,
-    #e83724,
-    #2f00ff
-  );
-  --horizontal-scroller-background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0) 24%,
-    rgba(21, 9, 100, 1) 50%,
-    #0a1392 84%
-  );
-
-  --gradient-start: 30%;
-  --gradient-end: 80%;
-  --netcompany-border: 2px solid #343434;
-  --netcompany-background: radial-gradient(
-    hsl(177, 49%, 15%) 1px,
-    transparent 1px
-  );
-  --lego-border: 2px solid #343434;
-  --lego-background: radial-gradient(hsl(0, 59%, 44%) 1px, transparent 1px);
-  --moesgaard-background: radial-gradient(
-    hsl(253, 94%, 67%) 1px,
-    transparent 1px
-  );
-  --moesgaard-border: 2px solid #343434;
-  --pdp-background: radial-gradient(hsl(222, 84%, 60%) 1px, transparent 1px);
-  --pdp-border: 2px solid #343434;
-  --sdu-background: radial-gradient(hsl(0, 0%, 95%) 1px, transparent 1px);
-  --sdu-border: 2px solid #343434;
-
-  --hover-blur-effect: radial-gradient(
-    circle at top left,
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.2)
-  );
-
-  --video-bg-color: #e8e7ed;
-  --contrast-color-1: #9be0f4;
-  --skills-section-tags: #0a1392;
-  --skills-section-tags-shadow: #180851;
-
-  --about-me-background-color: var(--background-color-dark);
-  --about-me-border-color: #0a1392;
-  --about-me-profile-outer-ring: linear-gradient(
-    135deg,
-    #02a2c4 10%,
-    #0a1392 40%,
-    #010413 70%
-  );
-
   --infinite-gradient: linear-gradient(
     90deg,
     transparent,
@@ -83,35 +31,82 @@
     transparent
   );
 
-  --testimonials-card-background: var(--background-color-dark);
-  --testimonials-card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --testimonials-card-border: 1px solid #333;
-  --testimonials-qoute-color: #02a2c4;
-  --testimonials-author-color: #3dcced;
-  --testimonials-author-job: #c1c1c1;
+  /* landing page */
+  --landing-title-line: linear-gradient(
+    to bottom,
+    var(--accent-color-1),
+    var(--accent-color-2)
+  );
+
+  /* project showcase */
+  --gradient-start: 30%;
+  --gradient-end: 80%;
+  --netcompany-border: 2px solid #343434;
+  --netcompany-background: radial-gradient(
+    var(--accent-color-4) 1px,
+    transparent 1px
+  );
+  --lego-border: 2px solid #343434;
+  --lego-background: radial-gradient(
+    var(--accent-color-4) 1px,
+    transparent 1px
+  );
+  --moesgaard-background: radial-gradient(
+    var(--accent-color-4) 1px,
+    transparent 1px
+  );
+  --moesgaard-border: 2px solid #343434;
+  --pdp-background: radial-gradient(var(--accent-color-4) 1px, transparent 1px);
+  --pdp-border: 2px solid #343434;
+  --sdu-background: radial-gradient(var(--accent-color-4) 1px, transparent 1px);
+  --sdu-border: 2px solid #343434;
+  --horizontal-scroller-background: var(--background-color-dark);
+  --horizontal-dividers-background: linear-gradient(
+    to bottom,
+    var(--accent-color-1),
+    var(--accent-color-2)
+  );
+  --radial-background-mask: radial-gradient(
+    100svh at 0% 0%,
+    #000 0%,
+    transparent 200%
+  );
+  --vertical-image-gallery-blurred-background: radial-gradient(
+    circle at top left,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.2)
+  );
+
+  /* skills */
+  --skills-background-color: var(--accent-color-2);
+  --skills-section-tags-shadow: var(--card-shadow);
+
+  /* About me */
+  --about-me-profile-outer-ring: linear-gradient(
+    135deg,
+    var(--accent-color-1) 10%,
+    var(--accent-color-2) 40%,
+    var(--card-background) 70%
+  );
+  --about-me-border-color: var(--accent-color-1);
+  --about-me-background-color: var(--card-background);
+  --about-me-content-image-border: 1px solid var(--font-color);
+  --about-me-p-line-height: 70px;
+
+  /* Testimonials */
+  --testimonials-card-background: var(--card-background);
+  --testimonials-card-shadow: var(--card-shadow);
+  --testimonials-card-border: 1px solid var(--border-color);
+  --testimonials-qoute-color: var(--accent-color-1);
+  --testimonials-author-color: var(--font-color-highlight);
+  --testimonials-author-job: var(--font-color-muted);
   --linkedin-logo-color: #0077b5;
 
-  --margin: 100px;
-  --desktop-padding: 5vw;
-  --padding: 20px 40px;
-  --container-padding: 40px 5vw;
-  --button-padding: 15px 50px;
-  --mobile-padding: 0 2vw;
-  --video-padding: 5px;
-  --section-padding: 0 5vw;
-  --connect-button-padding: 2vw;
-
-  --article-margin: clamp(30px, 10);
-
-  --border-radius-large: 20px;
-  --border-radius-medium: 15px;
-  --border-radius-small: 10px;
-  --border-radius-tiny: 5px;
-
+  /* FONT */
   --p-line-height: 2;
-  --about-me-p-line-height: 70px;
+
   --super-title-line-height: 1.2;
-  --font-margin-bottom: 0 0 1rem;
+  --font-margin-bottom: 0 0 clamp(0.25rem, 0.5rem, 1rem) 0;
 
   --font-expletus: "Expletus Sans", sans-serif;
   --font-nunito: "Nunito Sans", sans-serif;
@@ -132,4 +127,22 @@
 
   --font-size-super-title: clamp(30px, 7vw, 70px);
   --font-size-skills-section: clamp(120px, 25vw, 20rem);
+
+  /* BORDER RADIUS */
+  --border-radius-large: 20px;
+  --border-radius-medium: 15px;
+  --border-radius-small: 10px;
+
+  /* MARGIN & PADDING */
+  --margin: 100px;
+  --article-margin: clamp(30px, 10);
+
+  --padding: 20px 40px;
+  --desktop-padding: 5vw;
+  --container-padding: 20px 2.5vw;
+  --button-padding: 15px 50px;
+  --mobile-padding: 0 2vw;
+  --video-padding: 5px;
+  --section-padding: 0 5vw;
+  --connect-button-padding: 2vw;
 }

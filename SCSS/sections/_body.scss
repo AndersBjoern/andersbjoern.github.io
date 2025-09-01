@@ -20,13 +20,17 @@ $fonts: (nunito, var(--font-nunito)), (roboto, var(--font-roboto)),
   (expletus, var(--font-expletus));
 
 p,
-b,
 td,
 li {
   @include font-style(var(--font-size-p));
   font-family: var(--font-roboto);
   font-weight: var(--font-weight-medium);
   line-height: var(--p-line-height);
+}
+
+b {
+  color: var(--font-color-highlight);
+  font-weight: var(--font-weight-bold);
 }
 
 @each $name, $font in $fonts {
@@ -52,7 +56,7 @@ $weights: (light, var(--font-weight-light)), (medium, var(--font-weight-medium))
 
 html,
 body {
-  background-color: var(--background-color);
+  background-color: var(--background-color-dark);
   color: var(--font-color);
   clip-path: inset(0 0 0 0);
   max-width: 100vw;
@@ -68,12 +72,6 @@ body {
 
 .expand:hover {
   --scale-factor: 1.5;
-}
-
-@media screen and (max-width: 900px) {
-  .padding {
-    padding: var(--mobile-padding);
-  }
 }
 
 .section-seperator {
@@ -156,4 +154,35 @@ body {
 .img-container:hover .hover-text {
   opacity: 1;
   z-index: 100;
+}
+
+.icon-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: var(--icon-background);
+  border: var(--icon-border);
+
+  i {
+    font-size: 30px;
+    color: var(--icon-font-color);
+    line-height: 1;
+    text-align: center;
+    width: 1em;
+    height: 1em;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .img-container {
+    border-radius: var(--border-radius-small);
+  }
+  .padding {
+    padding: var(--mobile-padding);
+  }
 }

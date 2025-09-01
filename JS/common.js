@@ -1,6 +1,7 @@
 window.addEventListener("sectionsLoaded", () => {
   initializeGSAPAnimations();
   initializeShowMoreButton();
+  initializeFadeInAnimation();
   setupSkillsAnimation();
   setupNumberAnimations();
   setupHighlightsObserver();
@@ -45,6 +46,29 @@ function initializeShowMoreButton() {
         : "Show More";
     });
   }
+}
+
+function initializeFadeInAnimation() {
+  const fadeElements = document.querySelectorAll(".fade-effect");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("fade-out");
+          entry.target.classList.add("fade-in");
+        } else {
+          entry.target.classList.remove("fade-in");
+          entry.target.classList.add("fade-out");
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    }
+  );
+
+  fadeElements.forEach((el) => observer.observe(el));
 }
 
 function setupSkillsAnimation() {
@@ -133,8 +157,9 @@ function setupHighlightsObserver() {
   const body = document.body;
 
   const root = document.documentElement;
-  const backgroundcolor =
-    getComputedStyle(root).getPropertyValue("--background-color");
+  const backgroundcolor = getComputedStyle(root).getPropertyValue(
+    "--background-color-dark"
+  );
   const fontColor = getComputedStyle(root).getPropertyValue("--font-color");
 
   if (!highlightsSection || !blackBackground) return;

@@ -50,11 +50,11 @@
     align-items: center;
   }
   .tag-list li {
-    font-size: clamp(16px, 2vw, 2rem);
+    font-size: var(--font-size-h5);
     padding: 1rem 1.5rem;
-    background-color: var(--skills-section-tags);
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem -0.25rem var(--skills-section-tags-shadow);
+    border-radius: var(--border-radius-medium);
+    background-color: var(--skills-background-color);
+    box-shadow: var(--skills-section-tags-shadow);
   }
 }
 

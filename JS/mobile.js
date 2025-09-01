@@ -4,7 +4,6 @@ window.addEventListener("sectionsLoaded", (event) => {
     initializeVideoScrollTrigger();
     initializeVideoMaskEffect();
     projectShowcaseButtons();
-    animateClasses();
     initializeGallery();
     initializeTestimonialAnimation();
   }
@@ -108,29 +107,6 @@ function projectShowcaseButtons() {
       contentWrapper.style.maxHeight = "8000px";
     });
   });
-}
-
-function animateClasses() {
-  const fadeElements = document.querySelectorAll(".fade-effect");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove("fade-out");
-          entry.target.classList.add("fade-in");
-        } else {
-          entry.target.classList.remove("fade-in");
-          entry.target.classList.add("fade-out");
-        }
-      });
-    },
-    {
-      threshold: 0.2,
-    }
-  );
-
-  fadeElements.forEach((el) => observer.observe(el));
 }
 
 function initializeGallery() {

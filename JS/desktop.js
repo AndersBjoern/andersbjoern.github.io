@@ -24,11 +24,6 @@ function initializeHorizontalScroller() {
     ease: "none",
   });
 
-  const root = document.documentElement;
-  const backgroundcolor = getComputedStyle(root).getPropertyValue(
-    "--horizontal-scroller-background"
-  );
-
   ScrollTrigger.create({
     trigger: ".horizontal",
     start: "top 0%",
@@ -37,15 +32,6 @@ function initializeHorizontalScroller() {
     animation: tween,
     scrub: 1,
     invalidateOnRefresh: true,
-    onEnter: () => {
-      gsap.to(horizontalContainer, {
-        background: backgroundcolor,
-        duration: 0.5,
-      });
-    },
-    onLeaveBack: () => {
-      gsap.to(horizontalContainer, { background: "none", duration: 0.5 });
-    },
   });
 }
 
@@ -92,7 +78,7 @@ function initializeGridTriggers() {
 
 function calculateGridTranslation(index) {
   const translateX = index % 3 < 1 ? "-100vw" : index % 3 > 1 ? "100vw" : "0";
-  const translateY = index < 3 ? "-100vh" : index > 5 ? "100vh" : "0";
+  const translateY = index < 3 ? "-100lvh" : index > 5 ? "100lvh" : "0";
   return { translateX, translateY };
 }
 
