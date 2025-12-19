@@ -142,7 +142,7 @@ a {
   --font-weight-light: 300;
   --font-weight-medium: 400;
   --font-weight-bold: 700;
-  --font-size-super-title: clamp(30px, 7vw, 70px);
+  --font-size-super-title: clamp(30px, 12vw, 120px);
   --font-size-skills-section: clamp(120px, 25vw, 20rem);
   /* BORDER RADIUS */
   --border-radius-large: 20px;
@@ -898,6 +898,9 @@ body {
     position: relative;
     aspect-ratio: 16/9;
     border-radius: var(--border-radius-small);
+    border: 1px solid #d0d0d0;
+    box-shadow: var(--light-card-shadow);
+    overflow: hidden;
   }
   .section-wrapper .project-article .article-content-wrapper .videoplayer-container::before {
     content: "";
@@ -934,6 +937,15 @@ body {
     aspect-ratio: 16/9;
     border-radius: var(--border-radius-small);
     margin-bottom: var(--margin-bottom);
+    border: 1px solid #d0d0d0;
+    box-shadow: var(--light-card-shadow);
+    overflow: hidden;
+  }
+  .section-wrapper .project-article .article-content-wrapper .iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--border-radius-small);
   }
   .section-wrapper .project-article .article-content-wrapper .project-description {
     --column-width: 110px;
@@ -954,6 +966,7 @@ body {
     padding: 20px;
     border-radius: var(--border-radius-small);
     box-shadow: var(--light-card-shadow);
+    /* PDP logo container */
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo {
     max-width: 280px;
@@ -969,18 +982,34 @@ body {
        object-fit: contain;
     display: block;
   }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #legoLogo,
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #sduLogo {
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo img[src*=pdpLogo] {
+    height: 60px;
+    -o-object-fit: contain;
+       object-fit: contain;
+    margin: 0;
+    padding: 0;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo#sduLogo {
+    max-width: 150px;
+    max-height: 150px;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #legoLogo {
     aspect-ratio: 1/1;
     max-width: 100px;
     max-height: 100px;
     -o-object-fit: contain;
        object-fit: contain;
   }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #pdpLogo {
-    background-color: #fff;
-    padding: 10px;
-    border-radius: var(--border-radius-small);
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #sduLogo {
+    aspect-ratio: 1/1;
+    max-width: 150px;
+    max-height: 150px;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo:has(img[src*=pdpLogo]) {
+    max-height: 80px;
+    margin-bottom: var(--margin-bottom);
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .text-content {
     display: flex;
@@ -994,6 +1023,9 @@ body {
     gap: var(--margin-bottom);
     margin-bottom: var(--margin-bottom);
     justify-content: center;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper:last-child {
+    margin-bottom: 0;
   }
   .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper .stat-box {
     width: calc(50% - var(--margin-bottom) / 2);
@@ -1035,6 +1067,13 @@ body {
   }
   .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper .stat-box .stat-box-content p {
     flex: 1 1 auto;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-results .icon-text-pair:last-child {
+    margin-bottom: 0;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-results:last-child .stats-container-wrapper:last-child,
+  .section-wrapper .project-article .article-content-wrapper .project-results:last-child .icon-text-pair:last-child {
+    margin-bottom: 0;
   }
   .section-wrapper .project-article .article-content-wrapper .project-gallery > div {
     margin-bottom: var(--margin-bottom);
@@ -1144,6 +1183,9 @@ body {
     padding: 20px;
     border-radius: var(--border-radius-small);
     box-shadow: var(--light-card-shadow);
+  }
+  .section-wrapper .project-article .icon-text-pair:last-child {
+    margin-bottom: 0;
   }
   .section-wrapper .project-article .icon-text-pair .icon-circle-wrapper {
     flex-shrink: 0;
@@ -1383,6 +1425,9 @@ img {
   flex-direction: column;
   justify-content: start;
   text-align: center;
+}
+.about-me-container .numbers-container .numbers h3.super-title {
+  font-family: var(--font-expletus);
 }
 .about-me-container .about-me-text {
   line-height: var(--about-me-p-line-height);

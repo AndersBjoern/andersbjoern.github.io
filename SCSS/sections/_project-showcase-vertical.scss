@@ -155,6 +155,9 @@
           position: relative;
           aspect-ratio: 16/9;
           border-radius: var(--border-radius-small);
+          border: 1px solid #d0d0d0;
+          box-shadow: var(--light-card-shadow);
+          overflow: hidden;
 
           &::before {
             content: "";
@@ -205,6 +208,16 @@
           aspect-ratio: 16/9;
           border-radius: var(--border-radius-small);
           margin-bottom: var(--margin-bottom);
+          border: 1px solid #d0d0d0;
+          box-shadow: var(--light-card-shadow);
+          overflow: hidden;
+
+          iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--border-radius-small);
+          }
         }
         .project-description {
           --column-width: 110px;
@@ -240,20 +253,38 @@
                 object-fit: contain;
                 display: block;
               }
+
+              img[src*="pdpLogo"] {
+                height: 60px;
+                object-fit: contain;
+                margin: 0;
+                padding: 0;
+              }
+
+              &#sduLogo {
+                max-width: 150px;
+                max-height: 150px;
+              }
             }
 
-            #legoLogo,
-            #sduLogo {
+            #legoLogo {
               aspect-ratio: 1/1;
               max-width: 100px;
               max-height: 100px;
               object-fit: contain;
             }
 
-            #pdpLogo {
-              background-color: #fff;
-              padding: 10px;
-              border-radius: var(--border-radius-small);
+            #sduLogo {
+              aspect-ratio: 1/1;
+              max-width: 150px;
+              max-height: 150px;
+              object-fit: contain;
+            }
+
+            /* PDP logo container */
+            .project-logo:has(img[src*="pdpLogo"]) {
+              max-height: 80px;
+              margin-bottom: var(--margin-bottom);
             }
 
             .text-content {
@@ -272,6 +303,10 @@
             gap: var(--margin-bottom);
             margin-bottom: var(--margin-bottom);
             justify-content: center;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
             .stat-box {
               width: calc(50% - (var(--margin-bottom) / 2));
               aspect-ratio: 1/1;
@@ -318,6 +353,20 @@
             }
           }
         }
+
+        .project-results {
+          .icon-text-pair:last-child {
+            margin-bottom: 0;
+          }
+
+          &:last-child {
+            .stats-container-wrapper:last-child,
+            .icon-text-pair:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+
         .project-gallery {
           & > div {
             margin-bottom: var(--margin-bottom);
@@ -436,6 +485,10 @@
         padding: 20px;
         border-radius: var(--border-radius-small);
         box-shadow: var(--light-card-shadow);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
 
         .icon-circle-wrapper {
           flex-shrink: 0;
