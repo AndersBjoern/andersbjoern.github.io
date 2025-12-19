@@ -21,10 +21,10 @@ a {
   --font-color-muted: #9baab0;
   --font-color-highlight: var(--accent-color-3);
   --border-color: #343434;
-  --accent-color-1: hsl(222, 84%, 60%);
-  --accent-color-2: hsl(222, 83%, 35%);
-  --accent-color-3: hsl(217, 73%, 56%);
-  --accent-color-4: hsl(203, 74%, 29%);
+  --accent-color-1: hsl(198, 95%, 66%);
+  --accent-color-2: hsl(190, 81%, 21%);
+  --accent-color-3: hsl(200, 84%, 60%);
+  --accent-color-4: hsl(194, 83%, 35%);
   --card-shadow: 0 0.5rem 1rem -0.25rem var(--background-color-dark);
   --icon-background: var(--card-background);
   --icon-border: 1px solid var(--accent-color-2);
