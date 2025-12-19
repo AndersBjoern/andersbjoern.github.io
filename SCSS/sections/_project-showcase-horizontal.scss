@@ -1,6 +1,46 @@
 @media screen and (min-width: 901px) {
   section.horizontal {
     overflow: hidden;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: var(
+        --current-project-background,
+        var(--netcompany-background)
+      );
+      background-size: 3px 3px;
+      -webkit-mask-image: var(--radial-background-mask);
+      mask-image: var(--radial-background-mask);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    // Project-specific background overrides
+    &.show-netcompany {
+      --current-project-background: var(--netcompany-background);
+    }
+
+    &.show-lego {
+      --current-project-background: var(--lego-background);
+    }
+
+    &.show-moesgaard {
+      --current-project-background: var(--moesgaard-background);
+    }
+
+    &.show-pdp {
+      --current-project-background: var(--pdp-background);
+    }
+
+    &.show-sdu-game {
+      --current-project-background: var(--sdu-background);
+    }
 
     .section-wrapper {
       width: fit-content;
@@ -8,6 +48,8 @@
       flex-wrap: nowrap;
       padding: var(--container-padding);
       height: 100lvh;
+      position: relative;
+      z-index: 1;
 
       article.project-article {
         height: 100%;
@@ -16,6 +58,7 @@
         position: relative;
         border-radius: var(--border-radius-large);
         padding: 2.5vw;
+        color: var(--light-font-color);
 
         & > div {
           height: 100%;
@@ -26,55 +69,29 @@
           }
         }
 
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-size: 3px 3px;
-          opacity: 1;
-          pointer-events: none;
-          border-radius: var(--border-radius-large);
-
-          -webkit-mask-image: var(--radial-background-mask);
-          mask-image: var(--radial-background-mask);
-        }
-
         &#lego {
-          border: var(--lego-border);
-          &::before {
-            background-image: var(--lego-background);
-          }
+          border: 2px solid #d0d0d0;
+          background: var(--lego-article-background);
         }
 
         &#netcompany {
-          border: var(--netcompany-border);
-          &::before {
-            background-image: var(--netcompany-background);
-          }
+          border: 2px solid #d0d0d0;
+          background: var(--netcompany-article-background);
         }
 
         &#moesgaard {
-          border: var(--moesgaard-border);
-          &::before {
-            background-image: var(--moesgaard-background);
-          }
+          border: 2px solid #d0d0d0;
+          background: var(--moesgaard-article-background);
         }
 
         &#pdp {
-          border: var(--pdp-border);
-          &::before {
-            background-image: var(--pdp-background);
-          }
+          border: 2px solid #d0d0d0;
+          background: var(--pdp-article-background);
         }
 
         &#sdu-game {
-          border: var(--sdu-border);
-          &::before {
-            background-image: var(--sdu-background);
-          }
+          border: 2px solid #d0d0d0;
+          background: var(--sdu-article-background);
         }
 
         .video-wrapper {
@@ -116,10 +133,11 @@
           .row {
             flex: 1 1 0;
             min-height: 0;
-            overflow: hidden;
-            background-color: var(--card-background);
-            border: 1px solid var(--border-color);
+            overflow: visible;
+            background-color: var(--light-card-background);
+            border: 1px solid #d0d0d0;
             border-radius: var(--border-radius-large);
+            box-shadow: var(--light-card-shadow);
           }
 
           .row-padding {
@@ -144,6 +162,20 @@
           display: flex;
           align-items: flex-start;
           gap: 20px;
+
+          .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--light-icon-background);
+            border: var(--light-icon-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-icon-font-color);
+            font-size: 24px;
+            flex-shrink: 0;
+          }
 
           h4 {
             font-weight: bold;

@@ -121,16 +121,26 @@
   margin-left: 20px;
 }
 
-.testimonials-scroller:hover .testimonials-scroller-inner {
-  animation-play-state: paused;
-}
+/* Hover pause functionality now handled in JavaScript */
 .reverse-scroll .testimonials-scroller-inner {
   animation: scroll-reverse 20s linear infinite;
 }
 
-@keyframes scroll-reverse {
+@keyframes scroll {
+  from {
+    transform: translateX(calc(var(--drag-offset, 0px)));
+  }
   to {
-    transform: translate(calc(50% + 0.5rem));
+    transform: translateX(calc(-50% - 0.5rem + var(--drag-offset, 0px)));
+  }
+}
+
+@keyframes scroll-reverse {
+  from {
+    transform: translateX(calc(var(--drag-offset, 0px)));
+  }
+  to {
+    transform: translateX(calc(50% + 0.5rem + var(--drag-offset, 0px)));
   }
 }
 

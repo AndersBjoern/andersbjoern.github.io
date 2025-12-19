@@ -69,6 +69,23 @@ a {
   --pdp-border: 2px solid #343434;
   --sdu-background: radial-gradient(var(--accent-color-4) 1px, transparent 1px);
   --sdu-border: 2px solid #343434;
+  /* Article background colors - white theme */
+  --lego-article-background: #fafafa;
+  --netcompany-article-background: #f8f8f8;
+  --moesgaard-article-background: #f9f9f9;
+  --pdp-article-background: #fbfbfb;
+  --sdu-article-background: #fafafa;
+  /* Light grey backgrounds for content sections */
+  --light-card-background: #e8e8e8;
+  /* Light theme text colors */
+  --light-font-color: #2c2c2c;
+  --light-font-color-muted: #666666;
+  /* Light theme shadows */
+  --light-card-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  /* Light theme icon styling */
+  --light-icon-background: #ffffff;
+  --light-icon-border: 1px solid #d0d0d0;
+  --light-icon-font-color: var(--accent-color-1);
   --horizontal-scroller-background: var(--background-color-dark);
   --horizontal-dividers-background: linear-gradient(
     to bottom,
@@ -76,7 +93,7 @@ a {
     var(--accent-color-2)
   );
   --radial-background-mask: radial-gradient(
-    100svh at 0% 0%,
+    100vh at 0% 0%,
     #000 0%,
     transparent 200%
   );
@@ -138,7 +155,7 @@ a {
   --desktop-padding: 5vw;
   --container-padding: 20px 2.5vw;
   --button-padding: 15px 50px;
-  --mobile-padding: 0 2vw;
+  --mobile-padding: 20px 20px 0 20px;
   --video-padding: 5px;
   --section-padding: 0 5vw;
   --connect-button-padding: 2vw;
@@ -246,6 +263,14 @@ body {
   max-width: 100vw;
 }
 
+/* Viewport stabilization for mobile browsers */
+@media screen and (max-width: 900px) {
+  html,
+  body {
+    height: 100vh;
+    overflow-x: hidden;
+  }
+}
 .padding {
   padding: var(--section-padding);
 }
@@ -543,6 +568,36 @@ body {
 @media screen and (min-width: 901px) {
   section.horizontal {
     overflow: hidden;
+    position: relative;
+  }
+  section.horizontal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--current-project-background, var(--netcompany-background));
+    background-size: 3px 3px;
+    -webkit-mask-image: var(--radial-background-mask);
+    mask-image: var(--radial-background-mask);
+    pointer-events: none;
+    z-index: 0;
+  }
+  section.horizontal.show-netcompany {
+    --current-project-background: var(--netcompany-background);
+  }
+  section.horizontal.show-lego {
+    --current-project-background: var(--lego-background);
+  }
+  section.horizontal.show-moesgaard {
+    --current-project-background: var(--moesgaard-background);
+  }
+  section.horizontal.show-pdp {
+    --current-project-background: var(--pdp-background);
+  }
+  section.horizontal.show-sdu-game {
+    --current-project-background: var(--sdu-background);
   }
   section.horizontal .section-wrapper {
     width: -moz-fit-content;
@@ -551,6 +606,8 @@ body {
     flex-wrap: nowrap;
     padding: var(--container-padding);
     height: 100lvh;
+    position: relative;
+    z-index: 1;
   }
   section.horizontal .section-wrapper article.project-article {
     height: 100%;
@@ -559,6 +616,7 @@ body {
     position: relative;
     border-radius: var(--border-radius-large);
     padding: 2.5vw;
+    color: var(--light-font-color);
   }
   section.horizontal .section-wrapper article.project-article > div {
     height: 100%;
@@ -567,49 +625,25 @@ body {
   section.horizontal .section-wrapper article.project-article > div:last-child {
     margin-right: 0;
   }
-  section.horizontal .section-wrapper article.project-article::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: 3px 3px;
-    opacity: 1;
-    pointer-events: none;
-    border-radius: var(--border-radius-large);
-    -webkit-mask-image: var(--radial-background-mask);
-    mask-image: var(--radial-background-mask);
-  }
   section.horizontal .section-wrapper article.project-article#lego {
-    border: var(--lego-border);
-  }
-  section.horizontal .section-wrapper article.project-article#lego::before {
-    background-image: var(--lego-background);
+    border: 2px solid #d0d0d0;
+    background: var(--lego-article-background);
   }
   section.horizontal .section-wrapper article.project-article#netcompany {
-    border: var(--netcompany-border);
-  }
-  section.horizontal .section-wrapper article.project-article#netcompany::before {
-    background-image: var(--netcompany-background);
+    border: 2px solid #d0d0d0;
+    background: var(--netcompany-article-background);
   }
   section.horizontal .section-wrapper article.project-article#moesgaard {
-    border: var(--moesgaard-border);
-  }
-  section.horizontal .section-wrapper article.project-article#moesgaard::before {
-    background-image: var(--moesgaard-background);
+    border: 2px solid #d0d0d0;
+    background: var(--moesgaard-article-background);
   }
   section.horizontal .section-wrapper article.project-article#pdp {
-    border: var(--pdp-border);
-  }
-  section.horizontal .section-wrapper article.project-article#pdp::before {
-    background-image: var(--pdp-background);
+    border: 2px solid #d0d0d0;
+    background: var(--pdp-article-background);
   }
   section.horizontal .section-wrapper article.project-article#sdu-game {
-    border: var(--sdu-border);
-  }
-  section.horizontal .section-wrapper article.project-article#sdu-game::before {
-    background-image: var(--sdu-background);
+    border: 2px solid #d0d0d0;
+    background: var(--sdu-article-background);
   }
   section.horizontal .section-wrapper article.project-article .video-wrapper {
     width: 90vw;
@@ -647,10 +681,11 @@ body {
   section.horizontal .section-wrapper article.project-article .rows-wrapper .row {
     flex: 1 1 0;
     min-height: 0;
-    overflow: hidden;
-    background-color: var(--card-background);
-    border: 1px solid var(--border-color);
+    overflow: visible;
+    background-color: var(--light-card-background);
+    border: 1px solid #d0d0d0;
     border-radius: var(--border-radius-large);
+    box-shadow: var(--light-card-shadow);
   }
   section.horizontal .section-wrapper article.project-article .rows-wrapper .row-padding {
     padding: 40px;
@@ -671,6 +706,19 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 20px;
+  }
+  section.horizontal .section-wrapper article.project-article .star-section .icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--light-icon-background);
+    border: var(--light-icon-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light-icon-font-color);
+    font-size: 24px;
+    flex-shrink: 0;
   }
   section.horizontal .section-wrapper article.project-article .star-section h4 {
     font-weight: bold;
@@ -700,10 +748,44 @@ body {
   }
 }
 @media screen and (max-width: 900px) {
+  .verticcal {
+    position: relative;
+  }
+  .verticcal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--current-project-background, var(--netcompany-background));
+    background-size: 3px 3px;
+    -webkit-mask-image: var(--radial-background-mask);
+    mask-image: var(--radial-background-mask);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .verticcal.show-netcompany {
+    --current-project-background: var(--netcompany-background);
+  }
+  .verticcal.show-lego {
+    --current-project-background: var(--lego-background);
+  }
+  .verticcal.show-moesgaard {
+    --current-project-background: var(--moesgaard-background);
+  }
+  .verticcal.show-pdp {
+    --current-project-background: var(--pdp-background);
+  }
+  .verticcal.show-sdu-game {
+    --current-project-background: var(--sdu-background);
+  }
   .section-wrapper {
     padding: var(--mobile-padding);
-    --article-padding: 2.5vw;
+    --article-padding: 25px;
     --margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
   }
   .section-wrapper > .project-article:first-of-type {
     margin-top: 0;
@@ -715,21 +797,9 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    margin: clamp(60px, 15vh, 150px) 0;
-  }
-  .section-wrapper .project-article::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: 3px 3px;
-    opacity: 1;
-    pointer-events: none;
-    border-radius: var(--border-radius-medium);
-    -webkit-mask-image: var(--radial-background-mask);
-    mask-image: var(--radial-background-mask);
+    margin: 100px 0;
+    min-height: 600px;
+    color: var(--light-font-color);
   }
   .section-wrapper .project-article::after {
     content: "";
@@ -738,7 +808,7 @@ body {
     left: 0;
     right: 0;
     height: 50%;
-    background: var(--transparent-gradient);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(250, 250, 250));
     border-bottom-left-radius: var(--border-radius-medium);
     border-bottom-right-radius: var(--border-radius-medium);
     pointer-events: none;
@@ -750,34 +820,24 @@ body {
     pointer-events: none;
   }
   .section-wrapper .project-article#netcompany {
-    border: var(--netcompany-border);
-  }
-  .section-wrapper .project-article#netcompany::before {
-    background-image: var(--netcompany-background);
+    border: 2px solid #d0d0d0;
+    background: var(--netcompany-article-background);
   }
   .section-wrapper .project-article#lego {
-    border: var(--lego-border);
-  }
-  .section-wrapper .project-article#lego::before {
-    background-image: var(--lego-background);
+    border: 2px solid #d0d0d0;
+    background: var(--lego-article-background);
   }
   .section-wrapper .project-article#moesgaard {
-    border: var(--moesgaard-border);
-  }
-  .section-wrapper .project-article#moesgaard::before {
-    background-image: var(--moesgaard-background);
+    border: 2px solid #d0d0d0;
+    background: var(--moesgaard-article-background);
   }
   .section-wrapper .project-article#pdp {
-    border: var(--pdp-border);
-  }
-  .section-wrapper .project-article#pdp::before {
-    background-image: var(--pdp-background);
+    border: 2px solid #d0d0d0;
+    background: var(--pdp-article-background);
   }
   .section-wrapper .project-article#sdu-game {
-    border: var(--sdu-border);
-  }
-  .section-wrapper .project-article#sdu-game::before {
-    background-image: var(--sdu-background);
+    border: 2px solid #d0d0d0;
+    background: var(--sdu-article-background);
   }
   .section-wrapper .project-article .read-more {
     position: absolute;
@@ -800,13 +860,15 @@ body {
   .section-wrapper .project-article .article-content-wrapper {
     position: relative;
     overflow: hidden;
-    max-height: 95svh;
+    max-height: 800px;
     transition: max-height 1s ease;
+    padding: 10px;
+    margin: -10px;
   }
   .section-wrapper .project-article .article-content-wrapper > div {
     width: 100%;
-    overflow: hidden;
-    margin-bottom: clamp(30px, 8vw, 80px) 0;
+    overflow: visible;
+    margin-bottom: 50px 0;
   }
   .section-wrapper .project-article .article-content-wrapper > div:last-of-type {
     margin-bottom: 0;
@@ -853,7 +915,7 @@ body {
     margin-bottom: var(--margin-bottom);
   }
   .section-wrapper .project-article .article-content-wrapper .project-description {
-    --column-width: min(110px, 20vw);
+    --column-width: 110px;
     position: relative;
     margin-top: -110px;
     transition: margin-top 1s ease;
@@ -863,44 +925,21 @@ body {
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: calc(2 * var(--margin-bottom));
-    gap: 1.5rem;
-  }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo {
-    flex-shrink: 0;
-    height: var(--column-width);
-    padding-left: calc(var(--article-padding) * 0.5);
-  }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo img {
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-       object-fit: cover;
-  }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #legoLogo,
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #sduLogo {
-    aspect-ratio: 1/1;
-    width: var(--column-width);
-    -o-object-fit: contain;
-       object-fit: contain;
-  }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #pdpLogo {
-    background-color: #fff;
-    padding: 10px;
-    border-radius: var(--border-radius-small);
-  }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container--vertical {
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: calc(2 * var(--margin-bottom));
+    background-color: var(--light-card-background);
+    border: 1px solid #d0d0d0;
+    padding: 20px;
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--light-card-shadow);
   }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container--vertical .project-logo {
-    max-width: 70vw;
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo {
+    max-width: 280px;
     max-height: 100px;
     margin-bottom: var(--margin-bottom);
   }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container--vertical .project-logo img {
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
@@ -908,6 +947,19 @@ body {
     -o-object-fit: contain;
        object-fit: contain;
     display: block;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #legoLogo,
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #sduLogo {
+    aspect-ratio: 1/1;
+    max-width: 100px;
+    max-height: 100px;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container #pdpLogo {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: var(--border-radius-small);
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .text-content {
     display: flex;
@@ -925,10 +977,11 @@ body {
   .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper .stat-box {
     width: calc(50% - var(--margin-bottom) / 2);
     aspect-ratio: 1/1;
-    border: 1px solid var(--border-color);
+    border: 1px solid #d0d0d0;
     border-radius: var(--border-radius-small);
-    background-color: var(--card-background);
+    background-color: var(--light-card-background);
     text-align: center;
+    box-shadow: var(--light-card-shadow);
   }
   .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper .stat-box .stat-box-img {
     width: 100%;
@@ -986,7 +1039,7 @@ body {
   .section-wrapper .project-article .article-content-wrapper .project-gallery .main-image {
     width: 100%;
     aspect-ratio: 16/9;
-    margin-bottom: clamp(10px, 2vw, 20px);
+    margin-bottom: 15px;
   }
   .section-wrapper .project-article .article-content-wrapper .project-gallery .main-image img {
     border-radius: var(--border-radius-small);
@@ -998,7 +1051,7 @@ body {
   .section-wrapper .project-article .article-content-wrapper .project-gallery .thumbnail-gallery {
     display: flex;
     justify-content: center;
-    gap: clamp(10px, 2vw, 20px);
+    gap: 15px;
   }
   .section-wrapper .project-article .article-content-wrapper .project-gallery .thumbnail-gallery .gallery-item {
     flex: 1;
@@ -1037,6 +1090,7 @@ body {
             backdrop-filter: blur(10px);
     border-radius: var(--border-radius-small);
     background: var(--vertical-image-gallery-blurred-background);
+    color: var(--font-color);
     opacity: 1;
     transition: opacity 0.3s ease;
   }
@@ -1047,16 +1101,30 @@ body {
     display: flex;
     align-items: center;
     margin: var(--margin-bottom) 0;
-    background-color: var(--card-background);
-    border: 1px solid var(--border-color);
-    padding: 20px 20px 20px 0;
+    background-color: var(--light-card-background);
+    border: 1px solid #d0d0d0;
+    padding: 20px;
     border-radius: var(--border-radius-small);
+    box-shadow: var(--light-card-shadow);
   }
   .section-wrapper .project-article .icon-text-pair .icon-circle-wrapper {
     flex-shrink: 0;
     display: flex;
     justify-content: center;
-    width: var(--column-width);
+    width: 60px;
+    margin-right: 20px;
+  }
+  .section-wrapper .project-article .icon-text-pair .icon-circle-wrapper .icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--light-icon-background);
+    border: var(--light-icon-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light-icon-font-color);
+    font-size: 24px;
   }
   .section-wrapper .project-article .icon-text-pair .text-content {
     display: flex;
@@ -1510,17 +1578,25 @@ img {
   margin-left: 20px;
 }
 
-.testimonials-scroller:hover .testimonials-scroller-inner {
-  animation-play-state: paused;
-}
-
+/* Hover pause functionality now handled in JavaScript */
 .reverse-scroll .testimonials-scroller-inner {
   animation: scroll-reverse 20s linear infinite;
 }
 
-@keyframes scroll-reverse {
+@keyframes scroll {
+  from {
+    transform: translateX(calc(var(--drag-offset, 0px)));
+  }
   to {
-    transform: translate(calc(50% + 0.5rem));
+    transform: translateX(calc(-50% - 0.5rem + var(--drag-offset, 0px)));
+  }
+}
+@keyframes scroll-reverse {
+  from {
+    transform: translateX(calc(var(--drag-offset, 0px)));
+  }
+  to {
+    transform: translateX(calc(50% + 0.5rem + var(--drag-offset, 0px)));
   }
 }
 @media screen and (max-width: 900px) {

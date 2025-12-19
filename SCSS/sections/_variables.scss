@@ -60,6 +60,29 @@
   --pdp-border: 2px solid #343434;
   --sdu-background: radial-gradient(var(--accent-color-4) 1px, transparent 1px);
   --sdu-border: 2px solid #343434;
+
+  /* Article background colors - white theme */
+  --lego-article-background: #fafafa;
+  --netcompany-article-background: #f8f8f8;
+  --moesgaard-article-background: #f9f9f9;
+  --pdp-article-background: #fbfbfb;
+  --sdu-article-background: #fafafa;
+
+  /* Light grey backgrounds for content sections */
+  --light-card-background: #e8e8e8;
+
+  /* Light theme text colors */
+  --light-font-color: #2c2c2c;
+  --light-font-color-muted: #666666;
+
+  /* Light theme shadows */
+  --light-card-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+
+  /* Light theme icon styling */
+  --light-icon-background: #ffffff;
+  --light-icon-border: 1px solid #d0d0d0;
+  --light-icon-font-color: var(--accent-color-1);
+
   --horizontal-scroller-background: var(--background-color-dark);
   --horizontal-dividers-background: linear-gradient(
     to bottom,
@@ -67,7 +90,7 @@
     var(--accent-color-2)
   );
   --radial-background-mask: radial-gradient(
-    100svh at 0% 0%,
+    100vh at 0% 0%,
     #000 0%,
     transparent 200%
   );
@@ -141,7 +164,7 @@
   --desktop-padding: 5vw;
   --container-padding: 20px 2.5vw;
   --button-padding: 15px 50px;
-  --mobile-padding: 0 2vw;
+  --mobile-padding: 20px 20px 0 20px;
   --video-padding: 5px;
   --section-padding: 0 5vw;
   --connect-button-padding: 2vw;
