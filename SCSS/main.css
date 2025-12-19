@@ -161,6 +161,27 @@ a {
   --connect-button-padding: 2vw;
 }
 
+/* Scale effect for images that maintains border radius */
+.scale {
+  transition: transform 0.3s ease;
+  border-radius: var(--border-radius-small);
+  overflow: hidden;
+}
+
+.scale:hover {
+  transform: scale(1.05);
+}
+
+/* More specific rules to override any conflicts */
+.img-container .scale {
+  transition: transform 0.3s ease !important;
+  border-radius: var(--border-radius-small) !important;
+}
+
+.img-container .scale:hover {
+  transform: scale(1.05) !important;
+}
+
 h1 {
   font-size: var(--font-size-h1);
   margin: var(--font-margin-bottom);
@@ -1021,6 +1042,21 @@ body {
   .section-wrapper .project-article .article-content-wrapper .project-gallery > div:last-of-type {
     margin-bottom: 0;
   }
+  .section-wrapper .project-article .article-content-wrapper .project-gallery .img-container {
+    overflow: hidden;
+    border-radius: var(--border-radius-small);
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-gallery .img-container img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    border-radius: var(--border-radius-small);
+    transition: transform 0.3s ease;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-gallery .img-container img.scale:hover {
+    transform: scale(1.05);
+  }
   .section-wrapper .project-article .article-content-wrapper .project-gallery .video-scroll-player-container {
     margin-top: var(--margin-bottom);
     margin-bottom: calc(2 * var(--margin-bottom));
@@ -1040,6 +1076,8 @@ body {
     width: 100%;
     aspect-ratio: 16/9;
     margin-bottom: 15px;
+    overflow: hidden;
+    border-radius: var(--border-radius-small);
   }
   .section-wrapper .project-article .article-content-wrapper .project-gallery .main-image img {
     border-radius: var(--border-radius-small);
@@ -1274,7 +1312,8 @@ img {
     grid-column: span 2;
   }
   div:has(> .scale) {
-    border-radius: 0px;
+    border-radius: var(--border-radius-small);
+    overflow: hidden;
   }
 }
 .about-me-section {

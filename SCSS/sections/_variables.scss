@@ -169,3 +169,24 @@
   --section-padding: 0 5vw;
   --connect-button-padding: 2vw;
 }
+
+/* Scale effect for images that maintains border radius */
+.scale {
+  transition: transform 0.3s ease;
+  border-radius: var(--border-radius-small);
+  overflow: hidden;
+}
+
+.scale:hover {
+  transform: scale(1.05);
+}
+
+/* More specific rules to override any conflicts */
+.img-container .scale {
+  transition: transform 0.3s ease !important;
+  border-radius: var(--border-radius-small) !important;
+}
+
+.img-container .scale:hover {
+  transform: scale(1.05) !important;
+}
