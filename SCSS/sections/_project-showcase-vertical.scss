@@ -468,8 +468,10 @@
       }
 
       .icon-text-pair {
-        display: flex;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        grid-template-rows: auto auto;
+        gap: 15px;
         margin: var(--margin-bottom) 0;
         background-color: var(--light-card-background);
         border: 1px solid #d0d0d0;
@@ -481,16 +483,17 @@
           margin-bottom: 0;
         }
 
+        // Row 1, Column 1: Icon
         .icon-circle-wrapper {
-          flex-shrink: 0;
+          grid-column: 1;
+          grid-row: 1;
           display: flex;
           justify-content: center;
-          width: 60px;
-          margin-right: 20px;
+          align-items: flex-start;
 
           .icon-circle {
-            width: 60px;
-            height: 60px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background-color: var(--light-icon-background);
             border: var(--light-icon-border);
@@ -498,17 +501,38 @@
             align-items: center;
             justify-content: center;
             color: var(--light-icon-font-color);
-            font-size: 24px;
+
+            i {
+              font-size: 20px;
+            }
           }
         }
 
         .text-content {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
+          display: contents; // This makes the children participate in the grid
 
+          // Row 1, Column 2: Title
+          h4 {
+            grid-column: 2;
+            grid-row: 1;
+            margin-bottom: 0;
+            align-self: center;
+          }
+
+          // Row 2, Full Width: Bullet points
           ul {
-            margin-left: var(--article-padding);
+            grid-column: 1 / -1; // Span all columns (full width)
+            grid-row: 2;
+            margin-left: 0;
+            padding-left: 20px;
+            margin-top: 0;
+          }
+
+          // Row 2, Full Width: Paragraphs
+          p {
+            grid-column: 1 / -1; // Span all columns (full width)
+            grid-row: 2;
+            margin-top: 0;
           }
         }
       }
