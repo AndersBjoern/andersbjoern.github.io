@@ -63,9 +63,9 @@
 
   /* Article background colors - white theme */
   --lego-article-background: #fafafa;
-  --netcompany-article-background: #f8f8f8;
-  --moesgaard-article-background: #f9f9f9;
-  --pdp-article-background: #fbfbfb;
+  --netcompany-article-background: #fafafa;
+  --moesgaard-article-background: #fafafa;
+  --pdp-article-background: #fafafa;
   --sdu-article-background: #fafafa;
 
   /* Light grey backgrounds for content sections */
@@ -126,7 +126,7 @@
   --linkedin-logo-color: #0077b5;
 
   /* FONT */
-  --p-line-height: 2;
+  --p-line-height: 1.5;
 
   --super-title-line-height: 1.2;
   --font-margin-bottom: 0 0 clamp(0.25rem, 0.5rem, 1rem) 0;
@@ -179,6 +179,20 @@
 
 .scale:hover {
   transform: scale(1.05);
+}
+
+/* Mobile font size overrides */
+@media screen and (max-width: 900px) {
+  :root {
+    --font-size-h1: clamp(1.25rem, 5vw, 2rem);
+    --font-size-h2: clamp(1.125rem, 4.5vw, 1.75rem);
+    --font-size-h3: clamp(1rem, 3.5vw, 1.25rem);
+    --font-size-h4: clamp(0.875rem, 3vw, 1.125rem);
+    --font-size-h5: clamp(0.75rem, 2.5vw, 1rem);
+    --font-size-h6: clamp(0.675rem, 2vw, 0.875rem);
+    --font-size-p: clamp(14px, 3vw, 1rem);
+    --font-size-button: clamp(0.875rem, 3vw, 1rem);
+  }
 }
 
 /* More specific rules to override any conflicts */
