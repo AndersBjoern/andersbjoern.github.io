@@ -40,12 +40,15 @@ function initializeVideoScrollTrigger() {
   videos.forEach((video) => {
     ScrollTrigger.create({
       trigger: video,
-      start: "top center",
-      end: "bottom center",
+      start: "top 85%", // Start much earlier - when video is 85% down the viewport
+      end: "bottom 15%", // End much later - when video is 15% up from bottom
       onEnter: () => video.play(),
       onLeave: () => video.pause(),
       onEnterBack: () => video.play(),
       onLeaveBack: () => video.pause(),
+      // Better mobile support
+      refreshPriority: 1,
+      invalidateOnRefresh: true,
     });
   });
 }

@@ -166,10 +166,12 @@
 
         .cert-name {
           font-weight: bold;
+          display: block;
         }
 
         .issuer {
-          margin-left: 10px;
+          display: block;
+          margin-left: 0;
           margin-top: 5px;
         }
 

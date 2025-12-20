@@ -22,7 +22,7 @@ a {
   --font-color-highlight: var(--accent-color-3);
   --border-color: #343434;
   --accent-color-1: hsl(198, 95%, 66%);
-  --accent-color-2: hsl(190, 81%, 21%);
+  --accent-color-2: hsl(198, 72%, 32%);
   --accent-color-3: hsl(200, 84%, 60%);
   --accent-color-4: hsl(194, 83%, 35%);
   --card-shadow: 0 0.5rem 1rem -0.25rem var(--background-color-dark);
@@ -175,12 +175,12 @@ a {
 /* Mobile font size overrides */
 @media screen and (max-width: 900px) {
   :root {
-    --font-size-h1: clamp(1.25rem, 5vw, 2rem);
-    --font-size-h2: clamp(1.125rem, 4.5vw, 1.75rem);
-    --font-size-h3: clamp(1rem, 3.5vw, 1.25rem);
-    --font-size-h4: clamp(0.875rem, 3vw, 1.125rem);
-    --font-size-h5: clamp(0.75rem, 2.5vw, 1rem);
-    --font-size-h6: clamp(0.675rem, 2vw, 0.875rem);
+    --font-size-h1: clamp(1.375rem, 5.5vw, 2.2rem);
+    --font-size-h2: clamp(1.2375rem, 4.95vw, 1.925rem);
+    --font-size-h3: clamp(1.1rem, 3.85vw, 1.375rem);
+    --font-size-h4: clamp(0.9625rem, 3.3vw, 1.2375rem);
+    --font-size-h5: clamp(0.825rem, 2.75vw, 1.1rem);
+    --font-size-h6: clamp(0.7425rem, 2.2vw, 0.9625rem);
     --font-size-p: clamp(14px, 3vw, 1rem);
     --font-size-button: clamp(0.875rem, 3vw, 1rem);
   }
@@ -792,27 +792,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    border-top-left-radius: var(--border-radius-large);
+    border-top-right-radius: var(--border-radius-large);
     background-image: var(--current-project-background, var(--netcompany-background));
     background-size: 3px 3px;
     -webkit-mask-image: var(--radial-background-mask);
     mask-image: var(--radial-background-mask);
     pointer-events: none;
     z-index: 0;
-  }
-  .verticcal.show-netcompany {
-    --current-project-background: var(--netcompany-background);
-  }
-  .verticcal.show-lego {
-    --current-project-background: var(--lego-background);
-  }
-  .verticcal.show-moesgaard {
-    --current-project-background: var(--moesgaard-background);
-  }
-  .verticcal.show-pdp {
-    --current-project-background: var(--pdp-background);
-  }
-  .verticcal.show-sdu-game {
-    --current-project-background: var(--sdu-background);
   }
   .section-wrapper {
     padding: var(--mobile-padding);
@@ -842,7 +829,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 250px;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(250, 250, 250));
     border-bottom-left-radius: var(--border-radius-medium);
     border-bottom-right-radius: var(--border-radius-medium);
@@ -955,7 +942,7 @@ body {
     transition: margin-top 1s ease;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description.video-playing {
-    margin-top: var(--margin-bottom);
+    margin-top: 0;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description:last-of-type {
     margin-bottom: 0;
@@ -1047,15 +1034,16 @@ body {
   }
   .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper .stat-box .stat-box-img {
     width: 100%;
-    aspect-ratio: 1/1;
+    height: 100%;
     border-radius: var(--border-radius-small);
+    overflow: hidden;
   }
   .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper .stat-box .stat-box-img img {
     width: 100%;
     height: 100%;
     -o-object-fit: cover;
        object-fit: cover;
-    border-radius: var(--border-radius-small);
+    display: block;
   }
   .section-wrapper .project-article .article-content-wrapper .project-results .stats-container-wrapper .stat-box .stat-box-content {
     height: 100%;
@@ -1106,7 +1094,7 @@ body {
   }
   .section-wrapper .project-article .article-content-wrapper .project-gallery .video-scroll-player-container {
     margin-top: var(--margin-bottom);
-    margin-bottom: calc(2 * var(--margin-bottom));
+    margin-bottom: var(--margin-bottom);
     aspect-ratio: 16/9;
     position: relative;
     overflow: hidden;
@@ -1291,8 +1279,8 @@ body {
 }
 .skills-section .tag-list li {
   font-size: var(--font-size-h5);
-  padding: 1rem 1.5rem;
-  border-radius: var(--border-radius-medium);
+  padding: 0.8rem 0.9rem;
+  border-radius: var(--border-radius-large);
   background-color: var(--skills-background-color);
   box-shadow: var(--skills-section-tags-shadow);
 }
@@ -1538,9 +1526,11 @@ img {
 }
 .cert-table tr td.info-cell .cert-name {
   font-weight: bold;
+  display: block;
 }
 .cert-table tr td.info-cell .issuer {
-  margin-left: 10px;
+  display: block;
+  margin-left: 0;
   margin-top: 5px;
 }
 .cert-table tr td.info-cell .date {

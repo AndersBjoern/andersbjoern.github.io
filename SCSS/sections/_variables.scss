@@ -9,7 +9,7 @@
   --border-color: #343434;
 
   --accent-color-1: hsl(198, 95%, 66%);
-  --accent-color-2: hsl(190, 81%, 21%);
+  --accent-color-2: hsl(198, 72%, 32%);
   --accent-color-3: hsl(200, 84%, 60%);
   --accent-color-4: hsl(194, 83%, 35%);
 
@@ -184,12 +184,12 @@
 /* Mobile font size overrides */
 @media screen and (max-width: 900px) {
   :root {
-    --font-size-h1: clamp(1.25rem, 5vw, 2rem);
-    --font-size-h2: clamp(1.125rem, 4.5vw, 1.75rem);
-    --font-size-h3: clamp(1rem, 3.5vw, 1.25rem);
-    --font-size-h4: clamp(0.875rem, 3vw, 1.125rem);
-    --font-size-h5: clamp(0.75rem, 2.5vw, 1rem);
-    --font-size-h6: clamp(0.675rem, 2vw, 0.875rem);
+    --font-size-h1: clamp(1.375rem, 5.5vw, 2.2rem);
+    --font-size-h2: clamp(1.2375rem, 4.95vw, 1.925rem);
+    --font-size-h3: clamp(1.1rem, 3.85vw, 1.375rem);
+    --font-size-h4: clamp(0.9625rem, 3.3vw, 1.2375rem);
+    --font-size-h5: clamp(0.825rem, 2.75vw, 1.1rem);
+    --font-size-h6: clamp(0.7425rem, 2.2vw, 0.9625rem);
     --font-size-p: clamp(14px, 3vw, 1rem);
     --font-size-button: clamp(0.875rem, 3vw, 1rem);
   }
