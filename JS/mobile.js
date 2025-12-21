@@ -14,7 +14,37 @@ function initializeVideoPreloading() {
   const videos = document.querySelectorAll(".scroll-trigger-video");
   if (!videos.length) return;
 
+  // Try to enable autoplay on mobile after first user interaction
+  let hasUserInteracted = false;
+  const enableAutoplayAfterInteraction = () => {
+    if (!hasUserInteracted) {
+      hasUserInteracted = true;
+      videos.forEach((video) => {
+        // Remove the autoplay-failed attribute so videos can try to autoplay again
+        video.removeAttribute("data-autoplay-failed");
+        // Remove any existing play overlays
+        const container = video.closest(".videoplayer-container");
+        const overlay = container?.querySelector(".video-play-overlay");
+        if (overlay) overlay.remove();
+      });
+    }
+  };
+
+  // Listen for first user interaction
+  ["touchstart", "click", "scroll"].forEach((event) => {
+    document.addEventListener(event, enableAutoplayAfterInteraction, {
+      once: true,
+      passive: true,
+    });
+  });
+
   videos.forEach((video) => {
+    // Ensure mobile-friendly attributes are set
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
     // Set preload to metadata to load first frame
     video.preload = "metadata";
 
@@ -75,6 +105,16 @@ function initializeVideoScrollTrigger() {
   const videos = document.querySelectorAll(".scroll-trigger-video");
   if (!videos.length) return;
 
+  // Detect if device likely supports autoplay
+  const canAutoplay = () => {
+    // Check if we're on a mobile device
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+    return !isMobile; // Desktop usually allows autoplay, mobile usually doesn't
+  };
+
   videos.forEach((video) => {
     // Ensure video is loaded and ready
     const ensureVideoReady = () => {
@@ -95,12 +135,79 @@ function initializeVideoScrollTrigger() {
     const safePlay = async () => {
       try {
         await ensureVideoReady();
+
+        // Check if we can autoplay (mobile browsers often block this)
         const playPromise = video.play();
         if (playPromise !== undefined) {
           await playPromise;
         }
       } catch (error) {
-        console.log("Video play failed:", error);
+        console.log("Video autoplay blocked (likely mobile policy):", error);
+
+        // If autoplay fails, we still want to trigger the visual effects
+        // This will show the video frame and transition the mask/description
+        const videoContainer = video.closest(".videoplayer-container");
+        const projectArticle = video.closest("article.project-article");
+        const projectDescription = projectArticle?.querySelector(
+          ".project-description"
+        );
+
+        if (videoContainer) videoContainer.classList.add("playing");
+        if (projectDescription)
+          projectDescription.classList.add("video-playing");
+
+        // Add a visual indicator that user needs to tap to play
+        if (!video.hasAttribute("data-autoplay-failed")) {
+          video.setAttribute("data-autoplay-failed", "true");
+
+          // Create a play overlay
+          const playOverlay = document.createElement("div");
+          playOverlay.className = "video-play-overlay";
+          playOverlay.innerHTML =
+            '<i class="fa-solid fa-play"></i><span>Tap to play</span>';
+          playOverlay.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease;
+          `;
+
+          const container = video.closest(".videoplayer-container");
+          if (container) {
+            container.style.position = "relative";
+            container.appendChild(playOverlay);
+
+            // Remove overlay when user taps to play
+            const removeOverlay = () => {
+              playOverlay.remove();
+              video.removeEventListener("play", removeOverlay);
+            };
+
+            video.addEventListener("play", removeOverlay);
+
+            // Make overlay clickable
+            playOverlay.addEventListener("click", () => {
+              video
+                .play()
+                .then(() => {
+                  removeOverlay();
+                })
+                .catch(console.log);
+            });
+          }
+        }
       }
     };
 
