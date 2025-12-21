@@ -1,5 +1,6 @@
 window.addEventListener("sectionsLoaded", (event) => {
   if (event.detail.isMobile) {
+    initializeVideoPreloading(); // Add this first
     initializeContactButtonEffect();
     initializeVideoScrollTrigger();
     initializeVideoMaskEffect();
@@ -8,6 +9,43 @@ window.addEventListener("sectionsLoaded", (event) => {
     initializeTestimonialAnimation();
   }
 });
+
+function initializeVideoPreloading() {
+  const videos = document.querySelectorAll(".scroll-trigger-video");
+  if (!videos.length) return;
+
+  videos.forEach((video) => {
+    // Set preload to metadata to load first frame
+    video.preload = "metadata";
+
+    // Force load to ensure first frame is available
+    video.load();
+
+    // Set a small currentTime to ensure first frame shows
+    video.addEventListener(
+      "loadedmetadata",
+      () => {
+        if (video.duration > 0) {
+          video.currentTime = 0.1;
+        }
+      },
+      { once: true }
+    );
+
+    // Ensure video poster/first frame is visible
+    video.addEventListener(
+      "loadeddata",
+      () => {
+        // Force a repaint to ensure the frame is visible
+        video.style.opacity = "0.99";
+        setTimeout(() => {
+          video.style.opacity = "1";
+        }, 10);
+      },
+      { once: true }
+    );
+  });
+}
 
 function initializeContactButtonEffect() {
   ScrollTrigger.create({
@@ -38,17 +76,57 @@ function initializeVideoScrollTrigger() {
   if (!videos.length) return;
 
   videos.forEach((video) => {
+    // Ensure video is loaded and ready
+    const ensureVideoReady = () => {
+      return new Promise((resolve) => {
+        if (video.readyState >= 2) {
+          // HAVE_CURRENT_DATA or higher
+          resolve();
+        } else {
+          video.addEventListener("loadeddata", resolve, { once: true });
+          video.addEventListener("canplay", resolve, { once: true });
+          // Force load the video
+          video.load();
+        }
+      });
+    };
+
+    // Safe play function that ensures video is ready
+    const safePlay = async () => {
+      try {
+        await ensureVideoReady();
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          await playPromise;
+        }
+      } catch (error) {
+        console.log("Video play failed:", error);
+      }
+    };
+
     ScrollTrigger.create({
       trigger: video,
-      start: "top 85%", // Start much earlier - when video is 85% down the viewport
-      end: "bottom 15%", // End much later - when video is 15% up from bottom
-      onEnter: () => video.play(),
+      start: "top 70%", // Start when video top is 70% down the viewport
+      end: "bottom 30%", // End when video bottom is 30% up from bottom
+      onEnter: () => safePlay(),
       onLeave: () => video.pause(),
-      onEnterBack: () => video.play(),
+      onEnterBack: () => safePlay(),
       onLeaveBack: () => video.pause(),
       // Better mobile support
       refreshPriority: 1,
       invalidateOnRefresh: true,
+    });
+
+    // Preload video metadata when it comes into a larger viewport
+    ScrollTrigger.create({
+      trigger: video,
+      start: "top 90%", // Preload earlier but don't play yet
+      onEnter: () => {
+        if (video.readyState === 0) {
+          video.load();
+        }
+      },
+      once: true,
     });
   });
 }
@@ -64,6 +142,24 @@ function initializeVideoMaskEffect() {
       ".project-description"
     );
 
+    // Ensure video loads its first frame
+    const ensureVideoFrame = () => {
+      if (video.readyState === 0) {
+        video.load();
+      }
+      // Set currentTime to 0 to ensure first frame is shown
+      if (video.currentTime === 0 && video.readyState >= 2) {
+        video.currentTime = 0.1;
+      }
+    };
+
+    // Call on initialization
+    ensureVideoFrame();
+
+    // Also ensure frame is loaded when video metadata loads
+    video.addEventListener("loadedmetadata", ensureVideoFrame);
+    video.addEventListener("loadeddata", ensureVideoFrame);
+
     video.addEventListener("play", () => {
       if (videoContainer) videoContainer.classList.add("playing");
       if (projectDescription) projectDescription.classList.add("video-playing");
@@ -73,6 +169,17 @@ function initializeVideoMaskEffect() {
       if (videoContainer) videoContainer.classList.remove("playing");
       if (projectDescription)
         projectDescription.classList.remove("video-playing");
+    });
+
+    // Handle loading states
+    video.addEventListener("waiting", () => {
+      // Video is buffering, keep the mask
+      if (videoContainer) videoContainer.classList.remove("playing");
+    });
+
+    video.addEventListener("canplay", () => {
+      // Video can play, ensure first frame is visible
+      ensureVideoFrame();
     });
   });
 }
