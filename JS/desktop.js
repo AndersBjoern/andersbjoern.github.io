@@ -11,7 +11,8 @@ window.addEventListener("sectionsLoaded", (event) => {
 
 function initializeHorizontalScroller() {
   const horizontalContainer = document.querySelector(".section-wrapper");
-  if (!horizontalContainer) return;
+  const horizontalSection = document.querySelector(".horizontal");
+  if (!horizontalContainer || !horizontalSection) return;
 
   function getScrollAmount() {
     const horizontalContainerWidth = horizontalContainer.scrollWidth;
@@ -24,7 +25,7 @@ function initializeHorizontalScroller() {
     ease: "none",
   });
 
-  ScrollTrigger.create({
+  const scrollTriggerInstance = ScrollTrigger.create({
     trigger: ".horizontal",
     start: "top 0%",
     end: () => `+=${getScrollAmount() * -1}`,
@@ -32,6 +33,52 @@ function initializeHorizontalScroller() {
     animation: tween,
     scrub: 1,
     invalidateOnRefresh: true,
+  });
+
+  // Handle horizontal wheel events on the entire window
+  const handleHorizontalScroll = (e) => {
+    // Check if there's horizontal scroll (trackpad horizontal gesture or shift+wheel)
+    const hasHorizontalScroll =
+      Math.abs(e.deltaX) > Math.abs(e.deltaY) && e.deltaX !== 0;
+
+    if (hasHorizontalScroll) {
+      const currentScroll = window.pageYOffset || window.scrollY;
+      const scrollStart = scrollTriggerInstance.start;
+      const scrollEnd = scrollTriggerInstance.end;
+
+      // Only handle horizontal scroll if we're within the horizontal section bounds
+      if (currentScroll >= scrollStart && currentScroll <= scrollEnd) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Convert horizontal delta to vertical scroll amount
+        const scrollSpeed = 2; // Adjust this to control sensitivity
+        const scrollAmount = e.deltaX * scrollSpeed;
+
+        // Calculate new scroll position
+        const newScroll = currentScroll + scrollAmount;
+
+        // Clamp to the horizontal section bounds
+        const clampedScroll = Math.max(
+          scrollStart,
+          Math.min(scrollEnd, newScroll),
+        );
+
+        // Smoothly scroll to the new position
+        window.scrollTo({
+          top: clampedScroll,
+          behavior: "auto",
+        });
+      }
+    }
+  };
+
+  // Add event listener to window
+  window.addEventListener("wheel", handleHorizontalScroll, { passive: false });
+
+  // Also add to the horizontal section itself for better capture
+  horizontalSection.addEventListener("wheel", handleHorizontalScroll, {
+    passive: false,
   });
 }
 
