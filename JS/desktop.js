@@ -6,6 +6,7 @@ window.addEventListener("sectionsLoaded", (event) => {
     initializeHorizontalScroller();
     initializeGridTriggers();
     initializeTestimonialAnimation();
+    initializeCustomCursor();
   }
 });
 
@@ -170,4 +171,221 @@ function initializeScrollerContent(scroller, index) {
     duplicatedItem.setAttribute("aria-hidden", true);
     scrollerInner.appendChild(duplicatedItem);
   });
+}
+
+// Custom Cursor Implementation
+function initializeCustomCursor() {
+  new CustomCursor();
+}
+
+class CustomCursor {
+  constructor() {
+    this.cursor = null;
+    this.cursorText = null;
+    this.cursorArrow = null;
+    this.isVisible = false;
+    this.mouseX = 0;
+    this.mouseY = 0;
+    this.cursorX = 0;
+    this.cursorY = 0;
+    this.speed = 1; // Smooth follow speed
+    this.currentState = null;
+
+    // Define cursor states with their text
+    this.states = {
+      SCROLL: {
+        name: "scroll",
+        text: "scroll · scroll · ",
+        className: "cursor-state-scroll",
+      },
+      CLICK_TO_OPEN: {
+        name: "click-to-open",
+        text: "click to open · ",
+        className: "cursor-state-click-to-open",
+      },
+    };
+
+    this.init();
+  }
+
+  init() {
+    // Create cursor element
+    this.cursor = document.createElement("div");
+    this.cursor.className = "custom-cursor";
+
+    // Create the circular text container
+    this.cursorText = document.createElement("div");
+    this.cursorText.className = "cursor-text";
+
+    // Create the arrow element (for click-to-open state)
+    this.cursorArrow = document.createElement("div");
+    this.cursorArrow.className = "cursor-arrow";
+
+    this.cursor.appendChild(this.cursorText);
+    this.cursor.appendChild(this.cursorArrow);
+    document.body.appendChild(this.cursor);
+
+    // Set initial state
+    this.setState(this.states.SCROLL);
+
+    // Bind events
+    this.bindEvents();
+
+    // Start animation loop
+    this.animate();
+  }
+
+  setState(state) {
+    if (this.currentState === state) return;
+
+    // Remove previous state class
+    if (this.currentState) {
+      this.cursor.classList.remove(this.currentState.className);
+    }
+
+    // Set new state
+    this.currentState = state;
+    this.cursor.classList.add(state.className);
+
+    // Update text
+    this.updateText(state.text);
+  }
+
+  updateText(text) {
+    // Clear existing text
+    this.cursorText.innerHTML = "";
+
+    // For click-to-open state, create a pill-shaped container
+    if (this.currentState === this.states.CLICK_TO_OPEN) {
+      const pillContainer = document.createElement("div");
+      pillContainer.className = "cursor-pill";
+      pillContainer.textContent = "click to open";
+      this.cursorText.appendChild(pillContainer);
+    } else {
+      // Create individual characters for circular arrangement
+      const characters = text.split("");
+
+      characters.forEach((char, index) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.style.setProperty("--char-index", index);
+        span.style.setProperty("--total-chars", characters.length);
+        this.cursorText.appendChild(span);
+      });
+    }
+  }
+
+  bindEvents() {
+    // Track mouse movement
+    document.addEventListener("mousemove", (e) => {
+      this.mouseX = e.clientX;
+      this.mouseY = e.clientY;
+
+      if (!this.isVisible) {
+        this.show();
+      }
+
+      // Check what element is being hovered
+      this.checkHoveredElement(e);
+    });
+
+    // Hide cursor when leaving window
+    document.addEventListener("mouseleave", () => {
+      this.hide();
+    });
+
+    // Show cursor when entering window
+    document.addEventListener("mouseenter", () => {
+      this.show();
+    });
+
+    // Check if we're in the horizontal section
+    this.checkHorizontalSection();
+    window.addEventListener("scroll", () => {
+      this.checkHorizontalSection();
+      // Also check hovered element when scrolling
+      this.checkHoveredElementAtCurrentPosition();
+    });
+  }
+
+  checkHoveredElementAtCurrentPosition() {
+    // Check what's under the cursor at the current mouse position
+    this.cursor.style.pointerEvents = "none";
+    const elementUnderCursor = document.elementFromPoint(
+      this.mouseX,
+      this.mouseY,
+    );
+    this.cursor.style.pointerEvents = "none";
+
+    if (!elementUnderCursor) return;
+
+    // Check if hovering over a project article
+    const projectArticle = elementUnderCursor.closest(".project-article");
+
+    if (projectArticle) {
+      this.setState(this.states.CLICK_TO_OPEN);
+    } else {
+      this.setState(this.states.SCROLL);
+    }
+  }
+
+  checkHoveredElement(e) {
+    // Get the element under the cursor (excluding the cursor itself)
+    this.cursor.style.pointerEvents = "none";
+    const elementUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
+    this.cursor.style.pointerEvents = "none"; // Keep it disabled
+
+    if (!elementUnderCursor) return;
+
+    // Check if hovering over a project article
+    const projectArticle = elementUnderCursor.closest(".project-article");
+
+    if (projectArticle) {
+      this.setState(this.states.CLICK_TO_OPEN);
+    } else {
+      this.setState(this.states.SCROLL);
+    }
+  }
+
+  checkHorizontalSection() {
+    const horizontalSection = document.querySelector(".horizontal");
+    if (!horizontalSection) return;
+
+    const rect = horizontalSection.getBoundingClientRect();
+    const isInSection = rect.top <= window.innerHeight && rect.bottom >= 0;
+
+    if (isInSection) {
+      this.cursor.classList.add("active");
+    } else {
+      this.cursor.classList.remove("active");
+    }
+  }
+
+  show() {
+    this.isVisible = true;
+    this.cursor.classList.add("visible");
+  }
+
+  hide() {
+    this.isVisible = false;
+    this.cursor.classList.remove("visible");
+  }
+
+  animate() {
+    // Smooth follow effect
+    this.cursorX += (this.mouseX - this.cursorX) * this.speed;
+    this.cursorY += (this.mouseY - this.cursorY) * this.speed;
+
+    // Update cursor position
+    // For scroll state, center the cursor at mouse position
+    // For click-to-open, position at cursor without centering
+    if (this.currentState === this.states.SCROLL) {
+      this.cursor.style.transform = `translate(${this.cursorX}px, ${this.cursorY}px) translate(-50%, -50%)`;
+    } else {
+      this.cursor.style.transform = `translate(${this.cursorX}px, ${this.cursorY}px)`;
+    }
+
+    // Continue animation
+    requestAnimationFrame(() => this.animate());
+  }
 }
