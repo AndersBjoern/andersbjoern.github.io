@@ -1,4 +1,5 @@
 window.addEventListener("sectionsLoaded", () => {
+  initializeStickyTitle();
   initializeGSAPAnimations();
   initializeShowMoreButton();
   initializeFadeInAnimation();
@@ -6,6 +7,48 @@ window.addEventListener("sectionsLoaded", () => {
   setupNumberAnimations();
   setupHighlightsObserver();
 });
+
+function initializeStickyTitle() {
+  const stickyTitle = document.querySelector(".landing-section h2");
+  if (!stickyTitle) return;
+
+  // Store the original position
+  let titleOriginalTop = null;
+  let isSticky = false;
+
+  // Function to calculate and update sticky state
+  const updateStickyState = () => {
+    // Get the title's position relative to viewport
+    const rect = stickyTitle.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Calculate original position on first run
+    if (titleOriginalTop === null) {
+      titleOriginalTop = rect.top + scrollTop;
+    }
+
+    // Check if we've scrolled past the title's original position
+    if (scrollTop >= titleOriginalTop && !isSticky) {
+      stickyTitle.classList.add("sticky-header");
+      isSticky = true;
+    } else if (scrollTop < titleOriginalTop && isSticky) {
+      stickyTitle.classList.remove("sticky-header");
+      isSticky = false;
+    }
+  };
+
+  // Listen to scroll events
+  window.addEventListener("scroll", updateStickyState);
+
+  // Also update on resize in case layout changes
+  window.addEventListener("resize", () => {
+    titleOriginalTop = null; // Recalculate on resize
+    updateStickyState();
+  });
+
+  // Initial check
+  updateStickyState();
+}
 
 function initializeGSAPAnimations() {
   gsap.registerPlugin(ScrollTrigger);
@@ -65,7 +108,7 @@ function initializeFadeInAnimation() {
     },
     {
       threshold: 0.2,
-    }
+    },
   );
 
   fadeElements.forEach((el) => observer.observe(el));
@@ -158,7 +201,7 @@ function setupHighlightsObserver() {
 
   const root = document.documentElement;
   const backgroundcolor = getComputedStyle(root).getPropertyValue(
-    "--background-color-dark"
+    "--background-color-dark",
   );
   const fontColor = getComputedStyle(root).getPropertyValue("--font-color");
 

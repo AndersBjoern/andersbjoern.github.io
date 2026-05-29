@@ -14,7 +14,6 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
 
   &:before {
     content: "";
@@ -34,6 +33,7 @@
     );
     animation: rotate var(--speed) var(--easing) infinite;
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    z-index: -1; // Keep bubble behind content
   }
 
   .landing-section-container {
@@ -45,6 +45,20 @@
 
     h2 {
       margin-top: clamp(40px, 5vw, 140px) 0;
+      transition: all 0.3s ease;
+
+      &.sticky-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        padding: 20px var(--container-padding);
+        margin: 0;
+      }
     }
 
     .dynamic-title {
@@ -106,7 +120,9 @@
         position: relative;
         cursor: pointer;
         overflow: hidden;
-        transition: transform 0.5s ease, font-size 0.3s ease;
+        transition:
+          transform 0.5s ease,
+          font-size 0.3s ease;
         &::before {
           content: "";
           position: absolute;
@@ -124,7 +140,10 @@
           transition: 0.5s;
           border-radius: 50px;
           opacity: 0;
-          transition: width 0.5s ease, left 0.5s ease, opacity 0.5s ease;
+          transition:
+            width 0.5s ease,
+            left 0.5s ease,
+            opacity 0.5s ease;
         }
 
         &:hover {
