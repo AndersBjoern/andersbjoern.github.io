@@ -7,6 +7,7 @@ window.addEventListener("sectionsLoaded", (event) => {
     initializeGridTriggers();
     initializeTestimonialAnimation();
     initializeCustomCursor();
+    initializeHorizontalProjectExpand();
   }
 });
 
@@ -176,6 +177,138 @@ function initializeScrollerContent(scroller, index) {
 // Custom Cursor Implementation
 function initializeCustomCursor() {
   new CustomCursor();
+}
+
+function initializeHorizontalProjectExpand() {
+  const projectArticles = document.querySelectorAll(
+    ".horizontal .project-article",
+  );
+
+  projectArticles.forEach((article) => {
+    // Set initial collapsed state
+    article.classList.add("collapsed");
+
+    // Add click handler to expand
+    article.addEventListener("click", () => {
+      console.log("=== Project clicked ===");
+      if (article.classList.contains("collapsed")) {
+        // Get the horizontal scroll trigger instance
+        const horizontalTrigger = ScrollTrigger.getAll().find(
+          (trigger) => trigger.vars.trigger === ".horizontal",
+        );
+
+        if (!horizontalTrigger) {
+          console.log("ERROR: No horizontal trigger found");
+          return;
+        }
+
+        // Get the current horizontal translation of the container
+        const horizontalContainer = document.querySelector(".section-wrapper");
+        const currentTransform = gsap.getProperty(horizontalContainer, "x");
+
+        console.log("Before expansion:");
+        console.log("  Current horizontal translation (x):", currentTransform);
+        console.log("  Current scroll:", window.scrollY);
+        console.log("  Trigger start:", horizontalTrigger.start);
+        console.log("  Trigger end:", horizontalTrigger.end);
+
+        // Collapse all other articles
+        projectArticles.forEach((otherArticle) => {
+          if (otherArticle !== article) {
+            otherArticle.classList.add("collapsed");
+            otherArticle.classList.remove("expanded");
+          }
+        });
+
+        // Expand clicked article
+        article.classList.remove("collapsed");
+        article.classList.add("expanded");
+        console.log("Article expanded, waiting for animation...");
+
+        // Refresh ScrollTrigger and maintain scroll position after expansion animation completes
+        setTimeout(() => {
+          console.log("Animation complete, refreshing ScrollTrigger...");
+
+          // Refresh to recalculate dimensions
+          ScrollTrigger.refresh();
+          console.log("ScrollTrigger refreshed");
+
+          // Get the updated trigger instance
+          const updatedTrigger = ScrollTrigger.getAll().find(
+            (trigger) => trigger.vars.trigger === ".horizontal",
+          );
+
+          if (updatedTrigger) {
+            console.log("After refresh:");
+            console.log("  Updated trigger start:", updatedTrigger.start);
+            console.log("  Updated trigger end:", updatedTrigger.end);
+
+            // Calculate what scroll position would give us the same horizontal translation
+            // The animation maps scroll range to horizontal translation
+            const scrollRange = updatedTrigger.end - updatedTrigger.start;
+            const horizontalContainer =
+              document.querySelector(".section-wrapper");
+            const totalHorizontalDistance = -(
+              horizontalContainer.scrollWidth - window.innerWidth
+            );
+
+            // Calculate the scroll position that maintains the same x translation
+            const targetScrollProgress =
+              currentTransform / totalHorizontalDistance;
+            const newScrollPosition =
+              updatedTrigger.start + scrollRange * targetScrollProgress;
+
+            console.log(
+              "  Total horizontal distance:",
+              totalHorizontalDistance,
+            );
+            console.log("  Target scroll progress:", targetScrollProgress);
+            console.log("  Calculated new scroll position:", newScrollPosition);
+            console.log("  Current scroll before adjustment:", window.scrollY);
+
+            // Instantly adjust scroll to maintain the user's view
+            window.scrollTo({
+              top: newScrollPosition,
+              behavior: "auto",
+            });
+
+            console.log("Scroll adjustment completed (instant)");
+            console.log("  Final scroll position:", window.scrollY);
+            console.log(
+              "  Final horizontal translation:",
+              gsap.getProperty(horizontalContainer, "x"),
+            );
+          } else {
+            console.log("ERROR: Updated trigger not found");
+          }
+        }, 650); // Slightly longer than the 0.6s CSS transition
+      }
+    });
+  });
+
+  // Add a listener to detect any ScrollTrigger refreshes
+  ScrollTrigger.addEventListener("refresh", () => {
+    console.log("⚠️ ScrollTrigger refresh event fired at:", Date.now());
+    console.log("  Current scroll position:", window.scrollY);
+  });
+
+  // Track scroll changes to detect unexpected jumps
+  let lastScrollPosition = window.scrollY;
+  let scrollTimeout;
+  window.addEventListener("scroll", () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const currentScroll = window.scrollY;
+      const scrollDiff = Math.abs(currentScroll - lastScrollPosition);
+      if (scrollDiff > 100) {
+        console.log("🔴 Large scroll jump detected!");
+        console.log("  From:", lastScrollPosition);
+        console.log("  To:", currentScroll);
+        console.log("  Difference:", scrollDiff);
+      }
+      lastScrollPosition = currentScroll;
+    }, 100);
+  });
 }
 
 class CustomCursor {
