@@ -61,7 +61,7 @@ html,
 body {
   background-color: var(--background-color-dark);
   color: var(--font-color);
-  clip-path: inset(0 0 0 0);
+  /* clip-path: inset(0 0 0 0); */ /* REMOVED: This breaks position: fixed */
   max-width: 100vw;
 }
 
@@ -70,7 +70,13 @@ body {
   html,
   body {
     height: 100vh;
+    /* overflow-x: hidden; */ /* REMOVED: This breaks position: fixed on mobile */
+  }
+
+  /* Instead, prevent horizontal scroll on main container */
+  main {
     overflow-x: hidden;
+    width: 100%;
   }
 }
 

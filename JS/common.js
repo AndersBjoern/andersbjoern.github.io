@@ -1,5 +1,11 @@
-window.addEventListener("sectionsLoaded", () => {
-  initializeStickyTitle();
+window.addEventListener("sectionsLoaded", (event) => {
+  console.log("🚀 sectionsLoaded event fired", {
+    isMobile: event.detail.isMobile,
+    windowWidth: window.innerWidth,
+    userAgent: navigator.userAgent,
+  });
+
+  initStickyTitle();
   initializeGSAPAnimations();
   initializeShowMoreButton();
   initializeFadeInAnimation();
@@ -8,46 +14,62 @@ window.addEventListener("sectionsLoaded", () => {
   setupHighlightsObserver();
 });
 
-function initializeStickyTitle() {
-  const stickyTitle = document.querySelector(".landing-section h2");
-  if (!stickyTitle) return;
+function initStickyTitle() {
+  const title = document.querySelector(".landing-section h2");
 
-  // Store the original position
-  let titleOriginalTop = null;
-  let isSticky = false;
+  if (!title) {
+    console.log("❌ Sticky title: h2 element not found");
+    return;
+  }
 
-  // Function to calculate and update sticky state
-  const updateStickyState = () => {
-    // Get the title's position relative to viewport
-    const rect = stickyTitle.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const sentinel = document.createElement("div");
+  sentinel.style.cssText =
+    "position: absolute; top: 0; left: 0; width: 1px; height: 1px; pointer-events: none;";
+  sentinel.className = "sticky-sentinel";
 
-    // Calculate original position on first run
-    if (titleOriginalTop === null) {
-      titleOriginalTop = rect.top + scrollTop;
-    }
+  title.parentElement.insertBefore(sentinel, title);
 
-    // Check if we've scrolled past the title's original position
-    if (scrollTop >= titleOriginalTop && !isSticky) {
-      stickyTitle.classList.add("sticky-header");
-      isSticky = true;
-    } else if (scrollTop < titleOriginalTop && isSticky) {
-      stickyTitle.classList.remove("sticky-header");
-      isSticky = false;
-    }
-  };
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      const shouldStick =
+        !entry.isIntersecting && entry.boundingClientRect.top < 0;
 
-  // Listen to scroll events
-  window.addEventListener("scroll", updateStickyState);
+      console.log("👁️ IntersectionObserver triggered:", {
+        isIntersecting: entry.isIntersecting,
+        boundingTop: entry.boundingClientRect.top,
+        shouldStick: shouldStick,
+        hasClass: title.classList.contains("sticky-header"),
+      });
 
-  // Also update on resize in case layout changes
-  window.addEventListener("resize", () => {
-    titleOriginalTop = null; // Recalculate on resize
-    updateStickyState();
-  });
+      if (shouldStick) {
+        if (!title.classList.contains("sticky-header")) {
+          title.classList.add("sticky-header");
+          console.log("✅ Added sticky-header class");
 
-  // Initial check
-  updateStickyState();
+          // Verify it was applied
+          const computedStyle = window.getComputedStyle(title);
+          console.log("🔍 Computed styles after adding class:", {
+            position: computedStyle.position,
+            top: computedStyle.top,
+            zIndex: computedStyle.zIndex,
+            background: computedStyle.background,
+          });
+        }
+      } else {
+        if (title.classList.contains("sticky-header")) {
+          title.classList.remove("sticky-header");
+          console.log("❌ Removed sticky-header class");
+        }
+      }
+    },
+    {
+      threshold: [0, 1],
+      rootMargin: "-1px 0px 0px 0px", // Trigger when sentinel is 1px past the top
+    },
+  );
+
+  observer.observe(sentinel);
+  console.log("👂 IntersectionObserver attached to sentinel");
 }
 
 function initializeGSAPAnimations() {

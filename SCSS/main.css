@@ -291,7 +291,7 @@ html,
 body {
   background-color: var(--background-color-dark);
   color: var(--font-color);
-  clip-path: inset(0 0 0 0);
+  /* clip-path: inset(0 0 0 0); */ /* REMOVED: This breaks position: fixed */
   max-width: 100vw;
 }
 
@@ -300,7 +300,12 @@ body {
   html,
   body {
     height: 100vh;
+    /* overflow-x: hidden; */ /* REMOVED: This breaks position: fixed on mobile */
+  }
+  /* Instead, prevent horizontal scroll on main container */
+  main {
     overflow-x: hidden;
+    width: 100%;
   }
 }
 .padding {
@@ -428,7 +433,7 @@ body {
   background-image: linear-gradient(var(--accent-color-1), var(--accent-color-1));
   animation: rotate var(--speed) var(--easing) infinite;
   border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
-  z-index: -1;
+  z-index: 100;
 }
 .landing-section .landing-section-container {
   width: 100%;
@@ -438,20 +443,28 @@ body {
   flex-direction: column;
 }
 .landing-section .landing-section-container h2 {
-  margin-top: clamp(40px, 5vw, 140px) 0;
-  transition: all 0.3s ease;
+  position: relative;
+  width: 100%;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, transform 0.3s ease;
+  z-index: 10;
 }
 .landing-section .landing-section-container h2.sticky-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
+  top: 20px;
+  left: 2.5vw;
+  right: auto;
+  width: auto;
+  font-size: clamp(14px, 2vw, 18px);
+  padding: 12px 24px;
+  border-radius: 50px;
+  z-index: 9999;
   backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  padding: 20px var(--container-padding);
-  margin: 0;
+  background: rgba(20, 20, 20, 0.65);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  animation: stickyFade 0.25s ease;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 .landing-section .landing-section-container .dynamic-title {
   margin-top: clamp(50px, 6vw, 80px);
@@ -534,6 +547,16 @@ body {
   opacity: 1;
 }
 
+@keyframes stickyFade {
+  from {
+    opacity: 0;
+    transform: translateZ(0) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0) translateY(0);
+  }
+}
 .connect-button {
   opacity: 0;
   pointer-events: none;
