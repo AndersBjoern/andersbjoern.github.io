@@ -80,7 +80,7 @@
 
 // Only animate in scroll state
 .cursor-state-scroll .cursor-text {
-  animation: rotate 10s linear infinite;
+  animation: cursor-rotate 10s linear infinite;
 }
 
 // Pill-shaped container for click-to-open
@@ -127,7 +127,7 @@
 //   transform-origin: 0 55px;
 // }
 
-@keyframes rotate {
+@keyframes cursor-rotate {
   from {
     transform: rotate(0deg);
   }
