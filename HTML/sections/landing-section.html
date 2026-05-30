@@ -1,34 +1,67 @@
 <section class="landing-section padding">
   <div class="landing-section-container">
-    <a
-      href="https://www.linkedin.com/in/anders-bj%C3%B8rn-%C3%B8bro/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <h2 class="expletus light">Anders Bjørn Øbro</h2>
-    </a>
-    <h1 class="dynamic-title">
-      <span data-char="P">P</span>
-      <span data-char="R">R</span>
-      <span data-char="O">O</span>
-      <span data-char="D">D</span>
-      <span data-char="U">U</span>
-      <span data-char="C">C</span>
-      <span data-char="T">T</span>
-      <span>&nbsp;</span>
-      <span data-char="D">D</span>
-      <span data-char="E">E</span>
-      <span data-char="S">S</span>
-      <span data-char="I">I</span>
-      <span data-char="G">G</span>
-      <span data-char="N">N</span>
-      <span data-char="E">E</span>
-      <span data-char="R">R</span>
-    </h1>
-    <h3 class="Nunito light">
-      Human-centered design that makes complex technology feel simple, useful,
-      and meaningful.
-    </h3>
+    <!-- Audience Selector Buttons -->
+    <div class="audience-selector-wrapper">
+      <div class="audience-selector" data-animated="true">
+        <div class="audience-selector-inner">
+          <button class="audience-btn active" data-audience="anyone">
+            For anyone
+          </button>
+          <button class="audience-btn" data-audience="recruiters">
+            Recruiters
+          </button>
+          <button class="audience-btn" data-audience="product-managers">
+            Product Managers
+          </button>
+          <button class="audience-btn" data-audience="product-designers">
+            Product Designers
+          </button>
+          <button class="audience-btn" data-audience="engineers">
+            Engineers
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Text Box -->
+    <div class="dynamic-text-box">
+      <h3 class="Nunito light dynamic-text" data-audience="anyone">
+        I design coherence across products, platforms and contexts.
+      </h3>
+      <h3
+        class="Nunito light dynamic-text"
+        data-audience="recruiters"
+        style="display: none"
+      >
+        Experienced in connecting digital ecosystems, cross-functional
+        collaboration and agile development.
+      </h3>
+      <h3
+        class="Nunito light dynamic-text"
+        data-audience="product-managers"
+        style="display: none"
+      >
+        I work across product strategy, user insights, prototyping, and
+        stakeholder alignment to move ideas from concept to validated outcomes.
+      </h3>
+      <h3
+        class="Nunito light dynamic-text"
+        data-audience="product-designers"
+        style="display: none"
+      >
+        Focused on interaction design, prototyping, user research, and connected
+        experiences across digital and physical touchpoints.
+      </h3>
+      <h3
+        class="Nunito light dynamic-text"
+        data-audience="engineers"
+        style="display: none"
+      >
+        While (I'm != software engineer) <br />
+        { } <br />
+        I Do { know how to develop; } <br />
+      </h3>
+    </div>
     <div class="contact-button">
       <a href="mailto:andersbj1@gmail.com">
         <button class="roboto medium">

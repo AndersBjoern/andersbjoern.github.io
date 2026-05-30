@@ -1,12 +1,6 @@
 window.addEventListener("sectionsLoaded", (event) => {
-  console.log("🚀 sectionsLoaded event fired", {
-    isMobile: event.detail.isMobile,
-    windowWidth: window.innerWidth,
-    userAgent: navigator.userAgent,
-  });
-
   initStickyTitle();
-  initializeGSAPAnimations();
+  dynamicTextBoxForAudience();
   initializeShowMoreButton();
   initializeFadeInAnimation();
   setupSkillsAnimation();
@@ -15,89 +9,156 @@ window.addEventListener("sectionsLoaded", (event) => {
 });
 
 function initStickyTitle() {
-  const title = document.querySelector(".landing-section h2");
+  const wrapper = document.querySelector(".sticky-title-wrapper");
+  const title = wrapper.querySelector("h2");
 
-  if (!title) {
-    console.log("❌ Sticky title: h2 element not found");
-    return;
-  }
+  gsap.set(wrapper, {
+    position: "fixed",
+    top: "5vh",
+    left: "2.5vw",
+    scale: 2,
+    transformOrigin: "left top",
+    x: 0,
+  });
 
-  const sentinel = document.createElement("div");
-  sentinel.style.cssText =
-    "position: absolute; top: 0; left: 0; width: 1px; height: 1px; pointer-events: none;";
-  sentinel.className = "sticky-sentinel";
-
-  title.parentElement.insertBefore(sentinel, title);
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      const shouldStick =
-        !entry.isIntersecting && entry.boundingClientRect.top < 0;
-
-      console.log("👁️ IntersectionObserver triggered:", {
-        isIntersecting: entry.isIntersecting,
-        boundingTop: entry.boundingClientRect.top,
-        shouldStick: shouldStick,
-        hasClass: title.classList.contains("sticky-header"),
-      });
-
-      if (shouldStick) {
-        if (!title.classList.contains("sticky-header")) {
-          title.classList.add("sticky-header");
-          console.log("✅ Added sticky-header class");
-
-          // Verify it was applied
-          const computedStyle = window.getComputedStyle(title);
-          console.log("🔍 Computed styles after adding class:", {
-            position: computedStyle.position,
-            top: computedStyle.top,
-            zIndex: computedStyle.zIndex,
-            background: computedStyle.background,
-          });
-        }
-      } else {
-        if (title.classList.contains("sticky-header")) {
-          title.classList.remove("sticky-header");
-          console.log("❌ Removed sticky-header class");
-        }
-      }
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: document.body,
+      start: "top top",
+      end: "+=600",
+      scrub: true,
     },
+  });
+
+  // =========================
+  // PHASE 1: 0–300px
+  // =========================
+  tl.to(
+    wrapper,
     {
-      threshold: [0, 1],
-      rootMargin: "-1px 0px 0px 0px", // Trigger when sentinel is 1px past the top
+      top: 20,
+      scale: 1,
+      backgroundColor: "rgba(0,0,0,0.65)",
+      backdropFilter: "blur(12px)",
+      webkitBackdropFilter: "blur(12px)",
+      padding: "12px 16px",
+      borderRadius: "999px",
+      ease: "none",
+      duration: 300,
     },
+    0,
   );
 
-  observer.observe(sentinel);
-  console.log("👂 IntersectionObserver attached to sentinel");
+  // font shrink separat (smooth kontrol)
+  tl.to(
+    title,
+    {
+      fontSize: "1.1rem",
+      ease: "none",
+      duration: 300,
+    },
+    0,
+  );
+
+  // =========================
+  // PHASE 2: 300–450px
+  // =========================
+  tl.to(wrapper, {
+    x: () => {
+      const left = window.innerWidth * 0.025;
+      const targetRight = window.innerWidth * 0.975;
+      const width = wrapper.offsetWidth;
+
+      return targetRight - width - left;
+    },
+    ease: "none",
+    duration: 150,
+  });
 }
 
-function initializeGSAPAnimations() {
-  gsap.registerPlugin(ScrollTrigger);
+function dynamicTextBoxForAudience() {
+  const audienceButtons = document.querySelectorAll(".audience-btn");
+  const dynamicTexts = document.querySelectorAll(".dynamic-text");
+  const audienceSelector = document.querySelector(".audience-selector");
 
-  const text = document.querySelector("h1");
-  if (!text) return;
-
-  const char = text.querySelectorAll("span");
-  const replaceChar = text.querySelectorAll('span:not([data-char="."])');
-  const tl = gsap.timeline();
-
-  tl.set(char, { yPercent: -110 })
-    .set(text, { autoAlpha: 1 })
-    .to(char, {
-      duration: 1,
-      yPercent: 0,
-      stagger: 0.05,
-      ease: "expo.inOut",
-    })
-    .to(replaceChar, {
-      duration: 1,
-      yPercent: 110,
-      ease: "expo.inOut",
-      repeat: -1,
-      yoyo: true,
-      stagger: 0.1,
+  // Function to switch active audience
+  function switchAudience(targetAudience) {
+    // Update button states
+    audienceButtons.forEach((btn) => {
+      if (btn.dataset.audience === targetAudience) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
     });
+
+    // Update text visibility with smooth transition
+    dynamicTexts.forEach((text) => {
+      if (text.dataset.audience === targetAudience) {
+        text.style.display = "block";
+        // Force reflow to ensure transition works
+        text.offsetHeight;
+      } else {
+        text.style.display = "none";
+      }
+    });
+  }
+
+  // Add click event listeners to buttons
+  audienceButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const audience = this.dataset.audience;
+      switchAudience(audience);
+    });
+  });
+
+  // Check if scrolling is needed and apply gradient mask
+  function checkScrollable() {
+    if (audienceSelector) {
+      const inner = audienceSelector.querySelector(".audience-selector-inner");
+      if (inner && inner.scrollWidth > audienceSelector.clientWidth) {
+        audienceSelector.setAttribute("data-animated", "true");
+      } else {
+        audienceSelector.setAttribute("data-animated", "false");
+      }
+    }
+  }
+
+  // Check on load and resize
+  checkScrollable();
+  window.addEventListener("resize", checkScrollable);
+
+  // Optional: Add smooth scroll behavior for touch devices
+  if (audienceSelector) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    audienceSelector.addEventListener("mousedown", (e) => {
+      isDown = true;
+      audienceSelector.style.cursor = "grabbing";
+      startX = e.pageX - audienceSelector.offsetLeft;
+      scrollLeft = audienceSelector.scrollLeft;
+    });
+
+    audienceSelector.addEventListener("mouseleave", () => {
+      isDown = false;
+      audienceSelector.style.cursor = "default";
+    });
+
+    audienceSelector.addEventListener("mouseup", () => {
+      isDown = false;
+      audienceSelector.style.cursor = "default";
+    });
+
+    audienceSelector.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - audienceSelector.offsetLeft;
+      const walk = (x - startX) * 2;
+      audienceSelector.scrollLeft = scrollLeft - walk;
+    });
+  }
 }
 
 function initializeShowMoreButton() {

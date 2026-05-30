@@ -1,0 +1,98 @@
+// Landing Section - Buttons (Contact & Connect)
+
+.contact-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: clamp(40px, 5vw, 140px) 0;
+
+  button {
+    padding: var(--button-padding);
+    border-radius: 50px;
+    border: 1px solid var(--accent-color-1);
+    background: transparent;
+    color: white;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition:
+      transform 0.5s ease,
+      font-size 0.3s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      background: linear-gradient(
+        to bottom right,
+        var(--accent-color-1),
+        var(--accent-color-2)
+      );
+      height: 100%;
+      width: 0;
+      left: 50%;
+      bottom: 0;
+      z-index: -1;
+      border-radius: 50px;
+      opacity: 0;
+      transition:
+        width 0.5s ease,
+        left 0.5s ease,
+        opacity 0.5s ease;
+    }
+
+    &:hover {
+      transform: scale(1.15);
+
+      &::before {
+        width: 100%;
+        left: 0;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.connect-button {
+  position: fixed;
+  bottom: var(--connect-button-padding);
+  right: var(--connect-button-padding);
+  height: 40px;
+  width: 40px;
+  z-index: 9999;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  a,
+  button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--connect-button-padding);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    margin: 0;
+
+    .linkedin-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0a66c2;
+      margin-left: 0;
+      margin-bottom: 0;
+    }
+  }
+}

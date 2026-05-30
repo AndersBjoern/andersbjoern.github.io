@@ -53,7 +53,7 @@ function resetContentOnResize() {
     const main = document.querySelector("main");
 
     const preservedSections = Array.from(main.children).map(
-      (child) => child.outerHTML
+      (child) => child.outerHTML,
     );
 
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -65,6 +65,7 @@ function resetContentOnResize() {
 }
 
 function init() {
+  gsap.registerPlugin(ScrollTrigger);
   window.addEventListener("DOMContentLoaded", () => {
     loadSections();
   });

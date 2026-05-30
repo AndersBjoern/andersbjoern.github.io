@@ -410,6 +410,228 @@ body {
     transform: rotate(360deg);
   }
 }
+@keyframes stickyFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.sticky-title-wrapper {
+  position: fixed;
+  top: 5vh;
+  left: 2.5vw;
+  z-index: 9999;
+  transform: scale(2);
+  transform-origin: left top;
+  background: transparent;
+  padding: 0;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  will-change: transform, left, right, background, padding, backdrop-filter;
+}
+
+/* STATE 2 (sticky) */
+.sticky-title-wrapper.is-sticky {
+  top: 20px;
+  left: 2.5vw;
+  transform: scale(1);
+}
+
+/* STATE 3 (final shift) */
+.sticky-title-wrapper.is-final {
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+  border-radius: 999px;
+  width: -moz-fit-content;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.audience-selector-wrapper {
+  width: 100%;
+  margin: clamp(20px, 3vw, 40px) 0;
+}
+.audience-selector-wrapper .audience-selector {
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+}
+.audience-selector-wrapper .audience-selector[data-animated=true] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-mask: var(--infinite-gradient);
+  mask: var(--infinite-gradient);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.audience-selector-wrapper .audience-selector[data-animated=true]::-webkit-scrollbar {
+  display: none;
+}
+.audience-selector-wrapper .audience-selector-inner {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 100%;
+}
+.audience-selector-wrapper .audience-btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  border: 1px solid var(--accent-color-2);
+  background: transparent;
+  color: var(--font-color);
+  font-size: var(--font-size-h6);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.audience-selector-wrapper .audience-btn::before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(to bottom right, var(--accent-color-1), var(--accent-color-2));
+  height: 100%;
+  width: 0;
+  left: 50%;
+  top: 0;
+  z-index: -1;
+  border-radius: 50px;
+  opacity: 0;
+  transition: width 0.3s ease, left 0.3s ease, opacity 0.3s ease;
+}
+.audience-selector-wrapper .audience-btn:hover {
+  border-color: var(--accent-color-1);
+  transform: translateY(-2px);
+}
+.audience-selector-wrapper .audience-btn:hover::before {
+  width: 100%;
+  left: 0;
+  opacity: 0.3;
+}
+.audience-selector-wrapper .audience-btn.active {
+  background: linear-gradient(to bottom right, var(--accent-color-1), var(--accent-color-2));
+  border-color: var(--accent-color-1);
+  color: white;
+  font-weight: var(--font-weight-medium);
+}
+.audience-selector-wrapper .audience-btn.active::before {
+  opacity: 0;
+}
+
+.dynamic-text-box {
+  width: 100%;
+  min-height: clamp(80px, 10vw, 120px);
+  margin: clamp(20px, 3vw, 40px) 0;
+  position: relative;
+}
+
+.dynamic-text {
+  position: absolute;
+  width: 100%;
+  padding: 0 2rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+.dynamic-text[style*="display: block"], .dynamic-text:not([style*="display: none"]) {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.contact-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: clamp(40px, 5vw, 140px) 0;
+}
+.contact-button button {
+  padding: var(--button-padding);
+  border-radius: 50px;
+  border: 1px solid var(--accent-color-1);
+  background: transparent;
+  color: white;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.5s ease, font-size 0.3s ease;
+}
+.contact-button button::before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(to bottom right, var(--accent-color-1), var(--accent-color-2));
+  height: 100%;
+  width: 0;
+  left: 50%;
+  bottom: 0;
+  z-index: -1;
+  border-radius: 50px;
+  opacity: 0;
+  transition: width 0.5s ease, left 0.5s ease, opacity 0.5s ease;
+}
+.contact-button button:hover {
+  transform: scale(1.15);
+}
+.contact-button button:hover::before {
+  width: 100%;
+  left: 0;
+  opacity: 1;
+}
+
+.connect-button {
+  position: fixed;
+  bottom: var(--connect-button-padding);
+  right: var(--connect-button-padding);
+  height: 40px;
+  width: 40px;
+  z-index: 9999;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.connect-button a,
+.connect-button button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--connect-button-padding);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition: background-color 0.3s ease;
+  margin: 0;
+}
+.connect-button a .linkedin-logo,
+.connect-button button .linkedin-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a66c2;
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
 .landing-section {
   min-height: 90vh;
   display: flex;
@@ -441,168 +663,6 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
-.landing-section .landing-section-container h2 {
-  position: relative;
-  width: 100%;
-  transition: background 0.3s ease, backdrop-filter 0.3s ease, transform 0.3s ease;
-  z-index: 10;
-}
-.landing-section .landing-section-container h2.sticky-header {
-  position: fixed;
-  top: 20px;
-  left: 2.5vw;
-  right: auto;
-  width: auto;
-  font-size: clamp(14px, 2vw, 18px);
-  padding: 12px 24px;
-  border-radius: 50px;
-  z-index: 9999;
-  backdrop-filter: blur(12px);
-  background: rgba(20, 20, 20, 0.65);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  animation: stickyFade 0.25s ease;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-}
-.landing-section .landing-section-container .dynamic-title {
-  margin-top: clamp(50px, 6vw, 80px);
-  margin-bottom: clamp(50px, 6vw, 80px);
-  padding-left: clamp(10px, 2vw, 30px);
-  font-size: clamp(15px, 7.5vw, 130px);
-  font-weight: var(--font-weight-bold);
-  position: relative;
-  display: flex;
-  line-height: 0.85;
-  color: transparent;
-  -webkit-text-stroke: 2px #fff;
-  letter-spacing: 0.05em;
-  visibility: hidden;
-  overflow: hidden;
-}
-.landing-section .landing-section-container .dynamic-title span {
-  display: block;
-  position: relative;
-}
-.landing-section .landing-section-container .dynamic-title span:before {
-  content: attr(data-char);
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateY(-110%);
-  color: #fff;
-}
-.landing-section .landing-section-container .dynamic-title::before {
-  content: "";
-  position: absolute;
-  width: 4px;
-  height: 100%;
-  bottom: 0;
-  z-index: 0;
-  left: 0px;
-  background: var(--landing-title-line);
-  border-radius: var(--border-radius-small);
-}
-.landing-section .landing-section-container .contact-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: clamp(40px, 5vw, 140px) 0;
-}
-.landing-section .landing-section-container .contact-button button {
-  padding: var(--button-padding);
-  border-radius: 50px;
-  border: 1px solid var(--accent-color-1);
-  background: transparent;
-  color: white;
-  text-align: center;
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  transition: transform 0.5s ease, font-size 0.3s ease;
-}
-.landing-section .landing-section-container .contact-button button::before {
-  content: "";
-  position: absolute;
-  background: linear-gradient(to bottom right, var(--accent-color-1), var(--accent-color-2));
-  height: 100%;
-  width: 0;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  z-index: -1;
-  transition: 0.5s;
-  border-radius: 50px;
-  opacity: 0;
-  transition: width 0.5s ease, left 0.5s ease, opacity 0.5s ease;
-}
-.landing-section .landing-section-container .contact-button button:hover {
-  transform: scale(1.15);
-}
-.landing-section .landing-section-container .contact-button button:hover::before {
-  width: 100%;
-  left: 0;
-  opacity: 1;
-}
-
-@keyframes stickyFade {
-  from {
-    opacity: 0;
-    transform: translateZ(0) translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateZ(0) translateY(0);
-  }
-}
-.connect-button {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.landing-section .connect-button {
-  position: fixed;
-  bottom: var(--connect-button-padding);
-  right: var(--connect-button-padding);
-  height: 40px;
-  width: 40px;
-  z-index: 9999;
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  padding: 0;
-  transition: opacity 0.3s ease;
-}
-.landing-section .connect-button a,
-.landing-section .connect-button button {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--connect-button-padding);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  transition: background-color 0.3s ease;
-  margin: 0;
-}
-.landing-section .connect-button a .linkedin-logo,
-.landing-section .connect-button button .linkedin-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  color: #0a66c2;
-  margin-left: 0;
-  margin-bottom: 0;
 }
 
 @media screen and (min-width: 901px) {

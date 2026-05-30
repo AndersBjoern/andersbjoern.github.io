@@ -1,0 +1,27 @@
+// Landing Section - Dynamic Text Box
+
+.dynamic-text-box {
+  width: 100%;
+  min-height: clamp(80px, 10vw, 120px);
+  margin: clamp(20px, 3vw, 40px) 0;
+  position: relative;
+}
+
+.dynamic-text {
+  position: absolute;
+  width: 100%;
+  padding: 0 2rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  pointer-events: none;
+
+  &[style*="display: block"],
+  &:not([style*="display: none"]) {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
