@@ -2,6 +2,8 @@
   section.horizontal {
     overflow: hidden;
     position: relative;
+    clear: both; // Ensure it starts after all previous content
+    margin-top: 0; // Remove any negative margins that might cause overlap
 
     // Project-specific background overrides
     &.show-netcompany {

@@ -5,11 +5,24 @@
   width: 100%;
   .dynamic-text {
     transition: opacity 0.2s ease;
-    line-height: 1;
+    font-size: clamp(2rem, 5vw, 5rem);
+    line-height: 1.05;
+    max-width: 14ch;
+    font-weight: 500;
+  }
+  .dynamic-subtext {
+    font-size: clamp(1rem, 1.2vw, 1.3rem);
+    max-width: 55ch;
+    color: var(--font-color-muted);
   }
 }
 
 .audience-engineers {
+  // Hide the background for engineers theme
+  .landing-section-background {
+    display: none;
+  }
+
   .landing-section-content-container {
     background: var(--code-bg);
     border: 1px solid var(--code-border);
@@ -23,25 +36,8 @@
       white-space: pre-line;
     }
   }
-
-  .landing-section-img-container {
-    display: none;
-  }
 }
-/* VS Code Dark+ inspireret */
-.keyword {
+.accent {
   color: var(--accent-color-1);
   font-weight: 600;
-}
-
-.function {
-  color: var(--accent-color-3);
-}
-
-.property {
-  color: var(--font-color-highlight);
-}
-
-.string {
-  color: var(--accent-color-4);
 }

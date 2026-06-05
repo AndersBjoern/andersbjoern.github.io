@@ -1,16 +1,19 @@
+// No longer needed - background is now handled by ::before pseudo-element
+// on .landing-section-bottom in _layout.scss
+
+/*
 .landing-section-img-container {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 0;
   width: 100%;
-  height: 100%;
   border-radius: inherit;
   &::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 31, 27, 0.796); /* semi-transparent */
+    background-color: rgba(0, 31, 27, 0.796);
     pointer-events: none;
     border-radius: var(--border-radius-large);
   }
@@ -19,3 +22,4 @@
     border-radius: inherit;
   }
 }
+*/

@@ -10,10 +10,27 @@ window.addEventListener("sectionsLoaded", (event) => {
 function dynamicTextBoxForAudience() {
   const audienceButtons = document.querySelectorAll(".audience-btn");
   const dynamicText = document.querySelector(".dynamic-text");
-
   const sectionBottom = document.querySelector(".landing-section-bottom");
+  const sectionBackground = document.querySelector(
+    ".landing-section-background",
+  );
 
-  const audienceImage = document.querySelector("#audience-image");
+  // Set up ResizeObserver to refresh ScrollTrigger when landing section height changes
+  let resizeTimeout;
+  const resizeObserver = new ResizeObserver((entries) => {
+    // Debounce to avoid excessive refresh calls
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      if (window.ScrollTrigger) {
+        window.ScrollTrigger.refresh();
+      }
+    }, 100);
+  });
+
+  // Observe the landing section bottom for size changes
+  if (sectionBottom) {
+    resizeObserver.observe(sectionBottom);
+  }
 
   const audienceData = {
     anyone: {
@@ -92,7 +109,14 @@ function dynamicTextBoxForAudience() {
       dynamicText.innerHTML = data.text;
       dynamicText.style.opacity = 1;
 
-      audienceImage.src = data.image;
+      // Update background image via CSS custom property on the background element
+      sectionBackground.style.setProperty(
+        "--background-image",
+        `url('${data.image}')`,
+      );
+
+      // ResizeObserver will automatically trigger ScrollTrigger.refresh()
+      // when the section height changes
     }, 200);
   }
 

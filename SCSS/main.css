@@ -410,29 +410,28 @@ body {
     padding: var(--mobile-padding);
   }
 }
+/*
 .landing-section-img-container {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 0;
   width: 100%;
-  height: 100%;
   border-radius: inherit;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 31, 27, 0.796);
+    pointer-events: none;
+    border-radius: var(--border-radius-large);
+  }
+  img {
+    object-fit: cover;
+    border-radius: inherit;
+  }
 }
-.landing-section-img-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 31, 27, 0.796); /* semi-transparent */
-  pointer-events: none;
-  border-radius: var(--border-radius-large);
-}
-.landing-section-img-container img {
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: inherit;
-}
-
+*/
 .audience-selector {
   position: relative;
   overflow: hidden;
@@ -487,9 +486,20 @@ body {
 }
 .dynamic-text-box .dynamic-text {
   transition: opacity 0.2s ease;
-  line-height: 1;
+  font-size: clamp(2rem, 5vw, 5rem);
+  line-height: 1.05;
+  max-width: 14ch;
+  font-weight: 500;
+}
+.dynamic-text-box .dynamic-subtext {
+  font-size: clamp(1rem, 1.2vw, 1.3rem);
+  max-width: 55ch;
+  color: var(--font-color-muted);
 }
 
+.audience-engineers .landing-section-background {
+  display: none;
+}
 .audience-engineers .landing-section-content-container {
   background: var(--code-bg);
   border: 1px solid var(--code-border);
@@ -503,26 +513,38 @@ body {
   color: var(--code-text);
   white-space: pre-line;
 }
-.audience-engineers .landing-section-img-container {
-  display: none;
-}
 
-/* VS Code Dark+ inspireret */
-.keyword {
+.accent {
   color: var(--accent-color-1);
   font-weight: 600;
 }
 
-.function {
-  color: var(--accent-color-3);
+.linkedin-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 0.75rem 1rem;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 0 999px 999px 999px;
+  text-decoration: none;
+  color: var(--font-color);
+  transition: 0.25s;
 }
-
-.property {
-  color: var(--font-color-highlight);
+.linkedin-cta img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-
-.string {
-  color: var(--accent-color-4);
+.linkedin-cta i {
+  margin-left: 1rem;
+}
+.linkedin-cta:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-color-1);
 }
 
 /*
@@ -627,35 +649,67 @@ body {
   width: 100%;
   margin: var(--margin) 0;
   background-color: var(--background-color-dark);
+  overflow: hidden;
 }
 .landing-section h1 {
   margin-bottom: 40px;
 }
 .landing-section .landing-section-container {
   width: 100%;
+  overflow: hidden;
 }
 .landing-section .landing-section-container .landing-section-top {
   width: 100%;
   margin-bottom: 20px;
 }
 .landing-section .landing-section-container .landing-section-bottom {
-  min-height: 400px;
+  min-height: 60vh;
   width: 100%;
   border-radius: var(--border-radius-large);
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.landing-section .landing-section-container .landing-section-bottom .landing-section-background {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--border-radius-large);
+  pointer-events: none;
+  z-index: 0;
+}
+.landing-section .landing-section-container .landing-section-bottom .landing-section-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--background-image, url("../Images/heroBackground.png"));
+  background-size: cover;
+  background-position: center;
+  border-radius: inherit;
+}
+.landing-section .landing-section-container .landing-section-bottom .landing-section-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 31, 27, 0.796);
+  border-radius: inherit;
 }
 .landing-section .landing-section-container .landing-section-bottom .landing-section-content-container {
   position: relative;
-  z-index: 100;
+  z-index: 1;
   width: 100%;
-  height: 100%;
+  min-height: 60vh;
   padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media screen and (min-width: 901px) {
   section.horizontal {
     overflow: hidden;
     position: relative;
+    clear: both;
+    margin-top: 0;
   }
   section.horizontal.show-netcompany {
     --current-project-background: var(--netcompany-background);

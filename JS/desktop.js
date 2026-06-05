@@ -28,12 +28,13 @@ function initializeHorizontalScroller() {
 
   const scrollTriggerInstance = ScrollTrigger.create({
     trigger: ".horizontal",
-    start: "top 0%",
+    start: "top top", // Changed from "top 0%" - pins when section reaches top of viewport
     end: () => `+=${getScrollAmount() * -1}`,
     pin: true,
     animation: tween,
     scrub: 1,
     invalidateOnRefresh: true,
+    anticipatePin: 1, // Helps prevent jumping when pinning starts
   });
 
   // Handle horizontal wheel events on the entire window

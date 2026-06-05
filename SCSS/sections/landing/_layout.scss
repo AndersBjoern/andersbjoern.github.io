@@ -4,29 +4,70 @@
   width: 100%;
   margin: var(--margin) 0;
   background-color: var(--background-color-dark);
+  overflow: hidden; // Prevent horizontal scrollbar
 
   h1 {
     margin-bottom: 40px;
   }
   .landing-section-container {
     width: 100%;
+    overflow: hidden; // Prevent content from causing horizontal scroll
+
     .landing-section-top {
       width: 100%;
       margin-bottom: 20px;
     }
 
     .landing-section-bottom {
-      min-height: 400px;
+      min-height: 60vh;
       width: 100%;
       border-radius: var(--border-radius-large);
       position: relative;
+      isolation: isolate; // Creates a new stacking context
+      overflow: hidden; // Contain the background and prevent overflow
 
+      // The background wrapper - absolutely positioned
+      .landing-section-background {
+        position: absolute;
+        inset: 0;
+        border-radius: var(--border-radius-large);
+        pointer-events: none;
+        z-index: 0;
+
+        // Background image
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: var(
+            --background-image,
+            url("../Images/heroBackground.png")
+          );
+          background-size: cover;
+          background-position: center;
+          border-radius: inherit;
+        }
+
+        // Dark overlay
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-color: rgba(0, 31, 27, 0.796);
+          border-radius: inherit;
+        }
+      }
+
+      // Content container - normal flow
       .landing-section-content-container {
         position: relative;
-        z-index: 100;
+        z-index: 1;
         width: 100%;
-        height: 100%;
+        min-height: 60vh;
         padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
     }
   }
