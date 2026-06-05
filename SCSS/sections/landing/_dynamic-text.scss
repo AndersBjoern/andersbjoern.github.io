@@ -1,27 +1,47 @@
 // Landing Section - Dynamic Text Box
-
 .dynamic-text-box {
+  display: flex;
+  height: 100%;
   width: 100%;
-  min-height: clamp(80px, 10vw, 120px);
-  margin: clamp(20px, 3vw, 40px) 0;
-  position: relative;
+  .dynamic-text {
+    transition: opacity 0.2s ease;
+    line-height: 1;
+  }
 }
 
-.dynamic-text {
-  position: absolute;
-  width: 100%;
-  padding: 0 2rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.4s ease,
-    transform 0.4s ease;
-  pointer-events: none;
-
-  &[style*="display: block"],
-  &:not([style*="display: none"]) {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+.audience-engineers {
+  .landing-section-content-container {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: inherit;
+    position: relative;
+    padding-top: 3rem;
+    min-height: 50vh;
+    .dynamic-text {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--code-text);
+      white-space: pre-line;
+    }
   }
+
+  .landing-section-img-container {
+    display: none;
+  }
+}
+/* VS Code Dark+ inspireret */
+.keyword {
+  color: var(--accent-color-1);
+  font-weight: 600;
+}
+
+.function {
+  color: var(--accent-color-3);
+}
+
+.property {
+  color: var(--font-color-highlight);
+}
+
+.string {
+  color: var(--accent-color-4);
 }

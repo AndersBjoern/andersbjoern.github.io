@@ -1,40 +1,33 @@
 // Landing Section - Layout
 
 .landing-section {
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  width: 100%;
+  margin: var(--margin) 0;
+  background-color: var(--background-color-dark);
 
-  // Animated gradient background
-  &:before {
-    content: "";
-    position: absolute;
-    top: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    --size: max(70vh, 70vw);
-    --speed: 15s;
-    --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
-    width: var(--size);
-    height: var(--size);
-    filter: blur(calc(var(--size) / 5));
-    background-image: linear-gradient(
-      var(--accent-color-1),
-      var(--accent-color-1)
-    );
-    animation: rotate var(--speed) var(--easing) infinite;
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    z-index: 100;
+  h1 {
+    margin-bottom: 40px;
   }
-
   .landing-section-container {
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    .landing-section-top {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .landing-section-bottom {
+      min-height: 400px;
+      width: 100%;
+      border-radius: var(--border-radius-large);
+      position: relative;
+
+      .landing-section-content-container {
+        position: relative;
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        padding: 40px;
+      }
+    }
   }
 }

@@ -3,24 +3,6 @@
     overflow: hidden;
     position: relative;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: var(
-        --current-project-background,
-        var(--netcompany-background)
-      );
-      background-size: 3px 3px;
-      -webkit-mask-image: var(--radial-background-mask);
-      mask-image: var(--radial-background-mask);
-      pointer-events: none;
-      z-index: 0;
-    }
-
     // Project-specific background overrides
     &.show-netcompany {
       --current-project-background: var(--netcompany-background);
@@ -43,170 +25,187 @@
     }
 
     .section-wrapper {
-      width: fit-content;
-      display: flex;
-      flex-wrap: nowrap;
-      padding: var(--container-padding);
       height: 100lvh;
       position: relative;
-      z-index: 1;
 
-      article.project-article {
-        height: 100%;
+      .section-title {
+        position: absolute;
+        top: 0;
+        padding-top: 1rem;
+        height: 7rem;
+        left: 2.5vw;
         display: flex;
-        flex-direction: row;
-        position: relative;
-        border-radius: var(--border-radius-large);
+        justify-content: center;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      .projects-track {
+        //margin-top: var(--margin);
         padding: 2.5vw;
-        color: var(--light-font-color);
+        padding-top: 7rem;
+        display: flex;
+        flex-wrap: nowrap;
+        width: fit-content;
+        height: 100%;
 
-        & > div {
+        article.project-article {
           height: 100%;
-          margin-right: 5vw;
-
-          &:last-child {
-            margin-right: 0;
-          }
-        }
-
-        &#lego {
-          border: 2px solid #d0d0d0;
-          background: var(--lego-article-background);
-        }
-
-        &#netcompany {
-          border: 2px solid #d0d0d0;
-          background: var(--netcompany-article-background);
-        }
-
-        &#moesgaard {
-          border: 2px solid #d0d0d0;
-          background: var(--moesgaard-article-background);
-        }
-
-        &#pdp {
-          border: 2px solid #d0d0d0;
-          background: var(--pdp-article-background);
-        }
-
-        &#sdu-game {
-          border: 2px solid #d0d0d0;
-          background: var(--sdu-article-background);
-        }
-
-        .video-wrapper {
-          width: 90vw;
-          border-radius: var(--border-radius-large);
           display: flex;
-          justify-content: center;
-          align-items: center;
-          background: black;
-
-          video {
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: var(--border-radius-large);
-          }
-        }
-
-        .iframe-container {
-          width: 90vw;
+          flex-direction: row;
+          position: relative;
           border-radius: var(--border-radius-large);
+          padding: 2.5vw;
+          color: var(--light-font-color);
 
-          iframe {
-            width: 100%;
+          & > div {
             height: 100%;
-            border: none;
+            margin-right: 5vw;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+
+          &#lego {
+            border: 2px solid #d0d0d0;
+            background: var(--lego-article-background);
+          }
+
+          &#netcompany {
+            border: 2px solid #d0d0d0;
+            background: var(--netcompany-article-background);
+          }
+
+          &#moesgaard {
+            border: 2px solid #d0d0d0;
+            background: var(--moesgaard-article-background);
+          }
+
+          &#pdp {
+            border: 2px solid #d0d0d0;
+            background: var(--pdp-article-background);
+          }
+
+          &#sdu-game {
+            border: 2px solid #d0d0d0;
+            background: var(--sdu-article-background);
+          }
+
+          .video-wrapper {
+            width: 90vw;
             border-radius: var(--border-radius-large);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+
+            video {
+              z-index: 1;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: var(--border-radius-large);
+            }
           }
-        }
 
-        .rows-wrapper {
-          display: flex;
-          flex-direction: column;
-          gap: 2.5vw;
-          height: 100%;
-          width: clamp(600px, 50vw, 800px);
-
-          .row {
-            flex: 1 1 0;
-            min-height: 0;
-            overflow: visible;
-            background-color: var(--light-card-background);
-            border: 1px solid #d0d0d0;
+          .iframe-container {
+            width: 90vw;
             border-radius: var(--border-radius-large);
-            box-shadow: var(--light-card-shadow);
+
+            iframe {
+              width: 100%;
+              height: 100%;
+              border: none;
+              border-radius: var(--border-radius-large);
+            }
           }
 
-          .row-padding {
-            padding: 40px;
-          }
-
-          .row-center {
+          .rows-wrapper {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            gap: 2.5vw;
             height: 100%;
-            text-align: center;
-            h1 {
-              font-size: clamp(40px, 20vh, 200px);
-              margin-bottom: 2.5vh;
+            width: clamp(600px, 50vw, 800px);
+
+            .row {
+              flex: 1 1 0;
+              min-height: 0;
+              overflow: visible;
+              background-color: var(--light-card-background);
+              border: 1px solid #d0d0d0;
+              border-radius: var(--border-radius-large);
+              box-shadow: var(--light-card-shadow);
+            }
+
+            .row-padding {
+              padding: 40px;
+            }
+
+            .row-center {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              height: 100%;
+              text-align: center;
+              h1 {
+                font-size: clamp(40px, 20vh, 200px);
+                margin-bottom: 2.5vh;
+              }
+            }
+          }
+
+          .star-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+
+            .icon-circle {
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+              background-color: var(--light-icon-background);
+              border: var(--light-icon-border);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: var(--light-icon-font-color);
+              font-size: 24px;
+              flex-shrink: 0;
+            }
+
+            h4 {
+              font-weight: bold;
+              margin-bottom: 4px;
+            }
+
+            ul {
+              padding-left: 20px;
             }
           }
         }
 
-        .star-section {
-          display: flex;
-          align-items: flex-start;
-          gap: 20px;
-
-          .icon-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--light-icon-background);
-            border: var(--light-icon-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light-icon-font-color);
-            font-size: 24px;
-            flex-shrink: 0;
-          }
-
-          h4 {
-            font-weight: bold;
-            margin-bottom: 4px;
-          }
-
-          ul {
-            padding-left: 20px;
-          }
-        }
-      }
-
-      .project-seperation {
-        height: 100%;
-        width: 200px;
-
-        .seperation {
+        .project-seperation {
           height: 100%;
-          width: 100%;
-          position: relative;
-        }
+          width: 200px;
 
-        .seperation::after {
-          content: "";
-          position: absolute;
-          border-radius: var(--border-radius-medium);
-          width: 5px;
-          height: 20%;
-          bottom: 40%;
-          left: 50%;
-          background: var(--horizontal-dividers-background);
+          .seperation {
+            height: 100%;
+            width: 100%;
+            position: relative;
+          }
+
+          .seperation::after {
+            content: "";
+            position: absolute;
+            border-radius: var(--border-radius-medium);
+            width: 5px;
+            height: 20%;
+            bottom: 40%;
+            left: 50%;
+            background: var(--horizontal-dividers-background);
+          }
         }
       }
     }

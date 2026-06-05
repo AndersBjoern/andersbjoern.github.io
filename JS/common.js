@@ -1,5 +1,4 @@
 window.addEventListener("sectionsLoaded", (event) => {
-  initStickyTitle();
   dynamicTextBoxForAudience();
   initializeShowMoreButton();
   initializeFadeInAnimation();
@@ -8,157 +7,102 @@ window.addEventListener("sectionsLoaded", (event) => {
   setupHighlightsObserver();
 });
 
-function initStickyTitle() {
-  const wrapper = document.querySelector(".sticky-title-wrapper");
-  const title = wrapper.querySelector("h2");
-
-  gsap.set(wrapper, {
-    position: "fixed",
-    top: "5vh",
-    left: "2.5vw",
-    scale: 2,
-    transformOrigin: "left top",
-    x: 0,
-  });
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: document.body,
-      start: "top top",
-      end: "+=600",
-      scrub: true,
-    },
-  });
-
-  // =========================
-  // PHASE 1: 0–300px
-  // =========================
-  tl.to(
-    wrapper,
-    {
-      top: 20,
-      scale: 1,
-      backgroundColor: "rgba(0,0,0,0.65)",
-      backdropFilter: "blur(12px)",
-      webkitBackdropFilter: "blur(12px)",
-      padding: "12px 16px",
-      borderRadius: "999px",
-      ease: "none",
-      duration: 300,
-    },
-    0,
-  );
-
-  // font shrink separat (smooth kontrol)
-  tl.to(
-    title,
-    {
-      fontSize: "1.1rem",
-      ease: "none",
-      duration: 300,
-    },
-    0,
-  );
-
-  // =========================
-  // PHASE 2: 300–450px
-  // =========================
-  tl.to(wrapper, {
-    x: () => {
-      const left = window.innerWidth * 0.025;
-      const targetRight = window.innerWidth * 0.975;
-      const width = wrapper.offsetWidth;
-
-      return targetRight - width - left;
-    },
-    ease: "none",
-    duration: 150,
-  });
-}
-
 function dynamicTextBoxForAudience() {
   const audienceButtons = document.querySelectorAll(".audience-btn");
-  const dynamicTexts = document.querySelectorAll(".dynamic-text");
-  const audienceSelector = document.querySelector(".audience-selector");
+  const dynamicText = document.querySelector(".dynamic-text");
 
-  // Function to switch active audience
-  function switchAudience(targetAudience) {
-    // Update button states
+  const sectionBottom = document.querySelector(".landing-section-bottom");
+
+  const audienceImage = document.querySelector("#audience-image");
+
+  const audienceData = {
+    anyone: {
+      image: "../Images/heroBackground.png",
+      theme: "audience-anyone",
+      text: `
+        I design connected experiences where products,
+        platforms, and user journeys behave as one system
+        - not isolated features.
+        <br><br>
+        My focus is turning complex digital ecosystems into simple,
+        intuitive and meaningful user experiences across contexts.
+      `,
+    },
+
+    recruiters: {
+      image: "../Images/heroBackground.png",
+      theme: "audience-recruiters",
+      text: `
+        I work at the intersection of UX, systems thinking,
+        and product strategy.
+        <br><br>
+        My strength is simplifying complexity while aligning
+        business goals with user needs.
+      `,
+    },
+
+    "product-managers": {
+      image: "../Images/heroBackground.png",
+      theme: "audience-product-managers",
+      text: `
+        I help product teams create coherence across features,
+        journeys, and touchpoints.
+        <br><br>
+        I focus on user value, prioritization,
+        and scalable experience systems.
+      `,
+    },
+
+    "product-designers": {
+      image: "../Images/heroBackground.png",
+      theme: "audience-product-designers",
+      text: `
+        My approach combines interaction design,
+        systems thinking and UX architecture.
+        <br><br>
+        I enjoy creating products where complexity feels invisible.
+      `,
+    },
+
+    engineers: {
+      image: "../Images/heroBackground.png",
+      theme: "audience-engineers",
+      text: `
+    I'm a <span class="keyword">highly_technical_product_designer</span>. <span class="function">This.includes</span>() {<br />
+    &nbsp;&nbsp;<span class="function">combining</span>(<span class="property">physical_digital_experiences</span>,<span class="property"> product_strategy</span>,<span class="property"> project management</span>);<br />
+    &nbsp;&nbsp;<span class="keyword">while</span> (<span class="string">"I'm"</span>!= <span class="string">"software_engineer"</span>) {<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;I do have <span class="keyword">var</span> skills = [<span class="string"><i class="fab fa-unity"></i> Unity</span>,<span class="string"> <i class="fab fa-node-js"></i> Node.js</span>,<span class="string"> <i class="fas fa-database"></i> SQL</span>];<br />
+    }
+      `,
+    },
+  };
+
+  function switchAudience(audience) {
+    const data = audienceData[audience];
+
     audienceButtons.forEach((btn) => {
-      if (btn.dataset.audience === targetAudience) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
-      }
+      btn.classList.toggle("active", btn.dataset.audience === audience);
     });
 
-    // Update text visibility with smooth transition
-    dynamicTexts.forEach((text) => {
-      if (text.dataset.audience === targetAudience) {
-        text.style.display = "block";
-        // Force reflow to ensure transition works
-        text.offsetHeight;
-      } else {
-        text.style.display = "none";
-      }
-    });
+    sectionBottom.className = `landing-section-bottom ${data.theme}`;
+
+    dynamicText.style.opacity = 0;
+
+    setTimeout(() => {
+      dynamicText.innerHTML = data.text;
+      dynamicText.style.opacity = 1;
+
+      audienceImage.src = data.image;
+    }, 200);
   }
 
-  // Add click event listeners to buttons
   audienceButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const audience = this.dataset.audience;
-      switchAudience(audience);
+    button.addEventListener("click", () => {
+      switchAudience(button.dataset.audience);
     });
   });
 
-  // Check if scrolling is needed and apply gradient mask
-  function checkScrollable() {
-    if (audienceSelector) {
-      const inner = audienceSelector.querySelector(".audience-selector-inner");
-      if (inner && inner.scrollWidth > audienceSelector.clientWidth) {
-        audienceSelector.setAttribute("data-animated", "true");
-      } else {
-        audienceSelector.setAttribute("data-animated", "false");
-      }
-    }
-  }
-
-  // Check on load and resize
-  checkScrollable();
-  window.addEventListener("resize", checkScrollable);
-
-  // Optional: Add smooth scroll behavior for touch devices
-  if (audienceSelector) {
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    audienceSelector.addEventListener("mousedown", (e) => {
-      isDown = true;
-      audienceSelector.style.cursor = "grabbing";
-      startX = e.pageX - audienceSelector.offsetLeft;
-      scrollLeft = audienceSelector.scrollLeft;
-    });
-
-    audienceSelector.addEventListener("mouseleave", () => {
-      isDown = false;
-      audienceSelector.style.cursor = "default";
-    });
-
-    audienceSelector.addEventListener("mouseup", () => {
-      isDown = false;
-      audienceSelector.style.cursor = "default";
-    });
-
-    audienceSelector.addEventListener("mousemove", (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - audienceSelector.offsetLeft;
-      const walk = (x - startX) * 2;
-      audienceSelector.scrollLeft = scrollLeft - walk;
-    });
-  }
+  switchAudience("anyone");
 }
 
 function initializeShowMoreButton() {

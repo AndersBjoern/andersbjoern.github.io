@@ -6,12 +6,12 @@ window.addEventListener("sectionsLoaded", (event) => {
     initializeHorizontalScroller();
     initializeGridTriggers();
     initializeTestimonialAnimation();
-    initializeCustomCursor();
+    //initializeCustomCursor();
   }
 });
 
 function initializeHorizontalScroller() {
-  const horizontalContainer = document.querySelector(".section-wrapper");
+  const horizontalContainer = document.querySelector(".projects-track");
   const horizontalSection = document.querySelector(".horizontal");
   if (!horizontalContainer || !horizontalSection) return;
 

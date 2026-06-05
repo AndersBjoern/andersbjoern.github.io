@@ -3,16 +3,15 @@
   /* General */
   --background-color-dark: #020202;
   --card-background: #101112;
-  --font-color: #c8dff6;
-  --font-color-muted: #9baab0;
+  --font-color: #cde1dc;
+  --font-color-muted: #adb6aa;
   --font-color-highlight: var(--accent-color-3);
   --border-color: #343434;
 
-  --accent-color-1: hsl(198, 95%, 66%);
-  --accent-color-2: hsl(198, 72%, 32%);
-  --accent-color-3: hsl(200, 84%, 60%);
-  --accent-color-4: hsl(194, 83%, 35%);
-
+  --accent-color-1: #7ed9c8;
+  --accent-color-2: #0d4e41;
+  --accent-color-3: #d1c699;
+  --accent-color-4: #d1e8bf;
   --card-shadow: 0 0.5rem 1rem -0.25rem var(--background-color-dark);
 
   --icon-background: var(--card-background);
@@ -37,6 +36,15 @@
     var(--accent-color-1),
     var(--accent-color-2)
   );
+
+  --code-bg: #1e1e1e;
+  --code-border: #333;
+  --code-text: var(--font-color);
+
+  --btn-text: rgba(255, 255, 255, 0.6);
+  --btn-text-hover: #ffffff;
+  --btn-active-bg: #ffffff;
+  --btn-active-text: #000000;
 
   /* project showcase */
   --gradient-start: 30%;
@@ -152,7 +160,7 @@
   --font-size-skills-section: clamp(120px, 25vw, 20rem);
 
   /* BORDER RADIUS */
-  --border-radius-large: 20px;
+  --border-radius-large: 40px;
   --border-radius-medium: 15px;
   --border-radius-small: 10px;
 
