@@ -11,6 +11,12 @@
   max-width: 1500px;
 }
 
+.testimonials-scroller-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  width: fit-content;
+}
+
 .testimonials-scroller[data-animated="true"] {
   overflow: hidden;
   -webkit-mask: var(--infinite-gradient);
@@ -18,9 +24,6 @@
 }
 
 .testimonials-scroller[data-animated="true"] .testimonials-scroller-inner {
-  flex-wrap: nowrap;
-  display: flex;
-  width: fit-content;
   animation: scroll var(--scroll-animation-duration, 40s)
     var(--scroll-animation-direction, forwards) linear infinite;
   animation-play-state: running;

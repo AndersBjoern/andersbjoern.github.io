@@ -37,12 +37,7 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-anyone",
       text: `
-        I design connected experiences where products,
-        platforms, and user journeys behave as one system
-        - not isolated features.
-        <br><br>
-        My focus is turning complex digital ecosystems into simple,
-        intuitive and meaningful user experiences across contexts.
+        I design and build products and experiences that connect digital technology with real-world interactions in meaningful and intuitive ways.
       `,
     },
 
@@ -50,23 +45,9 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-recruiters",
       text: `
-        I work at the intersection of UX, systems thinking,
-        and product strategy.
-        <br><br>
-        My strength is simplifying complexity while aligning
-        business goals with user needs.
-      `,
-    },
-
-    "product-managers": {
-      image: "../Images/heroBackground.png",
-      theme: "audience-product-managers",
-      text: `
-        I help product teams create coherence across features,
-        journeys, and touchpoints.
-        <br><br>
-        I focus on user value, prioritization,
-        and scalable experience systems.
+        I design and build connected, cross-platform product experiences at the intersection of UX, systems thinking, and product strategy.
+        <br>
+        I focus on simplifying complexity while aligning business goals with user needs.
       `,
     },
 
@@ -74,10 +55,7 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-product-designers",
       text: `
-        My approach combines interaction design,
-        systems thinking and UX architecture.
-        <br><br>
-        I enjoy creating products where complexity feels invisible.
+        At the intersection of UX, systems thinking, and product strategy - I shape connected experiences across digital and physical ecosystems.
       `,
     },
 
@@ -85,11 +63,10 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-engineers",
       text: `
-    I'm a <span class="keyword">highly_technical_product_designer</span>. <span class="function">This.includes</span>() {<br />
-    &nbsp;&nbsp;<span class="function">combining</span>(<span class="property">physical_digital_experiences</span>,<span class="property"> product_strategy</span>,<span class="property"> project management</span>);<br />
-    &nbsp;&nbsp;<span class="keyword">while</span> (<span class="string">"I'm"</span>!= <span class="string">"software_engineer"</span>) {<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;I do have <span class="keyword">var</span> skills = [<span class="string"><i class="fab fa-unity"></i> Unity</span>,<span class="string"> <i class="fab fa-node-js"></i> Node.js</span>,<span class="string"> <i class="fas fa-database"></i> SQL</span>];<br />
-    }
+    I'm a <span class="accent"> highly_technical_product_designer</span>. This.includes() { developing and designing physical and digital experiences, product strategy and project management };
+    <br>
+    while (I'm!=software_engineer){
+    I do have skills = [<i class="fab fa-unity"></i> Unity, <i class="fas fa-code"></i> .NET, <i class="fab fa-node-js"></i> Node.js,<i class="fas fa-database"></i> SQL];
       `,
     },
   };
@@ -258,10 +235,12 @@ function setupHighlightsObserver() {
 
   if (!highlightsSection || !blackBackground) return;
 
+  // Use lower threshold on mobile since the section is taller relative to viewport
+  const isMobile = window.innerWidth <= 900;
   const observerOptions = {
     root: null,
     rootMargin: "0px",
-    threshold: 0.6,
+    threshold: isMobile ? 0.3 : 0.6,
   };
 
   const observerCallback = (entries) => {

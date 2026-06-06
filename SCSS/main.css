@@ -22,10 +22,9 @@ a {
   --font-color-muted: #adb6aa;
   --font-color-highlight: var(--accent-color-3);
   --border-color: #343434;
-  --accent-color-1: #7ed9c8;
-  --accent-color-2: #0d4e41;
-  --accent-color-3: #d1c699;
-  --accent-color-4: #d1e8bf;
+  --accent-color-1: #0a9572;
+  --accent-color-2: #033b30;
+  --accent-color-3: #3ac990;
   --card-shadow: 0 0.5rem 1rem -0.25rem var(--background-color-dark);
   --icon-background: var(--card-background);
   --icon-border: 1px solid var(--accent-color-2);
@@ -55,28 +54,6 @@ a {
   --btn-text-hover: #ffffff;
   --btn-active-bg: #ffffff;
   --btn-active-text: #000000;
-  /* project showcase */
-  --gradient-start: 30%;
-  --gradient-end: 80%;
-  --netcompany-border: 2px solid #343434;
-  --netcompany-background: radial-gradient(
-    var(--accent-color-4) 1px,
-    transparent 1px
-  );
-  --lego-border: 2px solid #343434;
-  --lego-background: radial-gradient(
-    var(--accent-color-4) 1px,
-    transparent 1px
-  );
-  --moesgaard-background: radial-gradient(
-    var(--accent-color-4) 1px,
-    transparent 1px
-  );
-  --moesgaard-border: 2px solid #343434;
-  --pdp-background: radial-gradient(var(--accent-color-4) 1px, transparent 1px);
-  --pdp-border: 2px solid #343434;
-  --sdu-background: radial-gradient(var(--accent-color-4) 1px, transparent 1px);
-  --sdu-border: 2px solid #343434;
   /* Article background colors - white theme */
   --lego-article-background: #fafafa;
   --netcompany-article-background: #fafafa;
@@ -295,7 +272,6 @@ b {
   line-height: var(--super-title-line-height);
 }
 
-html,
 body {
   background-color: var(--background-color-dark);
   color: var(--font-color);
@@ -311,6 +287,8 @@ body {
     /* overflow-x: hidden; */ /* REMOVED: This breaks position: fixed on mobile */
   }
   /* Instead, prevent horizontal scroll on main container */
+  /* overflow-x on main can interfere with IntersectionObserver */
+  /* Using overflow-x: clip instead to prevent scrollbars without affecting observers */
   main {
     overflow-x: hidden;
     width: 100%;
@@ -410,28 +388,6 @@ body {
     padding: var(--mobile-padding);
   }
 }
-/*
-.landing-section-img-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  border-radius: inherit;
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 31, 27, 0.796);
-    pointer-events: none;
-    border-radius: var(--border-radius-large);
-  }
-  img {
-    object-fit: cover;
-    border-radius: inherit;
-  }
-}
-*/
 .audience-selector {
   position: relative;
   overflow: hidden;
@@ -480,21 +436,13 @@ body {
 }
 
 .dynamic-text-box {
-  display: flex;
-  height: 100%;
   width: 100%;
 }
 .dynamic-text-box .dynamic-text {
   transition: opacity 0.2s ease;
-  font-size: clamp(2rem, 5vw, 5rem);
-  line-height: 1.05;
-  max-width: 14ch;
+  font-size: clamp(2rem, 3vw, 4rem);
+  line-height: 1.25;
   font-weight: 500;
-}
-.dynamic-text-box .dynamic-subtext {
-  font-size: clamp(1rem, 1.2vw, 1.3rem);
-  max-width: 55ch;
-  color: var(--font-color-muted);
 }
 
 .audience-engineers .landing-section-background {
@@ -503,10 +451,6 @@ body {
 .audience-engineers .landing-section-content-container {
   background: var(--code-bg);
   border: 1px solid var(--code-border);
-  border-radius: inherit;
-  position: relative;
-  padding-top: 3rem;
-  min-height: 50vh;
 }
 .audience-engineers .landing-section-content-container .dynamic-text {
   font-family: "JetBrains Mono", monospace;
@@ -528,7 +472,6 @@ body {
   background: var(--card-background);
   border: 1px solid var(--border-color);
   border-radius: 0 999px 999px 999px;
-  text-decoration: none;
   color: var(--font-color);
   transition: 0.25s;
 }
@@ -539,67 +482,15 @@ body {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.linkedin-cta h4 {
+  font-weight: bold;
+}
 .linkedin-cta i {
   margin-left: 1rem;
 }
 .linkedin-cta:hover {
   transform: translateY(-2px);
   border-color: var(--accent-color-1);
-}
-
-/*
-.contact-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: clamp(40px, 5vw, 140px) 0;
-
-  button {
-    padding: var(--button-padding);
-    border-radius: 50px;
-    border: 1px solid var(--accent-color-1);
-    background: transparent;
-    color: white;
-    text-align: center;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    transition:
-      transform 0.5s ease,
-      font-size 0.3s ease;
-
-    &::before {
-      content: "";
-      position: absolute;
-      background: linear-gradient(
-        to bottom right,
-        var(--accent-color-1),
-        var(--accent-color-2)
-      );
-      height: 100%;
-      width: 0;
-      left: 50%;
-      bottom: 0;
-      z-index: -1;
-      border-radius: 50px;
-      opacity: 0;
-      transition:
-        width 0.5s ease,
-        left 0.5s ease,
-        opacity 0.5s ease;
-    }
-
-    &:hover {
-      transform: scale(1.15);
-
-      &::before {
-        width: 100%;
-        left: 0;
-        opacity: 1;
-      }
-    }
-  }
 }
 
 .connect-button {
@@ -617,34 +508,35 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-
-  a,
-  button {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--connect-button-padding);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    user-select: none;
-    transition: background-color 0.3s ease;
-    margin: 0;
-
-    .linkedin-logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #0a66c2;
-      margin-left: 0;
-      margin-bottom: 0;
-    }
-  }
 }
-*/
+.connect-button a,
+.connect-button button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--connect-button-padding);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition: background-color 0.3s ease;
+  margin: 0;
+}
+.connect-button a .linkedin-logo,
+.connect-button button .linkedin-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a66c2;
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
 .landing-section {
   width: 100%;
   margin: var(--margin) 0;
@@ -901,10 +793,14 @@ body {
     height: 100%;
     border-top-left-radius: var(--border-radius-large);
     border-top-right-radius: var(--border-radius-large);
-    background-image: var(--current-project-background, var(--netcompany-background));
+    /*background-image: var(
+      --current-project-background,
+      var(--netcompany-background)
+    );
     background-size: 3px 3px;
+    -webkit-mask-image: var(--radial-background-mask);*/
     -webkit-mask-image: var(--radial-background-mask);
-    mask-image: var(--radial-background-mask);
+            mask-image: var(--radial-background-mask);
     pointer-events: none;
     z-index: 0;
   }
@@ -912,7 +808,7 @@ body {
     padding: var(--mobile-padding);
     --article-padding: 0px;
     --margin-bottom: 25px;
-    --logo-margin-bottom: 15px;
+    --logo-margin-bottom: 30px;
     position: relative;
     z-index: 1;
   }
@@ -1067,6 +963,7 @@ body {
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo {
     max-width: 140px;
     max-height: 50px;
+    margin-top: 20px;
     margin-bottom: var(--logo-margin-bottom);
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo img {
@@ -1676,6 +1573,13 @@ img {
   max-width: 1500px;
 }
 
+.testimonials-scroller-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .testimonials-scroller[data-animated=true] {
   overflow: hidden;
   -webkit-mask: var(--infinite-gradient);
@@ -1683,10 +1587,6 @@ img {
 }
 
 .testimonials-scroller[data-animated=true] .testimonials-scroller-inner {
-  flex-wrap: nowrap;
-  display: flex;
-  width: -moz-fit-content;
-  width: fit-content;
   animation: scroll var(--scroll-animation-duration, 40s) var(--scroll-animation-direction, forwards) linear infinite;
   animation-play-state: running;
 }

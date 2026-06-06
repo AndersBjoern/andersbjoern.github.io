@@ -57,7 +57,6 @@ $weights:
   line-height: var(--super-title-line-height);
 }
 
-html,
 body {
   background-color: var(--background-color-dark);
   color: var(--font-color);
@@ -74,6 +73,8 @@ body {
   }
 
   /* Instead, prevent horizontal scroll on main container */
+  /* overflow-x on main can interfere with IntersectionObserver */
+  /* Using overflow-x: clip instead to prevent scrollbars without affecting observers */
   main {
     overflow-x: hidden;
     width: 100%;

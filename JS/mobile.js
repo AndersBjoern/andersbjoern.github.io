@@ -1,7 +1,7 @@
 window.addEventListener("sectionsLoaded", (event) => {
   if (event.detail.isMobile) {
-    initializeVideoPreloading(); // Add this first
-    initializeContactButtonEffect();
+    initializeVideoPreloading();
+    initializeConnectButtonEffect();
     initializeVideoScrollTrigger();
     initializeVideoMaskEffect();
     projectShowcaseButtons();
@@ -59,7 +59,7 @@ function initializeVideoPreloading() {
           video.currentTime = 0.1;
         }
       },
-      { once: true }
+      { once: true },
     );
 
     // Ensure video poster/first frame is visible
@@ -72,12 +72,12 @@ function initializeVideoPreloading() {
           video.style.opacity = "1";
         }, 10);
       },
-      { once: true }
+      { once: true },
     );
   });
 }
 
-function initializeContactButtonEffect() {
+function initializeConnectButtonEffect() {
   ScrollTrigger.create({
     trigger: ".contact-button",
     start: "top bottom",
@@ -110,7 +110,7 @@ function initializeVideoScrollTrigger() {
     // Check if we're on a mobile device
     const isMobile =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
+        navigator.userAgent,
       );
     return !isMobile; // Desktop usually allows autoplay, mobile usually doesn't
   };
@@ -149,7 +149,7 @@ function initializeVideoScrollTrigger() {
         const videoContainer = video.closest(".videoplayer-container");
         const projectArticle = video.closest("article.project-article");
         const projectDescription = projectArticle?.querySelector(
-          ".project-description"
+          ".project-description",
         );
 
         if (videoContainer) videoContainer.classList.add("playing");
@@ -246,7 +246,7 @@ function initializeVideoMaskEffect() {
     const videoContainer = video.closest(".videoplayer-container");
     const projectArticle = video.closest("article.project-article");
     const projectDescription = projectArticle?.querySelector(
-      ".project-description"
+      ".project-description",
     );
 
     // Ensure video loads its first frame
@@ -329,14 +329,14 @@ function projectShowcaseButtons() {
 function initializeGallery() {
   const featuredImage = document.getElementById("featuredImage");
   const thumbnails = document.querySelectorAll(
-    ".thumbnail-gallery .gallery-item img"
+    ".thumbnail-gallery .gallery-item img",
   );
 
   thumbnails.forEach((thumbnail) => {
     thumbnail.addEventListener("click", () => {
       featuredImage.src = thumbnail.src;
       thumbnails.forEach((thumb) =>
-        thumb.parentElement.classList.remove("active")
+        thumb.parentElement.classList.remove("active"),
       );
       thumbnail.parentElement.classList.add("active");
     });

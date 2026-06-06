@@ -1,24 +1,14 @@
-// Landing Section - Dynamic Text Box
 .dynamic-text-box {
-  display: flex;
-  height: 100%;
   width: 100%;
   .dynamic-text {
     transition: opacity 0.2s ease;
-    font-size: clamp(2rem, 5vw, 5rem);
-    line-height: 1.05;
-    max-width: 14ch;
+    font-size: clamp(2rem, 3vw, 4rem);
+    line-height: 1.25;
     font-weight: 500;
-  }
-  .dynamic-subtext {
-    font-size: clamp(1rem, 1.2vw, 1.3rem);
-    max-width: 55ch;
-    color: var(--font-color-muted);
   }
 }
 
 .audience-engineers {
-  // Hide the background for engineers theme
   .landing-section-background {
     display: none;
   }
@@ -26,10 +16,7 @@
   .landing-section-content-container {
     background: var(--code-bg);
     border: 1px solid var(--code-border);
-    border-radius: inherit;
-    position: relative;
-    padding-top: 3rem;
-    min-height: 50vh;
+
     .dynamic-text {
       font-family: "JetBrains Mono", monospace;
       color: var(--code-text);
