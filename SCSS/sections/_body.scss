@@ -60,21 +60,10 @@ $weights:
 body {
   background-color: var(--background-color-dark);
   color: var(--font-color);
-  /* clip-path: inset(0 0 0 0); */ /* REMOVED: This breaks position: fixed */
   max-width: 100vw;
 }
 
-/* Viewport stabilization for mobile browsers */
 @media screen and (max-width: 900px) {
-  html,
-  body {
-    height: 100vh;
-    /* overflow-x: hidden; */ /* REMOVED: This breaks position: fixed on mobile */
-  }
-
-  /* Instead, prevent horizontal scroll on main container */
-  /* overflow-x on main can interfere with IntersectionObserver */
-  /* Using overflow-x: clip instead to prevent scrollbars without affecting observers */
   main {
     overflow-x: hidden;
     width: 100%;

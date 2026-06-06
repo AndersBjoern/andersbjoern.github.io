@@ -275,20 +275,10 @@ b {
 body {
   background-color: var(--background-color-dark);
   color: var(--font-color);
-  /* clip-path: inset(0 0 0 0); */ /* REMOVED: This breaks position: fixed */
   max-width: 100vw;
 }
 
-/* Viewport stabilization for mobile browsers */
 @media screen and (max-width: 900px) {
-  html,
-  body {
-    height: 100vh;
-    /* overflow-x: hidden; */ /* REMOVED: This breaks position: fixed on mobile */
-  }
-  /* Instead, prevent horizontal scroll on main container */
-  /* overflow-x on main can interfere with IntersectionObserver */
-  /* Using overflow-x: clip instead to prevent scrollbars without affecting observers */
   main {
     overflow-x: hidden;
     width: 100%;
@@ -555,7 +545,7 @@ body {
   margin-bottom: 20px;
 }
 .landing-section .landing-section-container .landing-section-bottom {
-  min-height: 60vh;
+  min-height: 60lvh;
   width: 100%;
   border-radius: var(--border-radius-large);
   position: relative;
@@ -589,7 +579,7 @@ body {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 60vh;
+  min-height: 60lvh;
   padding: 40px;
   display: flex;
   flex-direction: column;
@@ -1378,8 +1368,8 @@ img {
 }
 .about-me-section {
   width: 100%;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
+  margin-top: 10lvh;
+  margin-bottom: 10lvh;
 }
 
 .profile-picture-container {
