@@ -78,7 +78,7 @@ a {
     var(--accent-color-2)
   );
   --radial-background-mask: radial-gradient(
-    100vh at 0% 0%,
+    100lvh at 0% 0%,
     #000 0%,
     transparent 200%
   );
@@ -446,6 +446,7 @@ body {
   font-family: "JetBrains Mono", monospace;
   color: var(--code-text);
   white-space: pre-line;
+  font-size: clamp(1.7rem, 2vw, 3.6rem);
 }
 
 .accent {
@@ -722,8 +723,8 @@ body {
     text-align: center;
   }
   section.horizontal .section-wrapper .projects-track article.project-article .rows-wrapper .row-center h1 {
-    font-size: clamp(40px, 20vh, 200px);
-    margin-bottom: 2.5vh;
+    font-size: clamp(40px, 20lvh, 200px);
+    margin-bottom: 2.5lvh;
   }
   section.horizontal .section-wrapper .projects-track article.project-article .star-section {
     display: flex;
@@ -1293,7 +1294,7 @@ body {
 .block-container {
   contain: paint;
   display: block;
-  height: 300vh;
+  height: 300lvh;
 }
 
 .sticky-container {
@@ -1321,7 +1322,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 30vw;
-  height: 33vh;
+  height: 33lvh;
   clip-path: inset(0 round 5px);
 }
 
