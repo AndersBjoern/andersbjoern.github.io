@@ -546,7 +546,6 @@ body {
   margin-bottom: 20px;
 }
 .landing-section .landing-section-container .landing-section-bottom {
-  min-height: 60lvh;
   width: 100%;
   border-radius: var(--border-radius-large);
   position: relative;
@@ -580,8 +579,8 @@ body {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 60lvh;
-  padding: 40px;
+  height: 100%;
+  padding: 80px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
