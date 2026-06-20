@@ -2,29 +2,7 @@
   section.horizontal {
     overflow: hidden;
     position: relative;
-    clear: both; // Ensure it starts after all previous content
-    margin-top: 0; // Remove any negative margins that might cause overlap
-
-    // Project-specific background overrides
-    &.show-netcompany {
-      --current-project-background: var(--netcompany-background);
-    }
-
-    &.show-lego {
-      --current-project-background: var(--lego-background);
-    }
-
-    &.show-moesgaard {
-      --current-project-background: var(--moesgaard-background);
-    }
-
-    &.show-pdp {
-      --current-project-background: var(--pdp-background);
-    }
-
-    &.show-sdu-game {
-      --current-project-background: var(--sdu-background);
-    }
+    clear: both;
 
     .section-wrapper {
       height: 100lvh;
@@ -43,7 +21,6 @@
       }
 
       .projects-track {
-        //margin-top: var(--margin);
         padding: 2.5vw;
         padding-top: 7rem;
         display: flex;
@@ -57,8 +34,10 @@
           flex-direction: row;
           position: relative;
           border-radius: var(--border-radius-large);
-          padding: 2.5vw;
+          padding: 40px;
           color: var(--light-font-color);
+          background: var(--article-background);
+          border: var(--article-border);
 
           & > div {
             height: 100%;
@@ -69,34 +48,9 @@
             }
           }
 
-          &#lego {
-            border: 2px solid #d0d0d0;
-            background: var(--lego-article-background);
-          }
-
-          &#netcompany {
-            border: 2px solid #d0d0d0;
-            background: var(--netcompany-article-background);
-          }
-
-          &#moesgaard {
-            border: 2px solid #d0d0d0;
-            background: var(--moesgaard-article-background);
-          }
-
-          &#pdp {
-            border: 2px solid #d0d0d0;
-            background: var(--pdp-article-background);
-          }
-
-          &#sdu-game {
-            border: 2px solid #d0d0d0;
-            background: var(--sdu-article-background);
-          }
-
           .video-wrapper {
             width: 90vw;
-            border-radius: var(--border-radius-large);
+            border-radius: var(--border-radius-medium);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -107,19 +61,19 @@
               width: 100%;
               height: 100%;
               object-fit: cover;
-              border-radius: var(--border-radius-large);
+              border-radius: var(--border-radius-medium);
             }
           }
 
           .iframe-container {
             width: 90vw;
-            border-radius: var(--border-radius-large);
+            border-radius: var(--border-radius-medium);
 
             iframe {
               width: 100%;
               height: 100%;
               border: none;
-              border-radius: var(--border-radius-large);
+              border-radius: var(--border-radius-medium);
             }
           }
 
@@ -136,7 +90,7 @@
               overflow: visible;
               background-color: var(--light-card-background);
               border: 1px solid #d0d0d0;
-              border-radius: var(--border-radius-large);
+              border-radius: var(--border-radius-medium);
               box-shadow: var(--light-card-shadow);
             }
 

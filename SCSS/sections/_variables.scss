@@ -46,12 +46,14 @@
   --btn-active-bg: #ffffff;
   --btn-active-text: #000000;
 
-  /* Article background colors - white theme */
-  --lego-article-background: #fafafa;
-  --netcompany-article-background: #fafafa;
-  --moesgaard-article-background: #fafafa;
-  --pdp-article-background: #fafafa;
-  --sdu-article-background: #fafafa;
+  --article-background: linear-gradient(
+    163deg,
+    rgb(245, 245, 245) 0%,
+    rgba(255, 255, 255, 1) 57%,
+    rgba(255, 255, 255, 1) 100%
+  );
+
+  --article-border: 2px solid var(--border-color);
 
   /* Light grey backgrounds for content sections */
   --light-card-background: #e8e8e8;
@@ -138,7 +140,7 @@
 
   /* BORDER RADIUS */
   --border-radius-large: 40px;
-  --border-radius-medium: 15px;
+  --border-radius-medium: 20px;
   --border-radius-small: 10px;
 
   /* MARGIN & PADDING */
