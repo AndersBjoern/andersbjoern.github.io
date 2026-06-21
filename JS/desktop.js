@@ -1,13 +1,13 @@
 window.addEventListener("sectionsLoaded", (event) => {
   const isMobile = event.detail.isMobile;
+
   if (isMobile) {
     removeGridTriggers();
-  } else {
-    initializeHorizontalScroller();
-    initializeGridTriggers();
-    initializeTestimonialAnimation();
-    //initializeCustomCursor();
   }
+
+  initializeHorizontalScroller();
+  initializeGridTriggers();
+  initializeTestimonialAnimationDesktop();
 });
 
 function initializeHorizontalScroller() {
@@ -131,16 +131,40 @@ function calculateGridTranslation(index) {
   return { translateX, translateY };
 }
 
-function initializeTestimonialAnimation() {
+function initializeTestimonialAnimationDesktop() {
   const originalScroller = document.querySelector(".testimonials-scroller");
-  if (!originalScroller) return;
 
-  const container = originalScroller.parentElement;
-  for (let i = 0; i < 1; i++) {
-    const clonedScroller = originalScroller.cloneNode(true);
-    container.appendChild(clonedScroller);
+  if (!originalScroller) {
+    console.log("No scroller found, exiting");
+    return;
   }
 
+  // Clone the scroller for the second row
+  const container = originalScroller.parentElement;
+  const clonedScroller = originalScroller.cloneNode(true);
+
+  // Add a class to differentiate the cloned scroller
+  clonedScroller.classList.add("testimonials-scroller-clone");
+
+  // Get the testimonial items from the clone
+  const clonedInner = clonedScroller.querySelector(
+    ".testimonials-scroller-inner",
+  );
+  const clonedItems = Array.from(
+    clonedInner.querySelectorAll(".testimonial-item"),
+  );
+
+  // Move first 3 items to the back
+  const reorderedItems = [...clonedItems.slice(2), ...clonedItems.slice(0, 2)];
+
+  // Clear and rebuild the cloned inner with reordered items
+  clonedInner.innerHTML = "";
+  reorderedItems.forEach((item) => clonedInner.appendChild(item));
+
+  // Append the cloned scroller BEFORE adding offset
+  container.appendChild(clonedScroller);
+
+  // Initialize both scrollers
   const scrollers = document.querySelectorAll(".testimonials-scroller");
 
   scrollers.forEach((scroller, index) => {
@@ -155,19 +179,10 @@ function initializeTestimonialAnimation() {
 function initializeScrollerContent(scroller, index) {
   const scrollerInner = scroller.querySelector(".testimonials-scroller-inner");
   const scrollerContent = Array.from(scrollerInner.children);
-  const startIndex = index === 1 ? 4 : index === 2 ? 2 : 0;
 
-  const rearrangedContent = [
-    ...scrollerContent.slice(startIndex),
-    ...scrollerContent.slice(0, startIndex),
-  ];
-
-  scrollerInner.innerHTML = "";
-  rearrangedContent.forEach((item) => {
-    scrollerInner.appendChild(item);
-  });
-
-  rearrangedContent.forEach((item) => {
+  // No need to rearrange - already done when cloning
+  // Just duplicate items for infinite scroll effect
+  scrollerContent.forEach((item) => {
     const duplicatedItem = item.cloneNode(true);
     duplicatedItem.setAttribute("aria-hidden", true);
     scrollerInner.appendChild(duplicatedItem);

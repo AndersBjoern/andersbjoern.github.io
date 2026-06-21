@@ -348,19 +348,15 @@ function initializeScrollerContent(scroller, index) {
   if (!scrollerInner) return;
 
   const scrollerContent = Array.from(scrollerInner.children);
-  const startIndex = index === 1 ? 4 : index === 2 ? 2 : 0;
 
-  const rearrangedContent = [
-    ...scrollerContent.slice(startIndex),
-    ...scrollerContent.slice(0, startIndex),
-  ];
-
+  // Mobile only has one scroller, no need to rearrange starting position
   scrollerInner.innerHTML = "";
-  rearrangedContent.forEach((item) => {
+  scrollerContent.forEach((item) => {
     scrollerInner.appendChild(item);
   });
 
-  rearrangedContent.forEach((item) => {
+  // Duplicate items for infinite scroll effect
+  scrollerContent.forEach((item) => {
     const duplicatedItem = item.cloneNode(true);
     duplicatedItem.setAttribute("aria-hidden", true);
     scrollerInner.appendChild(duplicatedItem);
@@ -371,8 +367,8 @@ function initializeTestimonialAnimation() {
   const scrollers = document.querySelectorAll(".testimonials-scroller");
 
   scrollers.forEach((scroller, index) => {
-    const direction = index === 1 ? "right" : "left";
-    scroller.setAttribute("data-direction", direction);
+    // Mobile only has one scroller, always scroll left
+    scroller.setAttribute("data-direction", "left");
     scroller.setAttribute("data-animated", true);
 
     initializeScrollerContent(scroller, index);

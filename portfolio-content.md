@@ -198,14 +198,13 @@ During the COVID-19 lockdown, the University of Southern Denmark (SDU) sought a 
 
 ### Skills
 
-- UI & UX Design
-- Scrum Master
-- Agile Methodology
-- Stakeholder Management
-- Workshop Facilitation
 - Product Strategy
-- Team Coordination
-- Mixed Reality Development
+- Stakeholder Alignment
+- Workshop Facilitation
+- Agile Leadership
+- Cross-Functional Collaboration
+- Interactive Experiences
+- Mixed Reality & Emerging Technologies
 
 ---
 

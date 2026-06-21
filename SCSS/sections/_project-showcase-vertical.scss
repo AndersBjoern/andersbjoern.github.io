@@ -1,31 +1,6 @@
 @media screen and (max-width: 900px) {
-  .verticcal {
-    position: relative;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-top-left-radius: var(--border-radius-large);
-      border-top-right-radius: var(--border-radius-large);
-      /*background-image: var(
-        --current-project-background,
-        var(--netcompany-background)
-      );
-      background-size: 3px 3px;
-      -webkit-mask-image: var(--radial-background-mask);*/
-      mask-image: var(--radial-background-mask);
-      pointer-events: none;
-      z-index: 0;
-    }
-  }
-
   .section-wrapper {
     padding: var(--mobile-padding);
-    --article-padding: 0px;
     --margin-bottom: 25px;
     --logo-margin-bottom: 30px;
     position: relative;
@@ -38,12 +13,13 @@
     .project-article {
       width: 100%;
       border-radius: var(--border-radius-medium);
-      padding: var(--article-padding);
       position: relative;
       display: flex;
       flex-direction: column;
       margin: clamp(60px, 100px, 150px) 0;
       min-height: 600px;
+      background: var(--article-background);
+      border: var(--article-border);
       color: var(--light-font-color);
 
       &::after {
@@ -68,31 +44,6 @@
       &.expanded::after {
         opacity: 0;
         pointer-events: none;
-      }
-
-      &#netcompany {
-        border: 2px solid #d0d0d0;
-        background: var(--netcompany-article-background);
-      }
-
-      &#lego {
-        border: 2px solid #d0d0d0;
-        background: var(--lego-article-background);
-      }
-
-      &#moesgaard {
-        border: 2px solid #d0d0d0;
-        background: var(--moesgaard-article-background);
-      }
-
-      &#pdp {
-        border: 2px solid #d0d0d0;
-        background: var(--pdp-article-background);
-      }
-
-      &#sdu-game {
-        border: 2px solid #d0d0d0;
-        background: var(--sdu-article-background);
       }
 
       .read-more {
