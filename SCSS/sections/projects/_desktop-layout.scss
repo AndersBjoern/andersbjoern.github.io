@@ -36,8 +36,52 @@
           border-radius: var(--border-radius-large);
           padding: 40px;
           color: var(--light-font-color);
-          background: var(--article-background);
+          background: linear-gradient(
+            163deg,
+            rgb(245, 245, 245) 0%,
+            rgba(255, 255, 255, 1) 57%,
+            rgba(255, 255, 255, 1) 100%
+          );
           border: var(--article-border);
+
+          // Background image layer - sits between background and content
+          .background-image-layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: var(--border-radius-large);
+            background-size: auto 100%;
+            background-position: right center;
+            background-repeat: no-repeat;
+            z-index: 1;
+            pointer-events: none;
+            margin-right: 0;
+
+            // Mask with 0% opacity at three corners, 100% at top right
+            mask-image: radial-gradient(
+              ellipse 70vw 90% at 100% 0%,
+              black 0%,
+              rgba(0, 0, 0, 0.7) 10%,
+              rgba(0, 0, 0, 0.2) 80%,
+              transparent 100%
+            );
+
+            -webkit-mask-image: radial-gradient(
+              ellipse 70vw 90% at 100% 0%,
+              black 0%,
+              rgba(0, 0, 0, 0.7) 10%,
+              rgba(0, 0, 0, 0.2) 80%,
+              transparent 100%
+            );
+          }
+
+          // Ensure content is above the background image layer
+          & > div:not(.background-image-layer) {
+            position: relative;
+            z-index: 2;
+          }
 
           & > div {
             height: 100%;
@@ -74,70 +118,6 @@
               height: 100%;
               border: none;
               border-radius: var(--border-radius-medium);
-            }
-          }
-
-          .rows-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5vw;
-            height: 100%;
-            width: clamp(600px, 50vw, 800px);
-
-            .row {
-              flex: 1 1 0;
-              min-height: 0;
-              overflow: visible;
-              background-color: var(--light-card-background);
-              border: 1px solid #d0d0d0;
-              border-radius: var(--border-radius-medium);
-              box-shadow: var(--light-card-shadow);
-            }
-
-            .row-padding {
-              padding: 40px;
-            }
-
-            .row-center {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              height: 100%;
-              text-align: center;
-              h1 {
-                font-size: clamp(40px, 20lvh, 200px);
-                margin-bottom: 2.5lvh;
-              }
-            }
-          }
-
-          .star-section {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-
-            .icon-circle {
-              width: 60px;
-              height: 60px;
-              border-radius: 50%;
-              background-color: var(--light-icon-background);
-              border: var(--light-icon-border);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              color: var(--light-icon-font-color);
-              font-size: 24px;
-              flex-shrink: 0;
-            }
-
-            h4 {
-              font-weight: bold;
-              margin-bottom: 4px;
-            }
-
-            ul {
-              padding-left: 20px;
             }
           }
         }

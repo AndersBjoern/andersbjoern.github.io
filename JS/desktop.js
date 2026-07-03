@@ -3,11 +3,11 @@ window.addEventListener("sectionsLoaded", (event) => {
 
   if (isMobile) {
     removeGridTriggers();
+  } else {
+    initializeHorizontalScroller();
+    initializeGridTriggers();
+    initializeTestimonialAnimationDesktop();
   }
-
-  initializeHorizontalScroller();
-  initializeGridTriggers();
-  initializeTestimonialAnimationDesktop();
 });
 
 function initializeHorizontalScroller() {
