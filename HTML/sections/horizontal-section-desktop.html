@@ -63,31 +63,144 @@
           </div>
         </div>
 
-        <div class="rows-wrapper fade-effect">
-          <div class="row row-text">
+        <!-- STACR Interactive Section -->
+        <div class="stacr-interactive-wrapper fade-effect">
+          <div class="stacr-buttons-row">
+            <button
+              class="stacr-button"
+              data-stacr="situation"
+              data-label="Situation"
+            >
+              <i class="fa-solid fa-lightbulb"></i>
+            </button>
+            <button class="stacr-button" data-stacr="task" data-label="Task">
+              <i class="fa-solid fa-bullseye"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="action"
+              data-label="Action"
+            >
+              <i class="fa-solid fa-gear"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="challenge"
+              data-label="Challenge"
+            >
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="result"
+              data-label="Result"
+            >
+              <i class="fa-solid fa-chart-line"></i>
+            </button>
+          </div>
+
+          <div class="stacr-content-row">
+            <div class="stacr-content-area"></div>
+            <div class="stacr-media-area empty"></div>
+          </div>
+
+          <!-- Hidden content templates -->
+          <div data-stacr-content="situation">
+            <div class="row-icon">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <h4 class="row-title">Situation</h4>
+            <p class="row-body">
+              LEGO Games needed an educational digital game to help children
+              navigate online environments safely and responsibly.
+            </p>
+          </div>
+
+          <!-- Hidden media templates -->
+          <div data-stacr-media="default">
+            <img src="Images/legoForside.webp" alt="LEGO Game" loading="lazy" />
+          </div>
+
+          <div data-stacr-media="situation">
+            <img
+              src="Images/legoIsland.jpg"
+              alt="LEGO Game Environment"
+              loading="lazy"
+            />
+          </div>
+
+          <div data-stacr-content="task">
             <div class="row-icon">
               <i class="fa-solid fa-bullseye"></i>
             </div>
-
             <h4 class="row-title">Task</h4>
-
             <ul class="row-list">
               <li>Design a game teaching children about online safety.</li>
               <li>Align pedagogical goals with project scope and timelines.</li>
             </ul>
           </div>
 
-          <div class="row row-text">
+          <div data-stacr-media="task">
+            <img
+              src="Images/legoCriticalthinking.webp"
+              alt="LEGO Critical Thinking"
+              loading="lazy"
+            />
+          </div>
+
+          <div data-stacr-content="action">
             <div class="row-icon">
-              <i class="fa-solid fa-lightbulb"></i>
+              <i class="fa-solid fa-gear"></i>
             </div>
+            <h4 class="row-title">Action</h4>
+            <p class="row-body">Content not available for this project.</p>
+          </div>
 
-            <h4 class="row-title">Situation</h4>
+          <div data-stacr-media="result">
+            <img
+              src="Images/legoTest.webp"
+              alt="LEGO User Testing"
+              loading="lazy"
+            />
+          </div>
 
-            <p class="row-body">
-              LEGO Games needed an educational digital game to help children
-              navigate online environments safely and responsibly.
-            </p>
+          <div data-stacr-content="challenge">
+            <div class="row-icon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h4 class="row-title">Challenge</h4>
+            <p class="row-body">Content not available for this project.</p>
+          </div>
+
+          <div data-stacr-content="result">
+            <div class="row-icon">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h4 class="row-title">Results</h4>
+            <ul class="row-list">
+              <li>
+                The project was successfully handed over to the project owner.
+              </li>
+              <li>Test results showed evidence of effective learning.</li>
+              <li>
+                A set of design principles was used in future development.
+              </li>
+            </ul>
+            <div
+              class="row row-kpi"
+              style="
+                margin-top: 2rem;
+                padding: 2rem;
+                background: rgba(0, 0, 0, 0.02);
+                border-radius: var(--border-radius-medium);
+              "
+            >
+              <h1 class="super-title expletus">82%</h1>
+              <p>
+                Said the game was about
+                <span class="bold">who to trust</span>
+              </p>
+            </div>
           </div>
         </div>
 
@@ -124,34 +237,6 @@
                 class="scale"
               />
             </div>
-          </div>
-        </div>
-
-        <div class="rows-wrapper fade-effect">
-          <div class="row row-kpi">
-            <h1 class="super-title expletus">82%</h1>
-
-            <p>
-              Said the game was about
-              <span class="bold">who to trust</span>
-            </p>
-          </div>
-          <div class="row row-text">
-            <div class="row-icon">
-              <i class="fa-solid fa-chart-line"></i>
-            </div>
-
-            <h4 class="row-title">Results</h4>
-
-            <ul class="row-list">
-              <li>
-                The project was successfully handed over to the project owner.
-              </li>
-              <li>Test results showed evidence of effective learning.</li>
-              <li>
-                A set of design principles was used in future development.
-              </li>
-            </ul>
           </div>
         </div>
       </article>
@@ -199,14 +284,53 @@
             </p>
           </div>
         </div>
-        <div class="rows-wrapper fade-effect">
-          <div class="row row-text">
+        <!-- STACR Interactive Section -->
+        <div class="stacr-interactive-wrapper fade-effect">
+          <div class="stacr-buttons-row">
+            <button
+              class="stacr-button"
+              data-stacr="situation"
+              data-label="Situation"
+            >
+              <i class="fa-solid fa-lightbulb"></i>
+            </button>
+            <button class="stacr-button" data-stacr="task" data-label="Task">
+              <i class="fa-solid fa-bullseye"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="action"
+              data-label="Action"
+            >
+              <i class="fa-solid fa-gear"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="challenge"
+              data-label="Challenge"
+            >
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="result"
+              data-label="Result"
+            >
+              <i class="fa-solid fa-chart-line"></i>
+            </button>
+          </div>
+
+          <div class="stacr-content-row">
+            <div class="stacr-content-area"></div>
+            <div class="stacr-media-area empty"></div>
+          </div>
+
+          <!-- Hidden content templates -->
+          <div data-stacr-content="situation">
             <div class="row-icon">
               <i class="fa-solid fa-lightbulb"></i>
             </div>
-
             <h4 class="row-title">Situation</h4>
-
             <p class="row-body">
               To meet increasing demands for modernisation and automation,
               Nukissiorfiit required a robust digital solution capable of
@@ -215,13 +339,20 @@
             </p>
           </div>
 
-          <div class="row row-text">
+          <!-- Hidden media templates -->
+          <div data-stacr-media="default">
+            <img
+              src="Images/Nukissiorfiit.jpg"
+              alt="Greenland Energy Infrastructure"
+              loading="lazy"
+            />
+          </div>
+
+          <div data-stacr-content="task">
             <div class="row-icon">
               <i class="fa-solid fa-bullseye"></i>
             </div>
-
             <h4 class="row-title">Task</h4>
-
             <ul class="row-list">
               <li>
                 Design a platform for managing water, heat, and electricity
@@ -234,16 +365,12 @@
               <li>Enable efficient management of energy data and billing</li>
             </ul>
           </div>
-        </div>
 
-        <div class="rows-wrapper fade-effect">
-          <div class="row row-text">
+          <div data-stacr-content="action">
             <div class="row-icon">
               <i class="fa-solid fa-gear"></i>
             </div>
-
             <h4 class="row-title">Action</h4>
-
             <ul class="row-list">
               <li>
                 Established a scalable platform for energy and billing
@@ -257,13 +384,19 @@
             </ul>
           </div>
 
-          <div class="row row-text">
+          <div data-stacr-content="challenge">
+            <div class="row-icon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h4 class="row-title">Challenge</h4>
+            <p class="row-body">Content not available for this project.</p>
+          </div>
+
+          <div data-stacr-content="result">
             <div class="row-icon">
               <i class="fa-solid fa-chart-line"></i>
             </div>
-
             <h4 class="row-title">Results</h4>
-
             <ul class="row-list">
               <li>Improved efficiency and automation of energy workflows</li>
               <li>
@@ -321,14 +454,54 @@
             </p>
           </div>
         </div>
-        <div class="rows-wrapper fade-effect">
-          <div class="row row-text">
+
+        <!-- STACR Interactive Section -->
+        <div class="stacr-interactive-wrapper fade-effect">
+          <div class="stacr-buttons-row">
+            <button
+              class="stacr-button"
+              data-stacr="situation"
+              data-label="Situation"
+            >
+              <i class="fa-solid fa-lightbulb"></i>
+            </button>
+            <button class="stacr-button" data-stacr="task" data-label="Task">
+              <i class="fa-solid fa-bullseye"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="action"
+              data-label="Action"
+            >
+              <i class="fa-solid fa-gear"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="challenge"
+              data-label="Challenge"
+            >
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="result"
+              data-label="Result"
+            >
+              <i class="fa-solid fa-chart-line"></i>
+            </button>
+          </div>
+
+          <div class="stacr-content-row">
+            <div class="stacr-content-area"></div>
+            <div class="stacr-media-area empty"></div>
+          </div>
+
+          <!-- Hidden content templates -->
+          <div data-stacr-content="situation">
             <div class="row-icon">
               <i class="fa-solid fa-lightbulb"></i>
             </div>
-
             <h4 class="row-title">Situation</h4>
-
             <ul class="row-list">
               <li>
                 Moesgaard wanted to explore how digital tools could engage
@@ -344,13 +517,20 @@
             </ul>
           </div>
 
-          <div class="row row-text">
+          <!-- Hidden media templates -->
+          <div data-stacr-media="default">
+            <img
+              src="Images/momuTeam.jpg"
+              alt="Team at Moesgaard Museum"
+              loading="lazy"
+            />
+          </div>
+
+          <div data-stacr-content="task">
             <div class="row-icon">
               <i class="fa-solid fa-bullseye"></i>
             </div>
-
             <h4 class="row-title">Task</h4>
-
             <ul class="row-list">
               <li>
                 Create a digital companion to support a high-traffic exhibit.
@@ -361,6 +541,59 @@
               </li>
               <li>Deliver within 8 months while enabling data collection.</li>
             </ul>
+          </div>
+
+          <div data-stacr-content="action">
+            <div class="row-icon">
+              <i class="fa-solid fa-gear"></i>
+            </div>
+            <h4 class="row-title">Action</h4>
+            <p class="row-body">Content not available for this project.</p>
+          </div>
+
+          <div data-stacr-content="challenge">
+            <div class="row-icon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h4 class="row-title">Challenge</h4>
+            <p class="row-body">Content not available for this project.</p>
+          </div>
+
+          <div data-stacr-content="result">
+            <div class="row-icon">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h4 class="row-title">Results</h4>
+            <ul class="row-list">
+              <li>Boosted engagement and learning outcomes for children.</li>
+              <li>
+                Served as inspiration for Moesgaard's future digital strategy.
+              </li>
+              <li>
+                <a
+                  href="https://archive.org/details/digitalt-musemsdesign-101"
+                  target="_blank"
+                >
+                  A guide of design principles was created for future
+                  development — click images to view.
+                </a>
+              </li>
+            </ul>
+            <div
+              class="row row-kpi"
+              style="
+                margin-top: 2rem;
+                padding: 2rem;
+                background: rgba(0, 0, 0, 0.02);
+                border-radius: var(--border-radius-medium);
+              "
+            >
+              <h1 class="super-title expletus">140%</h1>
+              <p>
+                Improvement in
+                <span class="bold">children's learning outcomes</span>
+              </p>
+            </div>
           </div>
         </div>
 
@@ -495,27 +728,79 @@
             </p>
           </div>
         </div>
-        <div class="rows-wrapper fade-effect">
-          <div class="row row-text">
+
+        <!-- STACR Interactive Section -->
+        <div class="stacr-interactive-wrapper fade-effect">
+          <div class="stacr-buttons-row">
+            <button
+              class="stacr-button"
+              data-stacr="situation"
+              data-label="Situation"
+            >
+              <i class="fa-solid fa-lightbulb"></i>
+            </button>
+            <button class="stacr-button" data-stacr="task" data-label="Task">
+              <i class="fa-solid fa-bullseye"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="action"
+              data-label="Action"
+            >
+              <i class="fa-solid fa-gear"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="challenge"
+              data-label="Challenge"
+            >
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="result"
+              data-label="Result"
+            >
+              <i class="fa-solid fa-chart-line"></i>
+            </button>
+          </div>
+
+          <div class="stacr-content-row">
+            <div class="stacr-content-area"></div>
+            <div class="stacr-media-area empty"></div>
+          </div>
+
+          <!-- Hidden content templates -->
+          <div data-stacr-content="situation">
             <div class="row-icon">
               <i class="fa-solid fa-lightbulb"></i>
             </div>
-
-            <h4 class="row-title">Challenge</h4>
-
-            <p class="row-body">
-              A pharmaceutical company needed a safe and efficient onboarding
-              tool.
-            </p>
+            <h4 class="row-title">Situation</h4>
+            <p class="row-body">Content not available for this project.</p>
           </div>
 
-          <div class="row row-text">
+          <!-- Hidden media templates -->
+          <div data-stacr-media="default">
+            <img
+              src="Images/pdpVRsimulering.jpg"
+              alt="VR Training Environment"
+              loading="lazy"
+            />
+          </div>
+
+          <div data-stacr-content="task">
+            <div class="row-icon">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <h4 class="row-title">Task</h4>
+            <p class="row-body">Content not available for this project.</p>
+          </div>
+
+          <div data-stacr-content="action">
             <div class="row-icon">
               <i class="fa-solid fa-gear"></i>
             </div>
-
             <h4 class="row-title">Action</h4>
-
             <ul class="row-list">
               <li>
                 Led user research and matched workflows to training scenarios
@@ -525,29 +810,50 @@
             </ul>
           </div>
 
-          <div class="row row-text">
+          <div data-stacr-content="challenge">
+            <div class="row-icon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h4 class="row-title">Challenge</h4>
+            <p class="row-body">
+              A pharmaceutical company needed a safe and efficient onboarding
+              tool.
+            </p>
+          </div>
+
+          <div data-stacr-content="result">
             <div class="row-icon">
               <i class="fa-solid fa-chart-line"></i>
             </div>
-
             <h4 class="row-title">Results</h4>
-
             <ul class="row-list">
               <li>Proved VR's scalability for onboarding</li>
               <li>Increased user engagement and knowledge retention</li>
             </ul>
-          </div>
-        </div>
-
-        <div class="rows-wrapper fade-effect">
-          <div class="row row-kpi">
-            <h1 class="super-title expletus">83%</h1>
-            <p>Reported significant benefit from the VR tool</p>
-          </div>
-
-          <div class="row row-kpi">
-            <h1 class="super-title expletus">75%</h1>
-            <p>of required skills learned via the product</p>
+            <div
+              class="row row-kpi"
+              style="
+                margin-top: 2rem;
+                padding: 2rem;
+                background: rgba(0, 0, 0, 0.02);
+                border-radius: var(--border-radius-medium);
+              "
+            >
+              <h1 class="super-title expletus">83%</h1>
+              <p>Reported significant benefit from the VR tool</p>
+            </div>
+            <div
+              class="row row-kpi"
+              style="
+                margin-top: 1rem;
+                padding: 2rem;
+                background: rgba(0, 0, 0, 0.02);
+                border-radius: var(--border-radius-medium);
+              "
+            >
+              <h1 class="super-title expletus">75%</h1>
+              <p>of required skills learned via the product</p>
+            </div>
           </div>
         </div>
       </article>
@@ -598,14 +904,53 @@
           </div>
         </div>
 
-        <div class="rows-wrapper fade-effect">
-          <div class="row row-text">
+        <!-- STACR Interactive Section -->
+        <div class="stacr-interactive-wrapper fade-effect">
+          <div class="stacr-buttons-row">
+            <button
+              class="stacr-button"
+              data-stacr="situation"
+              data-label="Situation"
+            >
+              <i class="fa-solid fa-lightbulb"></i>
+            </button>
+            <button class="stacr-button" data-stacr="task" data-label="Task">
+              <i class="fa-solid fa-bullseye"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="action"
+              data-label="Action"
+            >
+              <i class="fa-solid fa-gear"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="challenge"
+              data-label="Challenge"
+            >
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </button>
+            <button
+              class="stacr-button"
+              data-stacr="result"
+              data-label="Result"
+            >
+              <i class="fa-solid fa-chart-line"></i>
+            </button>
+          </div>
+
+          <div class="stacr-content-row">
+            <div class="stacr-content-area"></div>
+            <div class="stacr-media-area empty"></div>
+          </div>
+
+          <!-- Hidden content templates -->
+          <div data-stacr-content="situation">
             <div class="row-icon">
               <i class="fa-solid fa-lightbulb"></i>
             </div>
-
             <h4 class="row-title">Situation</h4>
-
             <p class="row-body">
               During the COVID-19 lockdown, the University of Southern Denmark
               (SDU) sought a playful way to introduce children to its different
@@ -613,13 +958,11 @@
             </p>
           </div>
 
-          <div class="row row-text">
+          <div data-stacr-content="task">
             <div class="row-icon">
               <i class="fa-solid fa-bullseye"></i>
             </div>
-
             <h4 class="row-title">Task</h4>
-
             <ul class="row-list">
               <li>
                 Create a digital learning experience tailored to children.
@@ -631,29 +974,12 @@
               <li>Design intuitive and playful UI and gameplay.</li>
             </ul>
           </div>
-        </div>
 
-        <div class="rows-wrapper">
-          <div class="row row-image">
-            <div class="img-container">
-              <img
-                src="Images/ExoplanetenLogo.jpeg"
-                alt="SDU Exoplaneten Logo"
-                loading="lazy"
-                class="scale"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="rows-wrapper fade-effect">
-          <div class="row row-text">
+          <div data-stacr-content="action">
             <div class="row-icon">
               <i class="fa-solid fa-gear"></i>
             </div>
-
             <h4 class="row-title">Action</h4>
-
             <ul class="row-list">
               <li>
                 Collaborated in a team of 7 part-time developers over 5 months.
@@ -673,13 +999,19 @@
             </ul>
           </div>
 
-          <div class="row row-text">
+          <div data-stacr-content="challenge">
+            <div class="row-icon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h4 class="row-title">Challenge</h4>
+            <p class="row-body">Content not available for this project.</p>
+          </div>
+
+          <div data-stacr-content="result">
             <div class="row-icon">
               <i class="fa-solid fa-chart-line"></i>
             </div>
-
             <h4 class="row-title">Results</h4>
-
             <ul class="row-list">
               <li>Delivered with great enthusiasm from the project owner.</li>
               <li>
@@ -690,6 +1022,19 @@
                 Helped children engage with university life in a digital format.
               </li>
             </ul>
+          </div>
+        </div>
+
+        <div class="rows-wrapper">
+          <div class="row row-image">
+            <div class="img-container">
+              <img
+                src="Images/ExoplanetenLogo.jpeg"
+                alt="SDU Exoplaneten Logo"
+                loading="lazy"
+                class="scale"
+              />
+            </div>
           </div>
         </div>
       </article>
