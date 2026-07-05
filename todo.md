@@ -1,4 +1,12 @@
-section.horizontal .section-wrapper .projects-track article.project-article .rows-wrapper .row
-Specificity: (0,6,2)
-{
-border-radius: var(--border-radius-medium);
+1. mobile ikke brug rgba rows
+
+2) skift tekst:
+
+- intro muligheder
+- projekter
+- quotes
+- om mig
+
+3. tilføj testimonials
+
+4) gennemgå projekterne ift. billederne

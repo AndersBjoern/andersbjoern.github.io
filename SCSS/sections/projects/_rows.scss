@@ -22,6 +22,7 @@
 .row-intro {
   display: flex;
   flex-direction: column;
+  width: clamp(900px, 50vw, 1200px);
   gap: 1.25rem;
 
   .project-subtitle {
@@ -178,6 +179,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: var(--border-radius-medium);
 
   h1 {
     font-size: clamp(40px, 20lvh, 200px);

@@ -132,7 +132,6 @@
 
   .row-title {
     display: inline-block;
-    margin-bottom: 2rem;
 
     &::after {
       content: "";
@@ -174,9 +173,8 @@
 }
 
 .stacr-media-area {
-  flex: 0 0 auto;
-  width: auto;
-  max-height: 100%;
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,7 +185,7 @@
 
   img {
     height: 100%;
-    width: auto;
+    height: 100%;
     max-width: none;
     object-fit: contain;
     border-radius: var(--border-radius-medium);
@@ -195,9 +193,9 @@
 
   video {
     height: 100%;
-    width: auto;
+    height: 100%;
     max-width: none;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: var(--border-radius-medium);
   }
 
