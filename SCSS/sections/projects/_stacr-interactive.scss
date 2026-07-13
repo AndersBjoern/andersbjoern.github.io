@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  width: auto;
-  max-width: clamp(900px, 75vw, 1400px);
+  width: clamp(900px, 75vw, 1400px);
   height: 100%;
 }
 
@@ -107,6 +106,14 @@
   display: flex;
   gap: 3rem;
   align-items: flex-start;
+
+  // Full-width media layout when media button is active
+  &.media-only {
+    padding: 0;
+    gap: 0;
+    display: block;
+    overflow: hidden;
+  }
 }
 
 .stacr-content-area {
@@ -170,6 +177,17 @@
       background: var(--icon-font-color);
     }
   }
+
+  // Hide completely in media-only mode
+  .stacr-content-row.media-only & {
+    display: none !important;
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
 
 .stacr-media-area {
@@ -185,14 +203,12 @@
 
   img {
     height: 100%;
-    height: 100%;
     max-width: none;
     object-fit: contain;
     border-radius: var(--border-radius-medium);
   }
 
   video {
-    height: 100%;
     height: 100%;
     max-width: none;
     object-fit: cover;
@@ -208,6 +224,34 @@
 
     &::after {
       content: "No media available";
+    }
+  }
+
+  // Override when in media-only mode
+  .stacr-content-row.media-only & {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; // 16:9 aspect ratio
+    position: relative;
+    background: rgba(0, 0, 0, 1);
+    border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
+    display: block;
+    flex: none;
+
+    &.empty::after {
+      display: none;
+    }
+
+    img,
+    video,
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
     }
   }
 }

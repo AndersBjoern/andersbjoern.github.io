@@ -1,47 +1,59 @@
-// Quote Section
-.quote-section {
-  width: 100%;
-  padding: var(--section-padding);
-  margin: clamp(40px, 10vw, 200px) 0;
-}
-
 .quote-container {
-  width: 100%;
   text-align: right;
-}
+  padding: var(--section-padding);
+  margin-top: var(--margin);
+  margin-top: var(--margin);
 
-.quote-text {
-  font-size: var(--font-size-super-title);
-  line-height: var(--super-title-line-height);
-  color: var(--font-color);
-  margin: 0 0 2rem 0;
-  font-weight: var(--font-weight-bold);
-  position: relative;
-  /*
-  &::before {
-    content: "“";
-    position: absolute;
-    color: var(--testimonials-qoute-color);
-    font-family: "Alef", sans-serif;
-    font-weight: 700;
-    left: -0.5em;
-    top: -0.1em;
+  .quote-text {
+    font-size: clamp(28px, 3vw, 72px);
+    color: var(--font-color);
+
+    &::before,
+    &::after {
+      display: block;
+      font-family: "Alef", sans-serif;
+      font-size: 4em;
+      line-height: 0.8;
+      font-weight: 700;
+      color: var(--testimonials-qoute-color);
+    }
+
+    &::before {
+      content: "“";
+      margin-bottom: -0.25em;
+    }
+
+    &::after {
+      content: "”";
+      margin-top: 0.25em;
+    }
   }
 
-  &::after {
-    content: "“";
-    position: absolute;
-    color: var(--testimonials-qoute-color);
-    font-family: "Alef", sans-serif;
-    font-weight: 700;
-    margin-left: 0.1em;
-  }*/
+  .quote-author {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+
+    font-size: var(--font-size-h4);
+    color: var(--font-color-muted);
+    font-style: italic;
+    font-weight: var(--font-weight-light);
+    margin: 0;
+
+    &::before {
+      content: "";
+      width: 2rem;
+      height: 2px;
+      background-color: var(--accent-color-1);
+      border-radius: 999px;
+    }
+  }
 }
 
-.quote-author {
-  font-size: var(--font-size-h4);
-  color: var(--font-color-muted);
-  margin: 0;
-  font-style: italic;
-  font-weight: var(--font-weight-light);
+@media screen and (max-width: 900px) {
+  .quote-container {
+    text-align: right;
+    padding: var(--mobile-padding);
+  }
 }

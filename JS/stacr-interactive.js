@@ -65,14 +65,25 @@ class STACRController {
       }
     });
 
-    // Update content with fade effect
-    if (this.contents[contentKey]) {
+    // Handle media-only layout
+    const contentRow = this.projectArticle.querySelector(".stacr-content-row");
+    if (contentKey === "media") {
+      contentRow.classList.add("media-only");
+      // Clear content area immediately for media button
+      this.contentArea.innerHTML = "";
       this.contentArea.style.opacity = "0";
+    } else {
+      contentRow.classList.remove("media-only");
 
-      setTimeout(() => {
-        this.contentArea.innerHTML = this.contents[contentKey];
-        this.contentArea.style.opacity = "1";
-      }, 200);
+      // Update content with fade effect (only for non-media buttons)
+      if (this.contents[contentKey]) {
+        this.contentArea.style.opacity = "0";
+
+        setTimeout(() => {
+          this.contentArea.innerHTML = this.contents[contentKey];
+          this.contentArea.style.opacity = "1";
+        }, 200);
+      }
     }
 
     // Update media with fade effect

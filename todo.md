@@ -1,4 +1,6 @@
-1. mobile ikke brug rgba rows
+1. mobile
+   tilføj padding -80px
+   ændre ikoner placering
 
 2) skift tekst:
 
@@ -7,6 +9,6 @@
 - quotes
 - om mig
 
-3. tilføj testimonials
+4. gennemgå projekterne ift. billederne
 
-4) gennemgå projekterne ift. billederne
+// brug <div class="section-seperator"></div>

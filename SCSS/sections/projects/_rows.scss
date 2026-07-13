@@ -22,7 +22,6 @@
 .row-intro {
   display: flex;
   flex-direction: column;
-  width: clamp(900px, 50vw, 1200px);
   gap: 1.25rem;
 
   .project-subtitle {
