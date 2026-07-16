@@ -23,6 +23,7 @@ $fonts:
 
 p,
 td,
+span,
 li {
   @include font-style(var(--font-size-p));
   font-family: var(--font-roboto);

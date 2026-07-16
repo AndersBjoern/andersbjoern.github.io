@@ -229,6 +229,7 @@ button {
 
 p,
 td,
+span,
 li {
   font-size: var(--font-size-p);
   margin: var(--font-margin-bottom);
@@ -818,7 +819,6 @@ body {
     --column-width: 110px;
     position: relative;
     margin-top: -80px;
-    margin-bottom: var(--margin-bottom);
     transition: margin-top 1s ease;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description.video-playing {
@@ -836,6 +836,7 @@ body {
     padding: 20px;
     border-radius: var(--border-radius-small);
     box-shadow: var(--light-card-shadow);
+    margin-bottom: var(--margin-bottom);
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo {
     max-width: 140px;
@@ -901,26 +902,34 @@ body {
     box-shadow: var(--light-card-shadow);
     padding: 20px;
     margin-bottom: var(--margin-bottom);
+    position: relative;
+    overflow: hidden;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .icon-text-pair:last-child {
     margin-bottom: 0;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .icon-text-pair .icon-circle-wrapper {
-    flex-shrink: 0;
+    position: absolute;
+    top: -20px;
+    left: -5rem;
+    opacity: 0.06;
+    pointer-events: none;
+    width: 10rem;
+    text-align: center;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .icon-text-pair .icon-circle-wrapper .icon-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+    width: auto;
+    height: auto;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--accent-color-1);
-    border: 2px solid var(--accent-color-2);
+    background: transparent;
+    border: none;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .icon-text-pair .icon-circle-wrapper .icon-circle i {
-    font-size: 1.25rem;
-    color: white;
+    font-size: 5.5rem;
+    color: currentColor;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .icon-text-pair .text-content {
     flex: 1;
