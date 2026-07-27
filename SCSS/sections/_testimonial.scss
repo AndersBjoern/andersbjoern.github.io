@@ -118,14 +118,6 @@
   margin-bottom: 0;
 }
 
-.linkedin-logo {
-  font-size: 1.25rem;
-  color: var(--linkedin-logo-color);
-  margin: var(--font-margin-bottom);
-  margin-left: 20px;
-}
-
-/* Hover pause functionality now handled in JavaScript */
 .reverse-scroll .testimonials-scroller-inner {
   animation: scroll-reverse 20s linear infinite;
 }

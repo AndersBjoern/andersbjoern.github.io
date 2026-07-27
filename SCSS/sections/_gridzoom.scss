@@ -68,7 +68,7 @@ img {
   }
 
   div:has(> .scale) {
-    border-radius: var(--border-radius-small);
+    border-radius: var(--border-radius-medium);
     overflow: hidden;
   }
 }

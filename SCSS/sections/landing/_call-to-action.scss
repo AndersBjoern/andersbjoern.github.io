@@ -18,6 +18,7 @@
   }
   h4 {
     font-weight: bold;
+    margin-bottom: 0;
   }
   i {
     margin-left: 1rem;
@@ -25,5 +26,16 @@
   &:hover {
     transform: translateY(-2px);
     border-color: var(--accent-color-1);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .linkedin-cta {
+    padding: 0.65rem 0.8rem;
+
+    img {
+      width: 60px;
+      height: 60px;
+    }
   }
 }
