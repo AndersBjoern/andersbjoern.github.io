@@ -64,10 +64,10 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-engineers",
       text: `
-    I'm a <span class="accent"> highly_technical product_designer</span>. This.includes() { developing and designing physical and digital experiences, product strategy and project management };
+    I'm a <span class="accent"> highly_technical</span> product designer. This.includes() { developing and designing physical and digital experiences, product strategy and project management };
     <br>
     while (I'm!=software_engineer) {
-    I do have skills = [<i class="fab fa-unity"></i> Unity, <i class="fas fa-code"></i> .NET, <i class="fab fa-node-js"></i> Node.js, <i class="fas fa-database"></i> SQL];
+    I do have skills in = <span class="accent"><i class="fab fa-unity"></i> Unity</span>, <span class="accent"><i class="fas fa-code"></i> .NET</span>, <span class="accent"><i class="fab fa-node-js"></i> Node.js</span>, <span class="accent"><i class="fas fa-database"></i> SQL</span>;
       `,
     },
   };
