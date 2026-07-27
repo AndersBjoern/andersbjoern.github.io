@@ -87,17 +87,11 @@
           aspect-ratio: 16/9;
           border-radius: var(--border-radius-medium);
 
-          overflow: hidden;
-
           &.playing {
             video {
               mask-size: 700%;
               -webkit-mask-size: 700%;
             }
-          }
-
-          video {
-            margin-bottom: calc(2 * var(--margin-bottom));
           }
 
           video {

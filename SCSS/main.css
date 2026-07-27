@@ -794,14 +794,10 @@ body {
     position: relative;
     aspect-ratio: 16/9;
     border-radius: var(--border-radius-medium);
-    overflow: hidden;
   }
   .section-wrapper .project-article .article-content-wrapper .videoplayer-container.playing video {
     mask-size: 700%;
     -webkit-mask-size: 700%;
-  }
-  .section-wrapper .project-article .article-content-wrapper .videoplayer-container video {
-    margin-bottom: calc(2 * var(--margin-bottom));
   }
   .section-wrapper .project-article .article-content-wrapper .videoplayer-container video {
     width: 100%;
