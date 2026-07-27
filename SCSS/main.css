@@ -1427,7 +1427,7 @@ body {
 
 .stacr-content-row {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: hidden;
   padding: 40px;
   background: rgba(255, 255, 255, 0.9);
   border: var(--light-border);
