@@ -21,6 +21,7 @@
       background: var(--article-background);
       border: var(--article-border);
       color: var(--light-font-color);
+      overflow: hidden;
 
       &::after {
         content: "";
