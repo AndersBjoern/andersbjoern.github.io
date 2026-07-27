@@ -381,7 +381,7 @@ body {
     padding: var(--mobile-padding);
   }
   .section-seperator {
-    height: 140px;
+    height: 90px;
   }
 }
 .audience-selector {
@@ -727,6 +727,9 @@ body {
   }
   .section-wrapper > .project-article:first-of-type {
     margin-top: 0;
+  }
+  .section-wrapper > .project-article:last-of-type {
+    margin-bottom: 0;
   }
   .section-wrapper .project-article {
     width: 100%;

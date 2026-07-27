@@ -10,6 +10,10 @@
       margin-top: 0;
     }
 
+    & > .project-article:last-of-type {
+      margin-bottom: 0;
+    }
+
     .project-article {
       width: 100%;
       border-radius: var(--border-radius-large);
