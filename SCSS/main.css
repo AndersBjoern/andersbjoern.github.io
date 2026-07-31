@@ -436,7 +436,7 @@ body {
 }
 .dynamic-text-box .dynamic-text {
   transition: opacity 0.2s ease;
-  font-size: clamp(2rem, 3.5vw, 3.3rem);
+  font-size: clamp(1.3rem, 3.5vw, 2.5rem);
   line-height: 1.25;
   font-weight: 500;
 }
@@ -446,19 +446,18 @@ body {
 }
 .audience-engineers .landing-section-content-container {
   background: var(--code-bg);
-  border: 1px solid var(--code-border);
+  border: 2px solid var(--code-border);
+  border-radius: var(--border-radius-large);
 }
 .audience-engineers .landing-section-content-container .dynamic-text {
   font-family: "JetBrains Mono", monospace;
   color: var(--code-text);
   white-space: pre-line;
-  font-size: clamp(1.7rem, 2vw, 3.6rem);
 }
-
-.accent {
-  font-size: var(--font-size-h2);
+.audience-engineers .accent {
   color: var(--accent-color-1);
   font-weight: 600;
+  font-size: inherit;
 }
 
 .linkedin-cta {
@@ -601,6 +600,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.landing-section .landing-section-container .landing-section-bottom.audience-engineers .landing-section-content-container {
+  padding: 40px 30px;
 }
 
 @media screen and (min-width: 901px) {

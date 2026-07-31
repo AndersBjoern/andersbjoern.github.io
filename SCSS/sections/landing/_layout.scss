@@ -11,7 +11,7 @@
   }
   .landing-section-container {
     width: 100%;
-    overflow: hidden; // Prevent content from causing horizontal scroll
+    overflow: hidden;
 
     .landing-section-top {
       width: 100%;
@@ -32,7 +32,6 @@
         pointer-events: none;
         z-index: 0;
 
-        // Background image
         &::before {
           content: "";
           position: absolute;
@@ -46,7 +45,6 @@
           border-radius: inherit;
         }
 
-        // Dark overlay
         &::after {
           content: "";
           position: absolute;
@@ -65,6 +63,10 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+      }
+
+      &.audience-engineers .landing-section-content-container {
+        padding: 40px 30px;
       }
     }
   }

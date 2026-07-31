@@ -173,7 +173,7 @@ function initializeVideoScrollTrigger() {
             background: rgba(0,0,0,0.7);
             color: white;
             padding: 15px 20px;
-            border-radius: 25px;
+            border-radius: 999px;
             display: flex;
             align-items: center;
             gap: 8px;
