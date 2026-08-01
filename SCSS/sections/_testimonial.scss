@@ -74,7 +74,9 @@
     .testimonial-quote {
       font-style: italic;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      line-height: 1.5;
 
       .accent-color {
         color: var(--accent-color-1);
@@ -105,13 +107,11 @@
           align-items: center;
 
           .author-name {
-            font-size: 18px;
             color: var(--font-color-muted);
           }
 
           .author-title {
             color: var(--light-font-color-muted);
-            font-size: 16px;
             margin-bottom: 0;
           }
         }
@@ -143,17 +143,12 @@
 }
 
 @media screen and (max-width: 900px) {
-  .testimonial-quote {
-    user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    pointer-events: none;
-  }
-  .author-name {
-    font-size: 14px;
-  }
-
-  .author-title {
-    font-size: 12px;
+  .testimonial-item .testimonial-content {
+    .testimonial-quote {
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      pointer-events: none;
+    }
   }
 }

@@ -9,11 +9,18 @@
     background-color: var(--background-color-dark);
     .highlights-content {
       width: 95vw;
-      padding: 2.5vw;
+      padding: clamp(40px, 2.5vw, 3rem);
+      padding-left: 2.5vw;
 
       h1 {
         font-size: var(--font-size-h1);
       }
     }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .highlights-section .black-background .highlights-content {
+    padding-left: 20px; // var(--mobile-padding)
   }
 }

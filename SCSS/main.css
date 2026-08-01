@@ -116,7 +116,7 @@ a {
   --font-size-h1: clamp(2rem, 4vw, 4rem);
   --font-size-h2: clamp(1.75rem, 3.5vw, 3rem);
   --font-size-h3: clamp(1.5rem, 2.5vw, 2rem);
-  --font-size-h4: clamp(1.25rem, 2.5vw, 2rem);
+  --font-size-h4: clamp(1.25rem, 2.2vw, 1.8rem);
   --font-size-h5: clamp(1rem, 2vw, 1.5rem);
   --font-size-h6: clamp(0.875rem, 1.5vw, 1.25rem);
   --font-size-p: clamp(16px, 2vw, 1.25rem);
@@ -157,10 +157,10 @@ a {
     --font-size-h1: clamp(2.2rem, 5.5vw, 3rem);
     --font-size-h2: clamp(1.2375rem, 4.95vw, 1.925rem);
     --font-size-h3: clamp(1.1rem, 3.85vw, 1.375rem);
-    --font-size-h4: clamp(18px, 3.3vw, 1.2375rem);
-    --font-size-h5: clamp(15px, 2.5vw, 1rem);
-    --font-size-h6: clamp(13px, 2.2vw, 0.9625rem);
-    --font-size-p: clamp(16px, 3vw, 1rem);
+    --font-size-h4: clamp(18px, 3.3vw, 1.3rem);
+    --font-size-h5: clamp(16px, 2.5vw, 1.25rem);
+    --font-size-h6: clamp(18px, 2.2vw, 1.2rem);
+    --font-size-p: clamp(16px, 3vw, 1.1rem);
     --font-size-button: clamp(0.875rem, 3vw, 1rem);
     --border-radius-large: 40px;
     --border-radius-medium: calc(var(--border-radius-large) - 15px);
@@ -2105,7 +2105,9 @@ body {
 .testimonial-item .testimonial-content .testimonial-quote {
   font-style: italic;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 .testimonial-item .testimonial-content .testimonial-quote .accent-color {
   color: var(--accent-color-1);
@@ -2133,12 +2135,10 @@ body {
   align-items: center;
 }
 .testimonial-item .testimonial-content .testimonial-author .author-info .author-info-row .author-name {
-  font-size: 18px;
   color: var(--font-color-muted);
 }
 .testimonial-item .testimonial-content .testimonial-author .author-info .author-info-row .author-title {
   color: var(--light-font-color-muted);
-  font-size: 16px;
   margin-bottom: 0;
 }
 
@@ -2163,18 +2163,12 @@ body {
   }
 }
 @media screen and (max-width: 900px) {
-  .testimonial-quote {
+  .testimonial-item .testimonial-content .testimonial-quote {
     -moz-user-select: none;
          user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     pointer-events: none;
-  }
-  .author-name {
-    font-size: 14px;
-  }
-  .author-title {
-    font-size: 12px;
   }
 }
 .highlights-section {
@@ -2190,12 +2184,18 @@ body {
 }
 .highlights-section .black-background .highlights-content {
   width: 95vw;
-  padding: 2.5vw;
+  padding: clamp(40px, 2.5vw, 3rem);
+  padding-left: 2.5vw;
 }
 .highlights-section .black-background .highlights-content h1 {
   font-size: var(--font-size-h1);
 }
 
+@media screen and (max-width: 900px) {
+  .highlights-section .black-background .highlights-content {
+    padding-left: 20px;
+  }
+}
 .copyright-container p {
   color: #000;
   margin-bottom: 0;
