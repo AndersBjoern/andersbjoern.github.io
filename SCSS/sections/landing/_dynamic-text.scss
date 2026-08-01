@@ -1,7 +1,11 @@
 .dynamic-text-box {
   width: 100%;
   .dynamic-text {
-    transition: opacity 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      font-family 0.3s ease,
+      font-size 0.3s ease,
+      color 0.3s ease;
     font-size: clamp(1.3rem, 3.5vw, 2.5rem);
     line-height: 1.25;
     font-weight: 500;
@@ -10,7 +14,8 @@
 
 .audience-engineers {
   .landing-section-background {
-    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
 
   .landing-section-content-container {
@@ -22,6 +27,7 @@
       font-family: "JetBrains Mono", monospace;
       color: var(--code-text);
       white-space: pre-line;
+      font-size: clamp(1rem, 3vw, 2rem);
     }
   }
 

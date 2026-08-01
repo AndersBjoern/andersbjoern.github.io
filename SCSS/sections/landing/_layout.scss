@@ -31,6 +31,7 @@
         border-radius: var(--border-radius-large);
         pointer-events: none;
         z-index: 0;
+        transition: opacity 0.5s ease;
 
         &::before {
           content: "";
@@ -63,6 +64,11 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        transition:
+          height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+          background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+          padding 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.3s ease;
       }
 
       &.audience-engineers .landing-section-content-container {

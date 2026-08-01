@@ -64,9 +64,9 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-engineers",
       text: `
-    I'm a <span class="accent"> highly_technical</span> product designer. This.includes() { developing and designing physical and digital experiences, product strategy and project management };
-    <br>
-    while (I'm!=software_engineer) {
+    I'm a <span class="accent"> highly_technical</span> product designer.
+    <br>This.includes() { developing and designing physical and digital experiences, product strategy and project management };
+    <br>while (I'm!=software_engineer) {
     I do have skills in = <span class="accent"><i class="fab fa-unity"></i> Unity</span>, <span class="accent"><i class="fas fa-code"></i> .NET</span>, <span class="accent"><i class="fab fa-node-js"></i> Node.js</span>, <span class="accent"><i class="fas fa-database"></i> SQL</span>;
       `,
     },
@@ -74,28 +74,82 @@ function dynamicTextBoxForAudience() {
 
   function switchAudience(audience) {
     const data = audienceData[audience];
+    const contentContainer = document.querySelector(
+      ".landing-section-content-container",
+    );
+
+    // Get current and target themes
+    const currentTheme = sectionBottom.className
+      .split(" ")
+      .find((cls) => cls.startsWith("audience-"));
+    const isEngineerTransition =
+      currentTheme === "audience-engineers" ||
+      data.theme === "audience-engineers";
 
     audienceButtons.forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.audience === audience);
     });
 
-    sectionBottom.className = `landing-section-bottom ${data.theme}`;
+    if (isEngineerTransition) {
+      // Use fade in/out for engineer transitions (too many style changes)
+      contentContainer.style.opacity = 0;
 
-    dynamicText.style.opacity = 0;
+      setTimeout(() => {
+        // Update content and theme
+        dynamicText.innerHTML = data.text;
+        sectionBottom.className = `landing-section-bottom ${data.theme}`;
 
-    setTimeout(() => {
-      dynamicText.innerHTML = data.text;
-      dynamicText.style.opacity = 1;
+        // Update background image
+        sectionBackground.style.setProperty(
+          "--background-image",
+          `url('${data.image}')`,
+        );
 
-      // Update background image via CSS custom property on the background element
-      sectionBackground.style.setProperty(
-        "--background-image",
-        `url('${data.image}')`,
-      );
+        // Fade in container
+        contentContainer.style.opacity = 1;
+      }, 300);
+    } else {
+      // Use height animation for other transitions
+      const currentHeight = contentContainer.offsetHeight;
+      contentContainer.style.height = `${currentHeight}px`;
 
-      // ResizeObserver will automatically trigger ScrollTrigger.refresh()
-      // when the section height changes
-    }, 200);
+      // Fade out text only
+      dynamicText.style.opacity = 0;
+
+      setTimeout(() => {
+        // Update content and theme
+        dynamicText.innerHTML = data.text;
+        sectionBottom.className = `landing-section-bottom ${data.theme}`;
+
+        // Update background image
+        sectionBackground.style.setProperty(
+          "--background-image",
+          `url('${data.image}')`,
+        );
+
+        // Allow container to measure new content height
+        contentContainer.style.height = "auto";
+        const newHeight = contentContainer.offsetHeight;
+        contentContainer.style.height = `${currentHeight}px`;
+
+        // Force reflow
+        contentContainer.offsetHeight;
+
+        // Animate to new height
+        contentContainer.style.height = `${newHeight}px`;
+
+        // Fade in text
+        dynamicText.style.opacity = 1;
+
+        // After transition completes, set height back to auto for responsiveness
+        setTimeout(() => {
+          contentContainer.style.height = "auto";
+        }, 500);
+      }, 200);
+    }
+
+    // ResizeObserver will automatically trigger ScrollTrigger.refresh()
+    // when the section height changes
   }
 
   audienceButtons.forEach((button) => {
@@ -103,6 +157,8 @@ function dynamicTextBoxForAudience() {
       switchAudience(button.dataset.audience);
     });
   });
+
+  switchAudience("anyone");
 
   switchAudience("anyone");
 }

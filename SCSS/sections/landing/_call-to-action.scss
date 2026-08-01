@@ -19,9 +19,12 @@
   h4 {
     font-weight: bold;
     margin-bottom: 0;
-  }
-  i {
-    margin-left: 1rem;
+    .arrow {
+      margin-left: 10px;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--light-font-color-muted);
+    }
   }
   &:hover {
     transform: translateY(-2px);
@@ -32,10 +35,14 @@
 @media screen and (max-width: 900px) {
   .linkedin-cta {
     padding: 0.65rem 0.8rem;
+    gap: 1.4rem;
 
     img {
       width: 60px;
       height: 60px;
+    }
+    h4 .arrow {
+      font-size: 1.2rem;
     }
   }
 }
