@@ -8,9 +8,12 @@
     color: black;
     background-color: var(--background-color-dark);
     .highlights-content {
-      height: auto;
       width: 95vw;
       padding: 2.5vw;
+
+      h1 {
+        font-size: var(--font-size-h1);
+      }
     }
   }
 }

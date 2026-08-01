@@ -192,6 +192,7 @@
 
 .stacr-media-area {
   flex: 1;
+  height: 100%;
   min-width: 0;
   display: flex;
   align-items: center;
@@ -203,8 +204,8 @@
 
   img {
     height: 100%;
-    max-width: none;
-    object-fit: contain;
+    width: 100%;
+    object-fit: cover;
     border-radius: var(--border-radius-medium);
   }
 

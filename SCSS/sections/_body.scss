@@ -28,7 +28,6 @@ li {
   @include font-style(var(--font-size-p));
   font-family: var(--font-roboto);
   font-weight: var(--font-weight-medium);
-  line-height: var(--p-line-height);
 }
 
 b {

@@ -107,11 +107,7 @@ a {
   --testimonials-card-shadow: var(--card-shadow);
   --testimonials-card-border: 1px solid var(--border-color);
   --testimonials-qoute-color: var(--accent-color-1);
-  --testimonials-author-color: var(--font-color-highlight);
-  --testimonials-author-job: var(--font-color-muted);
-  --linkedin-logo-color: #0077b5;
   /* FONT */
-  --p-line-height: 1.5;
   --super-title-line-height: 1.2;
   --font-margin-bottom: 0 0 clamp(0.25rem, 0.5rem, 1rem) 0;
   --font-expletus: "Expletus Sans", sans-serif;
@@ -158,7 +154,7 @@ a {
 /* Mobile font size overrides */
 @media screen and (max-width: 900px) {
   :root {
-    --font-size-h1: clamp(1.375rem, 5.5vw, 2.2rem);
+    --font-size-h1: clamp(2.2rem, 5.5vw, 3rem);
     --font-size-h2: clamp(1.2375rem, 4.95vw, 1.925rem);
     --font-size-h3: clamp(1.1rem, 3.85vw, 1.375rem);
     --font-size-h4: clamp(18px, 3.3vw, 1.2375rem);
@@ -237,7 +233,6 @@ li {
   margin: var(--font-margin-bottom);
   font-family: var(--font-roboto);
   font-weight: var(--font-weight-medium);
-  line-height: var(--p-line-height);
 }
 
 b {
@@ -553,10 +548,29 @@ body {
   margin-bottom: 0;
 }
 
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --gradient-angle-offset {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --gradient-percent {
+  syntax: "<percentage>";
+  initial-value: 5%;
+  inherits: false;
+}
+@property --gradient-shine {
+  syntax: "<color>";
+  initial-value: var(--accent-color-3);
+  inherits: false;
+}
 .landing-section {
   width: 100%;
   margin: var(--margin) 0;
-  background-color: var(--background-color-dark);
   overflow: hidden;
 }
 .landing-section h1 {
@@ -577,6 +591,19 @@ body {
   isolation: isolate;
   overflow: hidden;
 }
+.landing-section .landing-section-container .landing-section-bottom:not(.audience-engineers) {
+  --animation: gradient-angle linear infinite;
+  --duration: 6s;
+  --shadow-size: 2px;
+  --gradient-percent: 20%;
+  --gradient-angle-offset: 95deg;
+  --gradient-shine: var(--accent-color-3);
+  border: 1px solid transparent;
+  background: linear-gradient(var(--card-background), var(--card-background)) padding-box, conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent, var(--accent-color-1) var(--gradient-percent), var(--gradient-shine) calc(var(--gradient-percent) * 2), var(--accent-color-1) calc(var(--gradient-percent) * 3), transparent calc(var(--gradient-percent) * 4)) border-box;
+  box-shadow: inset 0 0 0 1px var(--accent-color-2);
+  animation: var(--animation) var(--duration);
+  animation-composition: add;
+}
 .landing-section .landing-section-container .landing-section-bottom .landing-section-background {
   position: absolute;
   inset: 0;
@@ -584,15 +611,6 @@ body {
   pointer-events: none;
   z-index: 0;
   transition: opacity 0.5s ease;
-}
-.landing-section .landing-section-container .landing-section-bottom .landing-section-background::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--background-image, url("../Images/heroBackground.png"));
-  background-size: cover;
-  background-position: center;
-  border-radius: inherit;
 }
 .landing-section .landing-section-container .landing-section-bottom .landing-section-background::after {
   content: "";
@@ -612,10 +630,63 @@ body {
   justify-content: center;
   transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
 }
+.landing-section .landing-section-container .landing-section-bottom .landing-section-content-container::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  --size: 150%;
+  --position: 2px;
+  --space: calc(var(--position) * 2);
+  width: var(--size);
+  height: var(--size);
+  background: radial-gradient(circle at var(--position) var(--position), var(--accent-color-3) calc(var(--position) / 4), transparent 0) padding-box;
+  background-size: var(--space) var(--space);
+  background-repeat: space;
+  -webkit-mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
+          mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
+  border-radius: inherit;
+  opacity: 0.4;
+  animation: var(--animation, gradient-angle linear infinite) var(--duration, 3s);
+  animation-composition: add;
+}
+.landing-section .landing-section-container .landing-section-bottom .landing-section-content-container::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  width: 150%;
+  aspect-ratio: 1;
+  background: linear-gradient(-50deg, transparent, var(--accent-color-1), transparent);
+  -webkit-mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+          mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+  opacity: 0.6;
+  animation: shimmer linear infinite var(--duration, 3s);
+  animation-composition: add;
+}
 .landing-section .landing-section-container .landing-section-bottom.audience-engineers .landing-section-content-container {
   padding: 40px 30px;
 }
+.landing-section .landing-section-container .landing-section-bottom.audience-engineers .landing-section-content-container::before, .landing-section .landing-section-container .landing-section-bottom.audience-engineers .landing-section-content-container::after {
+  content: none;
+}
 
+@keyframes gradient-angle {
+  to {
+    --gradient-angle: 360deg;
+  }
+}
+@keyframes shimmer {
+  to {
+    rotate: 360deg;
+  }
+}
 @media screen and (min-width: 901px) {
   section.horizontal {
     overflow: hidden;
@@ -1225,7 +1296,7 @@ body {
   opacity: 0.65;
 }
 .row-intro .project-title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 5vw, 3rem);
 }
 .row-intro .project-tags {
   display: flex;
@@ -1277,11 +1348,7 @@ body {
   gap: 0.35rem;
 }
 .row-intro .project-footer .project-meta-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
-  font-weight: 500;
+  margin-bottom: 10px;
 }
 .row-intro .project-footer .project-meta-bottom {
   font-size: 0.9rem;
@@ -1524,6 +1591,7 @@ body {
 
 .stacr-media-area {
   flex: 1;
+  height: 100%;
   min-width: 0;
   display: flex;
   align-items: center;
@@ -1535,9 +1603,9 @@ body {
 }
 .stacr-media-area img {
   height: 100%;
-  max-width: none;
-  -o-object-fit: contain;
-     object-fit: contain;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: var(--border-radius-medium);
 }
 .stacr-media-area video {
@@ -1738,8 +1806,7 @@ body {
   height: 33lvh;
   clip-path: inset(0 round 5px);
 }
-
-img {
+.grid-item img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -2008,9 +2075,9 @@ img {
   flex-direction: column;
   justify-content: space-between;
   z-index: 1;
-  padding: 30px;
+  padding: 40px;
   margin-right: 20px;
-  border-radius: 10px;
+  border-radius: var(--border-radius-medium);
   box-shadow: var(--testimonials-card-shadow);
   background-color: var(--testimonials-card-background);
   border: var(--testimonials-card-border);
@@ -2030,24 +2097,20 @@ img {
   left: 50%;
   transform: translateX(-50%);
 }
-
-.testimonial-content {
+.testimonial-item .testimonial-content {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-
-.testimonial-quote {
+.testimonial-item .testimonial-content .testimonial-quote {
   font-style: italic;
   text-align: center;
-  margin-bottom: 20px;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 20px;
 }
-
-.testimonial-author {
+.testimonial-item .testimonial-content .testimonial-quote .accent-color {
+  color: var(--accent-color-1);
+}
+.testimonial-item .testimonial-content .testimonial-author {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2055,30 +2118,27 @@ img {
   cursor: pointer;
   text-decoration: none;
 }
-
-.testimonial-image {
+.testimonial-item .testimonial-content .testimonial-author .testimonial-image {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   margin-right: 25px;
 }
-
-.author-info {
+.testimonial-item .testimonial-content .testimonial-author .author-info {
   display: flex;
   flex-direction: column;
 }
-
-.author-info-row {
+.testimonial-item .testimonial-content .testimonial-author .author-info .author-info-row {
   display: flex;
   align-items: center;
 }
-
-.author-name {
-  color: var(--testimonials-author-color);
+.testimonial-item .testimonial-content .testimonial-author .author-info .author-info-row .author-name {
+  font-size: 18px;
+  color: var(--font-color-muted);
 }
-
-.author-title {
-  color: var(--testimonials-author-job);
+.testimonial-item .testimonial-content .testimonial-author .author-info .author-info-row .author-title {
+  color: var(--light-font-color-muted);
+  font-size: 16px;
   margin-bottom: 0;
 }
 
@@ -2110,6 +2170,12 @@ img {
     -ms-user-select: none;
     pointer-events: none;
   }
+  .author-name {
+    font-size: 14px;
+  }
+  .author-title {
+    font-size: 12px;
+  }
 }
 .highlights-section {
   height: auto;
@@ -2123,9 +2189,11 @@ img {
   background-color: var(--background-color-dark);
 }
 .highlights-section .black-background .highlights-content {
-  height: auto;
   width: 95vw;
   padding: 2.5vw;
+}
+.highlights-section .black-background .highlights-content h1 {
+  font-size: var(--font-size-h1);
 }
 
 .copyright-container p {

@@ -1,10 +1,35 @@
 // Landing Section - Layout
 
+// CSS Properties for animated border
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --gradient-angle-offset {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --gradient-percent {
+  syntax: "<percentage>";
+  initial-value: 5%;
+  inherits: false;
+}
+
+@property --gradient-shine {
+  syntax: "<color>";
+  initial-value: var(--accent-color-3);
+  inherits: false;
+}
+
 .landing-section {
   width: 100%;
   margin: var(--margin) 0;
-  background-color: var(--background-color-dark);
-  overflow: hidden; // Prevent horizontal scrollbar
+
+  overflow: hidden;
 
   h1 {
     margin-bottom: 40px;
@@ -25,6 +50,33 @@
       isolation: isolate;
       overflow: hidden;
 
+      &:not(.audience-engineers) {
+        --animation: gradient-angle linear infinite;
+        --duration: 6s;
+        --shadow-size: 2px;
+        --gradient-percent: 20%;
+        --gradient-angle-offset: 95deg;
+        --gradient-shine: var(--accent-color-3);
+
+        border: 1px solid transparent;
+        background:
+          linear-gradient(var(--card-background), var(--card-background))
+            padding-box,
+          conic-gradient(
+              from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+              transparent,
+              var(--accent-color-1) var(--gradient-percent),
+              var(--gradient-shine) calc(var(--gradient-percent) * 2),
+              var(--accent-color-1) calc(var(--gradient-percent) * 3),
+              transparent calc(var(--gradient-percent) * 4)
+            )
+            border-box;
+        box-shadow: inset 0 0 0 1px var(--accent-color-2);
+
+        animation: var(--animation) var(--duration);
+        animation-composition: add;
+      }
+
       .landing-section-background {
         position: absolute;
         inset: 0;
@@ -32,19 +84,6 @@
         pointer-events: none;
         z-index: 0;
         transition: opacity 0.5s ease;
-
-        &::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background-image: var(
-            --background-image,
-            url("../Images/heroBackground.png")
-          );
-          background-size: cover;
-          background-position: center;
-          border-radius: inherit;
-        }
 
         &::after {
           content: "";
@@ -69,11 +108,88 @@
           background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
           padding 0.5s cubic-bezier(0.4, 0, 0.2, 1),
           opacity 0.3s ease;
+
+        // Dotted background pattern (not applied to .audience-engineers)
+        &::before {
+          content: "";
+          pointer-events: none;
+          position: absolute;
+          inset-inline-start: 50%;
+          inset-block-start: 50%;
+          translate: -50% -50%;
+          z-index: -1;
+          --size: 150%;
+          --position: 2px;
+          --space: calc(var(--position) * 2);
+          width: var(--size);
+          height: var(--size);
+          background: radial-gradient(
+              circle at var(--position) var(--position),
+              var(--accent-color-3) calc(var(--position) / 4),
+              transparent 0
+            )
+            padding-box;
+          background-size: var(--space) var(--space);
+          background-repeat: space;
+          mask-image: conic-gradient(
+            from calc(var(--gradient-angle) + 45deg),
+            black,
+            transparent 10% 90%,
+            black
+          );
+          border-radius: inherit;
+          opacity: 0.4;
+          animation: var(--animation, gradient-angle linear infinite)
+            var(--duration, 3s);
+          animation-composition: add;
+        }
+
+        // Inner shimmer effect (not applied to .audience-engineers)
+        &::after {
+          content: "";
+          pointer-events: none;
+          position: absolute;
+          inset-inline-start: 50%;
+          inset-block-start: 50%;
+          translate: -50% -50%;
+          z-index: -1;
+          width: 150%;
+          aspect-ratio: 1;
+          background: linear-gradient(
+            -50deg,
+            transparent,
+            var(--accent-color-1),
+            transparent
+          );
+          mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+          opacity: 0.6;
+          animation: shimmer linear infinite var(--duration, 3s);
+          animation-composition: add;
+        }
       }
 
+      // Remove animations for .audience-engineers
       &.audience-engineers .landing-section-content-container {
         padding: 40px 30px;
+
+        &::before,
+        &::after {
+          content: none;
+        }
       }
     }
+  }
+}
+
+// Keyframe animations
+@keyframes gradient-angle {
+  to {
+    --gradient-angle: 360deg;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    rotate: 360deg;
   }
 }

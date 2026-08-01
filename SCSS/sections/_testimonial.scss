@@ -45,9 +45,9 @@
   flex-direction: column;
   justify-content: space-between;
   z-index: 1;
-  padding: 30px;
+  padding: 40px;
   margin-right: 20px;
-  border-radius: 10px;
+  border-radius: var(--border-radius-medium);
   box-shadow: var(--testimonials-card-shadow);
   background-color: var(--testimonials-card-background);
   border: var(--testimonials-card-border);
@@ -65,57 +65,59 @@
     left: 50%;
     transform: translateX(-50%);
   }
-}
 
-.testimonial-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+  .testimonial-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
-.testimonial-quote {
-  font-style: italic;
-  text-align: center;
-  margin-bottom: 20px;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .testimonial-quote {
+      font-style: italic;
+      text-align: center;
+      margin-top: 20px;
 
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: auto;
-  cursor: pointer;
-  text-decoration: none;
-}
+      .accent-color {
+        color: var(--accent-color-1);
+      }
+    }
 
-.testimonial-image {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-right: 25px;
-}
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: auto;
+      cursor: pointer;
+      text-decoration: none;
 
-.author-info {
-  display: flex;
-  flex-direction: column;
-}
+      .testimonial-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: 25px;
+      }
 
-.author-info-row {
-  display: flex;
-  align-items: center;
-}
+      .author-info {
+        display: flex;
+        flex-direction: column;
 
-.author-name {
-  color: var(--testimonials-author-color);
-}
+        .author-info-row {
+          display: flex;
+          align-items: center;
 
-.author-title {
-  color: var(--testimonials-author-job);
-  margin-bottom: 0;
+          .author-name {
+            font-size: 18px;
+            color: var(--font-color-muted);
+          }
+
+          .author-title {
+            color: var(--light-font-color-muted);
+            font-size: 16px;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
 }
 
 .reverse-scroll .testimonials-scroller-inner {
@@ -146,5 +148,12 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     pointer-events: none;
+  }
+  .author-name {
+    font-size: 14px;
+  }
+
+  .author-title {
+    font-size: 12px;
   }
 }
