@@ -2075,7 +2075,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   z-index: 1;
-  padding: 40px;
+  padding: 40px 25px;
   margin-right: 20px;
   border-radius: var(--border-radius-medium);
   box-shadow: var(--testimonials-card-shadow);
@@ -2105,7 +2105,7 @@ body {
 .testimonial-item .testimonial-content .testimonial-quote {
   font-style: italic;
   text-align: center;
-  margin-top: 10px;
+  margin-top: auto;
   margin-bottom: 20px;
   line-height: 1.5;
 }
