@@ -176,8 +176,9 @@ function initializeVideoScrollTrigger() {
             border-radius: 999px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             font-size: 14px;
+            line-height: 0;
             cursor: pointer;
             z-index: 10;
             backdrop-filter: blur(5px);

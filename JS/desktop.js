@@ -190,6 +190,7 @@ function initializeScrollerContent(scroller, index) {
 }
 
 // Custom Cursor Implementation
+/*
 function initializeCustomCursor() {
   new CustomCursor();
 }
@@ -405,3 +406,4 @@ class CustomCursor {
     requestAnimationFrame(() => this.animate());
   }
 }
+*/

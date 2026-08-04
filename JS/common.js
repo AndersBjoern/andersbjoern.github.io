@@ -203,12 +203,13 @@ function setupSkillsAnimation() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const scrollers = document.querySelectorAll(".skills-scroller");
+  console.log(scrollers.length);
   scrollers.forEach((scroller) => {
     scroller.setAttribute("data-animated", true);
 
     const scrollerInner = scroller.querySelector(".scroller_inner");
     const scrollerContent = Array.from(scrollerInner.children);
-
+    console.log(scrollerContent.length);
     scrollerContent.forEach((item) => {
       const duplicatedItem = item.cloneNode(true);
       duplicatedItem.setAttribute("aria-hidden", true);
@@ -282,6 +283,7 @@ function animateCounter(element, targetNumber) {
 function setupHighlightsObserver() {
   const highlightsSection = document.querySelector(".highlights-section");
   const blackBackground = document.querySelector(".black-background");
+  const highlightedTitles = document.querySelectorAll(".highlights-accent");
   const body = document.body;
 
   const root = document.documentElement;
@@ -289,6 +291,8 @@ function setupHighlightsObserver() {
     "--background-color-dark",
   );
   const fontColor = getComputedStyle(root).getPropertyValue("--font-color");
+  const accentFontColor =
+    getComputedStyle(root).getPropertyValue("--accent-color-1");
 
   if (!highlightsSection || !blackBackground) return;
 
@@ -304,8 +308,7 @@ function setupHighlightsObserver() {
     entries.forEach((entry) => {
       const isIntersecting = entry.isIntersecting;
 
-      body.style.transition = "background-color 1s ease";
-      blackBackground.style.transition = "all 1s ease";
+      body.style.transition = "background-color 1.5s ease";
 
       if (isIntersecting) {
         body.style.backgroundColor = "white";
@@ -313,12 +316,18 @@ function setupHighlightsObserver() {
         blackBackground.style.width = "95vw";
         blackBackground.style.borderTopRightRadius = "40px";
         blackBackground.style.borderBottomRightRadius = "40px";
+        highlightedTitles.forEach((title) => {
+          title.style.color = accentFontColor;
+        });
       } else {
         body.style.backgroundColor = backgroundcolor;
         blackBackground.style.color = backgroundcolor;
         blackBackground.style.width = "100vw";
         blackBackground.style.borderTopRightRadius = "0";
         blackBackground.style.borderBottomRightRadius = "0";
+        highlightedTitles.forEach((title) => {
+          title.style.color = backgroundcolor;
+        });
       }
     });
   };
