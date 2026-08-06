@@ -296,6 +296,13 @@ function setupHighlightsObserver() {
 
   if (!highlightsSection || !blackBackground) return;
 
+  // Ensure transitions are set on all elements before any state changes
+  body.style.transition = "background-color 1.5s ease";
+  blackBackground.style.transition = "all 1.5s ease";
+  highlightedTitles.forEach((title) => {
+    title.style.transition = "color 1.5s ease";
+  });
+
   // Use lower threshold on mobile since the section is taller relative to viewport
   const isMobile = window.innerWidth <= 900;
   const observerOptions = {
@@ -308,25 +315,36 @@ function setupHighlightsObserver() {
     entries.forEach((entry) => {
       const isIntersecting = entry.isIntersecting;
 
-      body.style.transition = "background-color 1.5s ease";
-
       if (isIntersecting) {
-        body.style.backgroundColor = "white";
-        blackBackground.style.color = fontColor;
-        blackBackground.style.width = "95vw";
-        blackBackground.style.borderTopRightRadius = "40px";
-        blackBackground.style.borderBottomRightRadius = "40px";
-        highlightedTitles.forEach((title) => {
-          title.style.color = accentFontColor;
+        // Use requestAnimationFrame to ensure all style changes happen together
+        requestAnimationFrame(() => {
+          body.style.backgroundColor = "white";
+          blackBackground.style.color = fontColor;
+          blackBackground.style.width = "95vw";
+          blackBackground.style.borderTopRightRadius = "40px";
+          blackBackground.style.borderBottomRightRadius = "40px";
+
+          // Force a reflow to ensure color changes are applied after layout changes
+          void blackBackground.offsetHeight;
+
+          highlightedTitles.forEach((title) => {
+            title.style.color = accentFontColor;
+          });
         });
       } else {
-        body.style.backgroundColor = backgroundcolor;
-        blackBackground.style.color = backgroundcolor;
-        blackBackground.style.width = "100vw";
-        blackBackground.style.borderTopRightRadius = "0";
-        blackBackground.style.borderBottomRightRadius = "0";
-        highlightedTitles.forEach((title) => {
-          title.style.color = backgroundcolor;
+        requestAnimationFrame(() => {
+          body.style.backgroundColor = backgroundcolor;
+          blackBackground.style.color = backgroundcolor;
+          blackBackground.style.width = "100vw";
+          blackBackground.style.borderTopRightRadius = "0";
+          blackBackground.style.borderBottomRightRadius = "0";
+
+          // Force a reflow to ensure color changes are applied after layout changes
+          void blackBackground.offsetHeight;
+
+          highlightedTitles.forEach((title) => {
+            title.style.color = backgroundcolor;
+          });
         });
       }
     });

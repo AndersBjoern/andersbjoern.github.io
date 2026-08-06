@@ -20,7 +20,11 @@
 
       h3 {
         margin: 20px 0;
-        transition: all 1.5s ease;
+        transition: color 1.5s ease;
+      }
+
+      .highlights-accent {
+        transition: color 1.5s ease;
       }
     }
   }
