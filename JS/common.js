@@ -64,10 +64,10 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-engineers",
       text: `
-    I'm a <span class="accent"> highly_technical</span> product designer.
-    <br>This.includes() { developing and designing physical and digital experiences, product strategy and project management };
-    <br>while (I'm!=software_engineer) {
-    I do have skills in = <span class="accent"><i class="fab fa-unity"></i> Unity</span>, <span class="accent"><i class="fas fa-code"></i> .NET</span>, <span class="accent"><i class="fab fa-node-js"></i> Node.js</span>, <span class="accent"><i class="fas fa-database"></i> SQL</span>;
+    <p>I'm a <span class="accent">highly_technical</span> product designer.</p>
+    <p>This.includes() { developing and designing physical and digital experiences, product strategy and project management };</p>
+    <p>while (I'm!=software_engineer) {</p>
+    <p>  I do have skills in = <span class="accent"><i class="fab fa-unity"></i> Unity</span>, <span class="accent"><i class="fas fa-code"></i> .NET</span>, <span class="accent"><i class="fab fa-node-js"></i> Node.js</span>, <span class="accent"><i class="fas fa-database"></i> SQL</span>;</p>
       `,
     },
   };
@@ -284,6 +284,7 @@ function setupHighlightsObserver() {
   const highlightsSection = document.querySelector(".highlights-section");
   const blackBackground = document.querySelector(".black-background");
   const highlightedTitles = document.querySelectorAll(".highlights-accent");
+  const hobbyItems = document.querySelectorAll(".hobby-item");
   const body = document.body;
 
   const root = document.documentElement;
@@ -296,14 +297,12 @@ function setupHighlightsObserver() {
 
   if (!highlightsSection || !blackBackground) return;
 
-  // Ensure transitions are set on all elements before any state changes
   body.style.transition = "background-color 1.5s ease";
   blackBackground.style.transition = "all 1.5s ease";
   highlightedTitles.forEach((title) => {
     title.style.transition = "color 1.5s ease";
   });
 
-  // Use lower threshold on mobile since the section is taller relative to viewport
   const isMobile = window.innerWidth <= 900;
   const observerOptions = {
     root: null,
@@ -316,7 +315,6 @@ function setupHighlightsObserver() {
       const isIntersecting = entry.isIntersecting;
 
       if (isIntersecting) {
-        // Use requestAnimationFrame to ensure all style changes happen together
         requestAnimationFrame(() => {
           body.style.backgroundColor = "white";
           blackBackground.style.color = fontColor;
@@ -324,11 +322,18 @@ function setupHighlightsObserver() {
           blackBackground.style.borderTopRightRadius = "40px";
           blackBackground.style.borderBottomRightRadius = "40px";
 
-          // Force a reflow to ensure color changes are applied after layout changes
           void blackBackground.offsetHeight;
 
           highlightedTitles.forEach((title) => {
             title.style.color = accentFontColor;
+          });
+
+          hobbyItems.forEach((item) => {
+            item.classList.add("animate-hobbies");
+            const icon = item.querySelector("i");
+            if (icon) {
+              icon.style.color = fontColor;
+            }
           });
         });
       } else {
@@ -339,11 +344,18 @@ function setupHighlightsObserver() {
           blackBackground.style.borderTopRightRadius = "0";
           blackBackground.style.borderBottomRightRadius = "0";
 
-          // Force a reflow to ensure color changes are applied after layout changes
           void blackBackground.offsetHeight;
 
           highlightedTitles.forEach((title) => {
             title.style.color = backgroundcolor;
+          });
+
+          hobbyItems.forEach((item) => {
+            item.classList.remove("animate-hobbies");
+            const icon = item.querySelector("i");
+            if (icon) {
+              icon.style.color = "black";
+            }
           });
         });
       }
@@ -354,10 +366,7 @@ function setupHighlightsObserver() {
   observer.observe(highlightsSection);
 }
 
-// Testimonial drag/scroll functionality for both mobile and desktop
 function initializeTestimonialDragScroll() {
-  // This function runs after testimonials are initialized by mobile.js or desktop.js
-  // It finds all testimonial scrollers (1 on mobile, 2 on desktop) and adds drag functionality
   const scrollers = document.querySelectorAll(".testimonials-scroller");
 
   scrollers.forEach((scroller) => {

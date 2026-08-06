@@ -24,10 +24,33 @@
     border-radius: var(--border-radius-large);
 
     .dynamic-text {
-      font-family: "JetBrains Mono", monospace;
-      color: var(--code-text);
-      white-space: pre-line;
-      font-size: clamp(1rem, 3vw, 2rem);
+      counter-reset: line-number;
+      counter-increment: line-number 0;
+      position: relative;
+      padding-left: clamp(2rem, 4vw, 3.5rem);
+
+      p {
+        font-family: "JetBrains Mono", monospace;
+        color: var(--code-text);
+        white-space: pre-line;
+        position: relative;
+        margin: 0.3rem 0;
+        display: block;
+        white-space: pre-wrap;
+        line-height: 1.7;
+
+        &::before {
+          position: absolute;
+          top: 0;
+          left: -2rem;
+          color: var(--light-font-color-muted);
+          user-select: none;
+          text-align: right;
+          content: counter(line-number);
+          counter-increment: line-number;
+          padding-right: 0.5rem;
+        }
+      }
     }
   }
 

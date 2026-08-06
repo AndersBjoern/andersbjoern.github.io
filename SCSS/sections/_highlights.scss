@@ -26,12 +26,94 @@
       .highlights-accent {
         transition: color 1.5s ease;
       }
+
+      .hobbies-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: clamp(5rem, 5vw, 10rem);
+        margin-top: 1.5rem;
+
+        .hobby-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+          flex: 0 1 auto;
+          min-width: 80px;
+
+          i {
+            font-size: clamp(2rem, 3vw, 4.5rem);
+            color: black;
+            transition: color 1.5s ease;
+          }
+
+          span {
+            font-size: 14px;
+            text-align: center;
+            font-weight: 500;
+            max-width: 120px;
+            line-height: 1.3;
+          }
+
+          // Animation only starts when animate-hobbies class is added
+          &.animate-hobbies i {
+            animation: hobby-wave 3s ease-in infinite;
+          }
+
+          // Stagger animation delay for wave effect (2s animation spread across 5 icons)
+          &.animate-hobbies:nth-child(1) i {
+            animation-delay: 0s;
+          }
+          &.animate-hobbies:nth-child(2) i {
+            animation-delay: 0.2s;
+          }
+          &.animate-hobbies:nth-child(3) i {
+            animation-delay: 0.4s;
+          }
+          &.animate-hobbies:nth-child(4) i {
+            animation-delay: 0.6s;
+          }
+          &.animate-hobbies:nth-child(5) i {
+            animation-delay: 0.8s;
+          }
+        }
+      }
     }
+  }
+}
+
+@keyframes hobby-wave {
+  0%,
+  75% {
+    transform: scale(1);
+    color: var(--font-color-muted);
+  }
+  86.66% {
+    // Peak
+    transform: scale(1.2);
+    color: var(--accent-color-1);
+  }
+  100% {
+    // Back to default
+    transform: scale(1);
+    color: var(--font-color-muted);
   }
 }
 
 @media screen and (max-width: 900px) {
   .highlights-section .black-background .highlights-content {
     padding-left: 20px;
+
+    .hobbies-grid {
+      gap: clamp(2rem, 4vw, 4rem);
+
+      .hobby-item {
+        min-width: 70px;
+
+        span {
+          font-size: 12px;
+        }
+      }
+    }
   }
 }
