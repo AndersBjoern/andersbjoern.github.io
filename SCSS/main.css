@@ -1657,7 +1657,6 @@ body {
 }
 
 .quote-container {
-  text-align: right;
   padding: var(--section-padding);
 }
 .quote-container .quote-text {
@@ -1682,26 +1681,32 @@ body {
 }
 .quote-container .quote-author {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   gap: 0.75rem;
+}
+.quote-container .quote-author .quote-author-dash {
+  width: 2rem;
+  height: 2px;
+  background-color: var(--accent-color-1);
+  border-radius: 999px;
+}
+.quote-container .quote-author h3 {
   font-size: var(--font-size-h4);
   color: var(--font-color-muted);
   font-style: italic;
   font-weight: var(--font-weight-light);
   margin: 0;
 }
-.quote-container .quote-author::before {
-  content: "";
-  width: 2rem;
-  height: 2px;
-  background-color: var(--accent-color-1);
-  border-radius: 999px;
+
+.quote-container.right {
+  text-align: right;
+}
+.quote-container.right .quote-author {
+  justify-content: flex-end;
 }
 
 @media screen and (max-width: 900px) {
   .quote-container {
-    text-align: right;
     padding: var(--mobile-padding);
   }
 }
@@ -1760,12 +1765,6 @@ body {
   background-color: var(--skills-background-color);
   box-shadow: var(--skills-section-tags-shadow);
 }
-.skills-section .tag-list li.company-logo img {
-  height: 32px;
-  width: auto;
-  display: block;
-  color: white;
-}
 .skills-section .tag-list li.skill-title {
   background-color: transparent;
   box-shadow: none;
@@ -1774,16 +1773,17 @@ body {
 .skills-section .tag-list li.company-logo {
   background-color: transparent;
   box-shadow: none;
-  padding: 0.8rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .skills-section .tag-list li.company-logo img {
-  height: clamp(40px, 5vw, 80px);
-  width: auto;
+  height: 40px;
   -o-object-fit: contain;
      object-fit: contain;
+}
+.skills-section .tag-list li.company-logo img#legoLogo {
+  height: 50px;
 }
 
 @keyframes scroll {
