@@ -144,18 +144,6 @@ function initializeVideoScrollTrigger() {
       } catch (error) {
         console.log("Video autoplay blocked (likely mobile policy):", error);
 
-        // If autoplay fails, we still want to trigger the visual effects
-        // This will show the video frame and transition the mask/description
-        const videoContainer = video.closest(".videoplayer-container");
-        const projectArticle = video.closest("article.project-article");
-        const projectDescription = projectArticle?.querySelector(
-          ".project-description",
-        );
-
-        if (videoContainer) videoContainer.classList.add("playing");
-        if (projectDescription)
-          projectDescription.classList.add("video-playing");
-
         // Add a visual indicator that user needs to tap to play
         if (!video.hasAttribute("data-autoplay-failed")) {
           video.setAttribute("data-autoplay-failed", "true");
@@ -268,26 +256,49 @@ function initializeVideoMaskEffect() {
     video.addEventListener("loadedmetadata", ensureVideoFrame);
     video.addEventListener("loadeddata", ensureVideoFrame);
 
-    video.addEventListener("play", () => {
+    // Helper function to add playing classes
+    const addPlayingClasses = () => {
       if (videoContainer) videoContainer.classList.add("playing");
       if (projectDescription) projectDescription.classList.add("video-playing");
-    });
+    };
 
-    video.addEventListener("pause", () => {
+    // Helper function to remove playing classes
+    const removePlayingClasses = () => {
       if (videoContainer) videoContainer.classList.remove("playing");
       if (projectDescription)
         projectDescription.classList.remove("video-playing");
-    });
+    };
 
-    // Handle loading states
+    // Use 'playing' event instead of 'play' - fires when video actually starts playing
+    video.addEventListener("playing", addPlayingClasses);
+
+    // Also listen to 'play' as a backup
+    video.addEventListener("play", addPlayingClasses);
+
+    video.addEventListener("pause", removePlayingClasses);
+
+    video.addEventListener("ended", removePlayingClasses);
+
+    // Handle loading states - but re-add classes when done buffering
     video.addEventListener("waiting", () => {
-      // Video is buffering, keep the mask
-      if (videoContainer) videoContainer.classList.remove("playing");
+      // Video is buffering, optionally remove the mask (commented out to keep animation)
+      // if (videoContainer) videoContainer.classList.remove("playing");
     });
 
     video.addEventListener("canplay", () => {
       // Video can play, ensure first frame is visible
       ensureVideoFrame();
+      // If video is not paused, ensure playing classes are applied
+      if (!video.paused) {
+        addPlayingClasses();
+      }
+    });
+
+    video.addEventListener("canplaythrough", () => {
+      // Video can play through without interruption
+      if (!video.paused) {
+        addPlayingClasses();
+      }
     });
   });
 }

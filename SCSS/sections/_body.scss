@@ -24,7 +24,8 @@ $fonts:
 p,
 td,
 span,
-li {
+li,
+blockquote {
   @include font-style(var(--font-size-p));
   font-family: var(--font-roboto);
   font-weight: var(--font-weight-medium);

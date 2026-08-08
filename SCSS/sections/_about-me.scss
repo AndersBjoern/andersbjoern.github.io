@@ -77,16 +77,78 @@
   }
 
   .about-me-text {
-    line-height: var(--about-me-p-line-height);
     margin-bottom: clamp(40px, 7vw, 80px);
-    .inline-image {
-      height: 70px;
-      width: 120px;
-      border-radius: 50px;
-      object-fit: cover;
-      border: var(--about-me-content-image-border);
-      vertical-align: middle;
-      margin: 0 10px;
+
+    p {
+      margin-bottom: 1.5em;
+      line-height: 1.7;
+
+      &::first-letter {
+        font-family: var(--font-expletus);
+        font-size: 2em;
+        font-style: italic;
+        font-weight: bold;
+        float: left;
+        line-height: 0.8;
+        margin-right: 0.2em;
+        color: var(--accent-color-1);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .about-me-quote {
+      margin: 2em 0;
+      padding: 1.5em 2em;
+      font-style: italic;
+      font-size: 1.1em;
+      line-height: 1.6;
+      position: relative;
+
+      &::before,
+      &::after {
+        font-size: 3em;
+        position: absolute;
+        font-family: "Alef", sans-serif;
+        line-height: 0.8;
+        font-weight: 700;
+        color: var(--testimonials-qoute-color);
+      }
+      &::before {
+        content: "“";
+        left: 0;
+        top: 0;
+      }
+
+      &::after {
+        content: "”";
+        right: 0;
+        bottom: 0;
+      }
+
+      .quote-author {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1.5em;
+        font-style: normal;
+
+        .quote-author-dash {
+          width: 2rem;
+          height: 2px;
+          background-color: var(--accent-color-1);
+          border-radius: 999px;
+        }
+
+        .author-name {
+          font-size: var(--font-size-h6);
+          color: var(--font-color-muted);
+          font-style: italic;
+          font-weight: var(--font-weight-light);
+        }
+      }
     }
   }
 

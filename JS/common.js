@@ -203,13 +203,11 @@ function setupSkillsAnimation() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const scrollers = document.querySelectorAll(".skills-scroller");
-  console.log(scrollers.length);
   scrollers.forEach((scroller) => {
     scroller.setAttribute("data-animated", true);
 
     const scrollerInner = scroller.querySelector(".scroller_inner");
     const scrollerContent = Array.from(scrollerInner.children);
-    console.log(scrollerContent.length);
     scrollerContent.forEach((item) => {
       const duplicatedItem = item.cloneNode(true);
       duplicatedItem.setAttribute("aria-hidden", true);

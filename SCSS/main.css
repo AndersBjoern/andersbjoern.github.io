@@ -228,7 +228,8 @@ button {
 p,
 td,
 span,
-li {
+li,
+blockquote {
   font-size: var(--font-size-p);
   margin: var(--font-margin-bottom);
   font-family: var(--font-roboto);
@@ -1002,9 +1003,6 @@ body {
     -o-object-fit: contain;
        object-fit: contain;
   }
-  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container {
-    /* PDP logo container */
-  }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .project-logo:has(img[src*=pdpLogo]) {
     max-height: 40px;
     margin-bottom: var(--logo-margin-bottom);
@@ -1014,7 +1012,10 @@ body {
     flex-direction: column;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .text-content h3 {
-    margin-bottom: 0;
+    margin: 0.3rem 0 1rem 0;
+  }
+  .section-wrapper .project-article .article-content-wrapper .project-description .project-title-container .text-content .project-summary {
+    line-height: 1.7;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .icon-text-pair {
     display: flex;
@@ -1114,6 +1115,7 @@ body {
     margin-bottom: 0;
   }
   .section-wrapper .project-article .article-content-wrapper .project-description .img-container-wrapper .img-container {
+    position: relative;
     overflow: hidden;
     border-radius: var(--border-radius-medium);
     border: 1px solid #d0d0d0;
@@ -1125,6 +1127,7 @@ body {
     display: block;
     -o-object-fit: cover;
        object-fit: cover;
+    border-radius: var(--border-radius-medium);
   }
   .section-wrapper .project-article .article-content-wrapper .project-results {
     margin-bottom: var(--margin-bottom);
@@ -1286,6 +1289,22 @@ body {
   }
   .section-wrapper .project-article .article-content-wrapper .project-gallery .thumbnail-gallery .gallery-item:hover::after {
     opacity: 0;
+  }
+  .section-wrapper .project-article .article-content-wrapper .img-container-wrapper {
+    position: relative;
+  }
+  .section-wrapper .project-article .article-content-wrapper .img-container-wrapper .company-logo-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--article-background);
+    padding: 12px 16px;
+    border-bottom-left-radius: var(--border-radius-medium);
+    box-shadow: var(--light-card-shadow);
+    z-index: 10;
+    color: var(--light-font-color-muted);
+    font-family: var(--font-roboto);
+    font-size: 14px;
   }
 }
 .rows-wrapper {
@@ -1969,18 +1988,69 @@ body {
   font-family: var(--font-expletus);
 }
 .about-me-container .about-me-text {
-  line-height: var(--about-me-p-line-height);
   margin-bottom: clamp(40px, 7vw, 80px);
 }
-.about-me-container .about-me-text .inline-image {
-  height: 70px;
-  width: 120px;
-  border-radius: 50px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border: var(--about-me-content-image-border);
-  vertical-align: middle;
-  margin: 0 10px;
+.about-me-container .about-me-text p {
+  margin-bottom: 1.5em;
+  line-height: 1.7;
+}
+.about-me-container .about-me-text p::first-letter {
+  font-family: var(--font-expletus);
+  font-size: 2em;
+  font-style: italic;
+  font-weight: bold;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.2em;
+  color: var(--accent-color-1);
+}
+.about-me-container .about-me-text p:last-child {
+  margin-bottom: 0;
+}
+.about-me-container .about-me-text .about-me-quote {
+  margin: 2em 0;
+  padding: 1.5em 2em;
+  font-style: italic;
+  font-size: 1.1em;
+  line-height: 1.6;
+  position: relative;
+}
+.about-me-container .about-me-text .about-me-quote::before, .about-me-container .about-me-text .about-me-quote::after {
+  font-size: 3em;
+  position: absolute;
+  font-family: "Alef", sans-serif;
+  line-height: 0.8;
+  font-weight: 700;
+  color: var(--testimonials-qoute-color);
+}
+.about-me-container .about-me-text .about-me-quote::before {
+  content: "“";
+  left: 0;
+  top: 0;
+}
+.about-me-container .about-me-text .about-me-quote::after {
+  content: "”";
+  right: 0;
+  bottom: 0;
+}
+.about-me-container .about-me-text .about-me-quote .quote-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5em;
+  font-style: normal;
+}
+.about-me-container .about-me-text .about-me-quote .quote-author .quote-author-dash {
+  width: 2rem;
+  height: 2px;
+  background-color: var(--accent-color-1);
+  border-radius: 999px;
+}
+.about-me-container .about-me-text .about-me-quote .quote-author .author-name {
+  font-size: var(--font-size-h6);
+  color: var(--font-color-muted);
+  font-style: italic;
+  font-weight: var(--font-weight-light);
 }
 .about-me-container .certifications .cert-container {
   max-height: 300px;
