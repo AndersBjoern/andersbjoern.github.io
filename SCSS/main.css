@@ -533,8 +533,8 @@ body {
     width: 60px;
     height: 60px;
   }
-  .linkedin-cta h4 .arrow {
-    font-size: 1.1rem;
+  .linkedin-cta h5 .arrow {
+    font-size: 1.2rem;
   }
 }
 .connect-button {
@@ -694,7 +694,7 @@ body {
   inset-block-start: 50%;
   translate: -50% -50%;
   z-index: -1;
-  width: 180%;
+  width: 300%;
   aspect-ratio: 1;
   background: linear-gradient(-50deg, transparent, var(--accent-color-1), transparent);
   -webkit-mask-image: radial-gradient(circle at bottom, transparent 40%, black);

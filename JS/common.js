@@ -35,7 +35,6 @@ function dynamicTextBoxForAudience() {
 
   const audienceData = {
     anyone: {
-      image: "../Images/heroBackground.png",
       theme: "audience-anyone",
       text: `
         I'm a Project Leader & Product Innovator, creating ecosystems that enable people to work, learn and play.
@@ -46,17 +45,15 @@ function dynamicTextBoxForAudience() {
     },
 
     recruiters: {
-      image: "../Images/heroBackground.png",
       theme: "audience-recruiters",
       text: `
         I’ve worked across digital products, interactive play, immersive XR and digital-physical experiences, taking ideas from discovery and user research through prototyping, development and delivery - while keeping teams focused on what actually creates value.
         <br><br>
-        My strength lies in translating deep user and market insights into actionable product strategies that connect vision to execution.
+        I’m particularly drawn to products that connect multiple systems, disciplines or physical and digital touchpoints, where creating the right experience means understanding not just the interface, but the ecosystem behind it.
       `,
     },
 
     engineers: {
-      image: "../Images/heroBackground.png",
       theme: "audience-engineers",
       text: `
     <p>I'm a <span class="accent">highly_technical</span> product designer.</p>
@@ -95,12 +92,6 @@ function dynamicTextBoxForAudience() {
         dynamicText.innerHTML = data.text;
         sectionBottom.className = `landing-section-bottom ${data.theme}`;
 
-        // Update background image
-        sectionBackground.style.setProperty(
-          "--background-image",
-          `url('${data.image}')`,
-        );
-
         // Fade in container
         contentContainer.style.opacity = 1;
       }, 300);
@@ -116,12 +107,6 @@ function dynamicTextBoxForAudience() {
         // Update content and theme
         dynamicText.innerHTML = data.text;
         sectionBottom.className = `landing-section-bottom ${data.theme}`;
-
-        // Update background image
-        sectionBackground.style.setProperty(
-          "--background-image",
-          `url('${data.image}')`,
-        );
 
         // Allow container to measure new content height
         contentContainer.style.height = "auto";
