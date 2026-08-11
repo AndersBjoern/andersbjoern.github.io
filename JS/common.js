@@ -38,7 +38,10 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-anyone",
       text: `
-        I connect user needs, technology, design and business goals to turn scattered ideas into experiences that work
+        I'm a Project Leader & Product Innovator, creating ecosystems that enable people to work, learn and play.
+        <br><br>
+        Throughout my career, I've led multidisciplinary teams, driven product development and contributed with software and UI design to products that are live today
+    
       `,
     },
 
@@ -46,9 +49,9 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-recruiters",
       text: `
-        I’m a product developer and project leader with a background in software development, UX, interaction design and product strategy. I help cross-functional teams turn complex problems into clear product direction.
-        <br><br>
         I’ve worked across digital products, interactive play, immersive XR and digital-physical experiences, taking ideas from discovery and user research through prototyping, development and delivery - while keeping teams focused on what actually creates value.
+        <br><br>
+        My strength lies in translating deep user and market insights into actionable product strategies that connect vision to execution.
       `,
     },
 
