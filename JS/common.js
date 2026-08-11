@@ -38,7 +38,7 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-anyone",
       text: `
-        I design and build products and experiences that connect digital technology with real-world interactions in meaningful and intuitive ways.
+        I connect user needs, technology, design and business goals to turn scattered ideas into experiences that work
       `,
     },
 
@@ -46,17 +46,9 @@ function dynamicTextBoxForAudience() {
       image: "../Images/heroBackground.png",
       theme: "audience-recruiters",
       text: `
-        I design and build connected, cross-platform product experiences at the intersection of UX, systems thinking, and product strategy.
-        <br>
-        I focus on simplifying complexity while aligning business goals with user needs.
-      `,
-    },
-
-    "product-designers": {
-      image: "../Images/heroBackground.png",
-      theme: "audience-product-designers",
-      text: `
-        At the intersection of UX, systems thinking, and product strategy - I shape connected experiences across digital and physical ecosystems.
+        I’m a product developer and project leader with a background in software development, UX, interaction design and product strategy. I help cross-functional teams turn complex problems into clear product direction.
+        <br><br>
+        I’ve worked across digital products, interactive play, immersive XR and digital-physical experiences, taking ideas from discovery and user research through prototyping, development and delivery - while keeping teams focused on what actually creates value.
       `,
     },
 
@@ -65,9 +57,10 @@ function dynamicTextBoxForAudience() {
       theme: "audience-engineers",
       text: `
     <p>I'm a <span class="accent">highly_technical</span> product designer.</p>
-    <p>This.includes() { developing and designing physical and digital experiences, product strategy and project management };</p>
-    <p>while (I'm!=software_engineer) {</p>
-    <p>  I do have skills in = <span class="accent"><i class="fab fa-unity"></i> Unity</span>, <span class="accent"><i class="fas fa-code"></i> .NET</span>, <span class="accent"><i class="fab fa-node-js"></i> Node.js</span>, <span class="accent"><i class="fas fa-database"></i> SQL</span>;</p>
+    <p>This.includes() {</p>
+    <p>   developing and designing physical and digital experiences, product strategy and project management };</p>
+    <p>while (I'm != software_engineer) {</p>
+    <p>   I do have skills in = <span class="accent"><i class="fab fa-unity"></i> Unity</span>, <span class="accent"><i class="fas fa-code"></i> .NET</span>, <span class="accent"><i class="fab fa-node-js"></i> Node.js</span>, <span class="accent"><i class="fas fa-database"></i> SQL</span>;</p>
       `,
     },
   };
@@ -262,6 +255,8 @@ function animateCounter(element, targetNumber) {
   const totalFrames = Math.round((countDuration / 1000) * frameRate);
   const increment = targetNumber / totalFrames;
 
+  const suffix = element.dataset.suffix || "";
+
   let currentNumber = 0;
   let frame = 0;
 
@@ -274,7 +269,7 @@ function animateCounter(element, targetNumber) {
       clearInterval(counterInterval);
     }
 
-    element.textContent = `${Math.round(currentNumber)}+`;
+    element.textContent = `${Math.round(currentNumber)}${suffix}`;
   }, 1000 / frameRate);
 }
 

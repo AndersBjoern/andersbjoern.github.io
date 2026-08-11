@@ -6,8 +6,8 @@
       font-family 0.3s ease,
       font-size 0.3s ease,
       color 0.3s ease;
-    font-size: clamp(1.3rem, 3.5vw, 2.5rem);
-    line-height: 1.25;
+    font-size: clamp(1.15rem, 3vw, 2.2rem);
+    line-height: 1.5;
     font-weight: 500;
   }
 }
@@ -27,7 +27,7 @@
       counter-reset: line-number;
       counter-increment: line-number 0;
       position: relative;
-      padding-left: clamp(2rem, 4vw, 3.5rem);
+      padding-left: clamp(1rem, 4vw, 3.5rem);
 
       p {
         font-family: "JetBrains Mono", monospace;
@@ -42,7 +42,7 @@
         &::before {
           position: absolute;
           top: 0;
-          left: -2rem;
+          left: -3rem;
           color: var(--light-font-color-muted);
           user-select: none;
           text-align: right;
@@ -58,5 +58,17 @@
     color: var(--accent-color-1);
     font-weight: 600;
     font-size: inherit;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .dynamic-text-box .dynamic-text {
+    line-height: 1.7;
+  }
+  .audience-engineers
+    .landing-section-content-container
+    .dynamic-text
+    p::before {
+    left: -1.7rem;
   }
 }

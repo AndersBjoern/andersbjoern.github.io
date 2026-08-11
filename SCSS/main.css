@@ -432,8 +432,8 @@ body {
 }
 .dynamic-text-box .dynamic-text {
   transition: opacity 0.2s ease, font-family 0.3s ease, font-size 0.3s ease, color 0.3s ease;
-  font-size: clamp(1.3rem, 3.5vw, 2.5rem);
-  line-height: 1.25;
+  font-size: clamp(1.15rem, 3vw, 2.2rem);
+  line-height: 1.5;
   font-weight: 500;
 }
 
@@ -450,7 +450,7 @@ body {
   counter-reset: line-number;
   counter-increment: line-number 0;
   position: relative;
-  padding-left: clamp(2rem, 4vw, 3.5rem);
+  padding-left: clamp(1rem, 4vw, 3.5rem);
 }
 .audience-engineers .landing-section-content-container .dynamic-text p {
   font-family: "JetBrains Mono", monospace;
@@ -465,7 +465,7 @@ body {
 .audience-engineers .landing-section-content-container .dynamic-text p::before {
   position: absolute;
   top: 0;
-  left: -2rem;
+  left: -3rem;
   color: var(--light-font-color-muted);
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -481,6 +481,14 @@ body {
   font-size: inherit;
 }
 
+@media screen and (max-width: 900px) {
+  .dynamic-text-box .dynamic-text {
+    line-height: 1.7;
+  }
+  .audience-engineers .landing-section-content-container .dynamic-text p::before {
+    left: -1.7rem;
+  }
+}
 .linkedin-cta {
   display: inline-flex;
   align-items: center;
@@ -500,11 +508,11 @@ body {
   -o-object-fit: cover;
      object-fit: cover;
 }
-.linkedin-cta h4 {
+.linkedin-cta h5 {
   font-weight: bold;
   margin-bottom: 0;
 }
-.linkedin-cta h4 .arrow {
+.linkedin-cta h5 .arrow {
   margin-left: 10px;
   font-size: 1.8rem;
   font-weight: 900;
@@ -671,8 +679,8 @@ body {
   background: radial-gradient(circle at var(--position) var(--position), var(--accent-color-3) calc(var(--position) / 4), transparent 0) padding-box;
   background-size: var(--space) var(--space);
   background-repeat: space;
-  -webkit-mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
-          mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
+  -webkit-mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 40% 60%, black);
+          mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 40% 60%, black);
   border-radius: inherit;
   opacity: 0.4;
   animation: var(--animation, gradient-angle linear infinite) var(--duration, 3s);
@@ -686,7 +694,7 @@ body {
   inset-block-start: 50%;
   translate: -50% -50%;
   z-index: -1;
-  width: 150%;
+  width: 180%;
   aspect-ratio: 1;
   background: linear-gradient(-50deg, transparent, var(--accent-color-1), transparent);
   -webkit-mask-image: radial-gradient(circle at bottom, transparent 40%, black);
