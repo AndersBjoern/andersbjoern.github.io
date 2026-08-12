@@ -461,28 +461,57 @@ function initializeTouchDrag(scroller) {
   }
 
   // Touch events for mobile
+  let startY = 0;
+  let touchDirection = null;
+
   function handleTouchStart(e) {
     isDown = true;
     isDragging = false;
+    touchDirection = null;
     const touch = e.touches[0];
     startX = touch.pageX;
+    startY = touch.pageY;
     pauseAnimation();
   }
 
   function handleTouchMove(e) {
     if (!isDown) return;
-    e.preventDefault();
-    isDragging = true;
 
     const touch = e.touches[0];
     const currentX = touch.pageX;
+    const currentY = touch.pageY;
     const deltaX = currentX - startX;
-    updateDragOffset(dragOffset + deltaX);
-    startX = currentX;
+    const deltaY = currentY - startY;
+
+    // Determine scroll direction on first significant movement
+    if (touchDirection === null) {
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
+
+      // Only determine direction if movement is significant enough (>10px)
+      if (absX > 10 || absY > 10) {
+        // User is scrolling more horizontally than vertically
+        if (absX > absY) {
+          touchDirection = "horizontal";
+        } else {
+          touchDirection = "vertical";
+        }
+      }
+    }
+
+    // Only handle horizontal scrolling and prevent default
+    if (touchDirection === "horizontal") {
+      e.preventDefault();
+      isDragging = true;
+      updateDragOffset(dragOffset + deltaX);
+      startX = currentX;
+    }
+    // If vertical, let the browser handle the scroll naturally (don't prevent default)
   }
 
   function handleTouchEnd() {
     isDown = false;
+    touchDirection = null;
     if (isDragging) {
       resumeAnimation();
       isDragging = false;
