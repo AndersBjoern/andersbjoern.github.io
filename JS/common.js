@@ -544,16 +544,24 @@ function initializeTouchDrag(scroller) {
   scrollerInner.addEventListener("mouseup", handleMouseEnd);
   scrollerInner.addEventListener("mouseleave", handleMouseEnd);
 
-  // Add touch event listeners
-  scrollerInner.addEventListener("touchstart", handleTouchStart, {
-    passive: true, // Passive since we don't prevent default on touchstart
-  });
-  scrollerInner.addEventListener("touchmove", handleTouchMove, {
-    passive: false, // Non-passive so we can preventDefault for horizontal scroll
-  });
-  scrollerInner.addEventListener("touchend", handleTouchEnd, {
-    passive: true,
-  });
+  // Only add touch event listeners on devices that also support mouse (like tablets)
+  // For pure touch devices (phones), let native scrolling handle everything
+  const hasMouse = window.matchMedia(
+    "(hover: hover) and (pointer: fine)",
+  ).matches;
+
+  if (hasMouse) {
+    // Add touch event listeners only for hybrid devices
+    scrollerInner.addEventListener("touchstart", handleTouchStart, {
+      passive: true, // Passive since we don't prevent default on touchstart
+    });
+    scrollerInner.addEventListener("touchmove", handleTouchMove, {
+      passive: false, // Non-passive so we can preventDefault for horizontal scroll
+    });
+    scrollerInner.addEventListener("touchend", handleTouchEnd, {
+      passive: true,
+    });
+  }
 
   // Prevent click events when dragging
   scrollerInner.addEventListener("click", (e) => {
