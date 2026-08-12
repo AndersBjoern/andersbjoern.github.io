@@ -511,11 +511,12 @@ function initializeTouchDrag(scroller) {
 
   function handleTouchEnd() {
     isDown = false;
+
+    // Always resume animation on touch end, regardless of drag state
+    resumeAnimation();
+
     touchDirection = null;
-    if (isDragging) {
-      resumeAnimation();
-      isDragging = false;
-    }
+    isDragging = false;
   }
 
   // Hover pause functionality
