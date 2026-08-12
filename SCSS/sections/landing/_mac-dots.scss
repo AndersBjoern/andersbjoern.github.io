@@ -1,0 +1,84 @@
+// Mac-style dots for IDE design
+
+.mac-dots {
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  .mac-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.red {
+      background-color: #ff605c;
+    }
+
+    &.yellow {
+      background-color: #ffbd44;
+    }
+
+    &.green {
+      background-color: #00ca4e;
+    }
+  }
+}
+
+// Show dots when engineer audience is selected
+.landing-section-bottom.audience-engineers .mac-dots {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.4s ease 0.2s,
+    transform 0.4s ease 0.2s;
+}
+
+// Animation variants for each dot (staggered appearance)
+.landing-section-bottom.audience-engineers .mac-dots {
+  .mac-dot {
+    animation: dotAppear 0.3s ease forwards;
+    opacity: 0;
+    transform: scale(0);
+
+    &.red {
+      animation-delay: 0.2s;
+    }
+
+    &.yellow {
+      animation-delay: 0.3s;
+    }
+
+    &.green {
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+@keyframes dotAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
