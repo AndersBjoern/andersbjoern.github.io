@@ -188,10 +188,20 @@
       border-radius: 999px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+
+      i {
+        margin-left: 8px;
+        font-size: 0.85em;
+        transition: transform 0.3s ease;
+      }
     }
 
     .show-more-btn:hover {
       background-color: var(--accent-color-1);
+
+      i {
+        transform: translateY(2px);
+      }
     }
   }
 }

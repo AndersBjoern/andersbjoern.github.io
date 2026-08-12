@@ -66,8 +66,18 @@
         z-index: 2;
         transition: background-color 0.3s ease;
 
+        i {
+          margin-left: 8px;
+          font-size: 0.85em;
+          transition: transform 0.3s ease;
+        }
+
         &:hover {
           background-color: var(--accent-color-1);
+
+          i {
+            transform: translateY(2px);
+          }
         }
       }
 

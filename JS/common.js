@@ -28,7 +28,6 @@ function dynamicTextBoxForAudience() {
     }, 100);
   });
 
-  // Observe the landing section bottom for size changes
   if (sectionBottom) {
     resizeObserver.observe(sectionBottom);
   }
@@ -150,9 +149,12 @@ function initializeShowMoreButton() {
     showMoreButton.addEventListener("click", function () {
       const container = document.querySelector(".cert-container");
       container.classList.toggle("show-all");
-      this.textContent = container.classList.contains("show-all")
-        ? "Show Less"
-        : "Show More";
+
+      // Preserve the icon by updating innerHTML instead of textContent
+      const isExpanded = container.classList.contains("show-all");
+      this.innerHTML = isExpanded
+        ? 'Show Less <i class="fas fa-chevron-up"></i>'
+        : 'Show More <i class="fas fa-chevron-down"></i>';
     });
   }
 }
@@ -285,7 +287,6 @@ function animateCounter(element, targetNumber, onComplete) {
     element.textContent = `${Math.round(currentNumber)}${suffix}`;
   }, 1000 / frameRate);
 
-  // Store interval ID so it can be cancelled if needed
   if (numberElement) {
     numberElement.dataset.intervalId = counterInterval;
   }
