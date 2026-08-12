@@ -461,68 +461,32 @@ function initializeTouchDrag(scroller) {
   }
 
   // Touch events for mobile
-  let startY = 0;
-  let touchDirection = null;
-
   function handleTouchStart(e) {
     isDown = true;
     isDragging = false;
-    touchDirection = null;
     const touch = e.touches[0];
     startX = touch.pageX;
-    startY = touch.pageY;
-    // Don't pause animation yet - wait to determine scroll direction
+    pauseAnimation();
   }
 
   function handleTouchMove(e) {
     if (!isDown) return;
+    e.preventDefault();
+    isDragging = true;
 
     const touch = e.touches[0];
     const currentX = touch.pageX;
-    const currentY = touch.pageY;
     const deltaX = currentX - startX;
-    const deltaY = currentY - startY;
-
-    // Determine scroll direction on first significant movement
-    if (touchDirection === null) {
-      const absX = Math.abs(deltaX);
-      const absY = Math.abs(deltaY);
-
-      // Only determine direction if movement is significant enough (>10px)
-      if (absX > 10 || absY > 10) {
-        // User is scrolling more horizontally than vertically
-        if (absX > absY) {
-          touchDirection = "horizontal";
-          // Only pause animation for horizontal scrolling
-          pauseAnimation();
-        } else {
-          touchDirection = "vertical";
-          // For vertical scroll, stop tracking this gesture
-          isDown = false;
-        }
-      }
-    }
-
-    // Only handle horizontal scrolling and prevent default
-    if (touchDirection === "horizontal") {
-      e.preventDefault();
-      isDragging = true;
-      updateDragOffset(dragOffset + deltaX);
-      startX = currentX;
-    }
-    // If vertical, let the browser handle the scroll naturally (don't prevent default)
+    updateDragOffset(dragOffset + deltaX);
+    startX = currentX;
   }
 
   function handleTouchEnd() {
     isDown = false;
-
-    // Only resume animation if we were doing horizontal dragging
     if (isDragging) {
       resumeAnimation();
       isDragging = false;
     }
-
-    touchDirection = null;
   }
 
   // Hover pause functionality
@@ -544,24 +508,14 @@ function initializeTouchDrag(scroller) {
   scrollerInner.addEventListener("mouseup", handleMouseEnd);
   scrollerInner.addEventListener("mouseleave", handleMouseEnd);
 
-  // Only add touch event listeners on devices that also support mouse (like tablets)
-  // For pure touch devices (phones), let native scrolling handle everything
-  const hasMouse = window.matchMedia(
-    "(hover: hover) and (pointer: fine)",
-  ).matches;
-
-  if (hasMouse) {
-    // Add touch event listeners only for hybrid devices
-    scrollerInner.addEventListener("touchstart", handleTouchStart, {
-      passive: true, // Passive since we don't prevent default on touchstart
-    });
-    scrollerInner.addEventListener("touchmove", handleTouchMove, {
-      passive: false, // Non-passive so we can preventDefault for horizontal scroll
-    });
-    scrollerInner.addEventListener("touchend", handleTouchEnd, {
-      passive: true,
-    });
-  }
+  // Add touch event listeners
+  scrollerInner.addEventListener("touchstart", handleTouchStart, {
+    passive: false,
+  });
+  scrollerInner.addEventListener("touchmove", handleTouchMove, {
+    passive: false,
+  });
+  scrollerInner.addEventListener("touchend", handleTouchEnd);
 
   // Prevent click events when dragging
   scrollerInner.addEventListener("click", (e) => {
