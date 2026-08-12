@@ -471,7 +471,7 @@ function initializeTouchDrag(scroller) {
     const touch = e.touches[0];
     startX = touch.pageX;
     startY = touch.pageY;
-    pauseAnimation();
+    // Don't pause animation yet - wait to determine scroll direction
   }
 
   function handleTouchMove(e) {
@@ -493,8 +493,12 @@ function initializeTouchDrag(scroller) {
         // User is scrolling more horizontally than vertically
         if (absX > absY) {
           touchDirection = "horizontal";
+          // Only pause animation for horizontal scrolling
+          pauseAnimation();
         } else {
           touchDirection = "vertical";
+          // For vertical scroll, stop tracking this gesture
+          isDown = false;
         }
       }
     }
@@ -512,11 +516,13 @@ function initializeTouchDrag(scroller) {
   function handleTouchEnd() {
     isDown = false;
 
-    // Always resume animation on touch end, regardless of drag state
-    resumeAnimation();
+    // Only resume animation if we were doing horizontal dragging
+    if (isDragging) {
+      resumeAnimation();
+      isDragging = false;
+    }
 
     touchDirection = null;
-    isDragging = false;
   }
 
   // Hover pause functionality
