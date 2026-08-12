@@ -546,12 +546,14 @@ function initializeTouchDrag(scroller) {
 
   // Add touch event listeners
   scrollerInner.addEventListener("touchstart", handleTouchStart, {
-    passive: false,
+    passive: true, // Passive since we don't prevent default on touchstart
   });
   scrollerInner.addEventListener("touchmove", handleTouchMove, {
-    passive: false,
+    passive: false, // Non-passive so we can preventDefault for horizontal scroll
   });
-  scrollerInner.addEventListener("touchend", handleTouchEnd);
+  scrollerInner.addEventListener("touchend", handleTouchEnd, {
+    passive: true,
+  });
 
   // Prevent click events when dragging
   scrollerInner.addEventListener("click", (e) => {

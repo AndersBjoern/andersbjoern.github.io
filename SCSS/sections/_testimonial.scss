@@ -15,6 +15,7 @@
   display: flex;
   flex-wrap: nowrap;
   width: fit-content;
+  touch-action: manipulation; /* Allow scrolling in all directions but disable double-tap zoom */
 }
 
 .testimonials-scroller[data-animated="true"] {
