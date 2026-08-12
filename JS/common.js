@@ -204,26 +204,47 @@ function setupNumberAnimations() {
 
   const observerOptions = {
     root: null,
-    rootMargin: "0px",
-    threshold: 0.8,
+    rootMargin: "-10% 0px -10% 0px", // Add margin to prevent edge flickering
+    threshold: 0.5,
   };
 
   const observerCallback = (entries) => {
     entries.forEach((entry) => {
+      const numberElement = entry.target;
+      const h3 = numberElement.querySelector("h3");
+      if (!h3) return;
+
       if (entry.isIntersecting) {
-        const numberElement = entry.target;
-        const h3 = numberElement.querySelector("h3");
-        if (!h3) return;
+        // Only animate if not currently animating
+        if (numberElement.dataset.animating === "true") return;
 
         const target = parseInt(h3.dataset.target, 10);
 
         numberElement.style.transform = "scale(1)";
         numberElement.style.opacity = "1";
-        animateCounter(h3, target);
+
+        // Mark as animating to prevent re-triggering during animation
+        numberElement.dataset.animating = "true";
+
+        animateCounter(h3, target, () => {
+          // Clear animating flag after animation completes
+          numberElement.dataset.animating = "false";
+        });
       } else {
-        const numberElement = entry.target;
+        // Reset when leaving viewport
+        // Cancel any ongoing animation first
+        if (numberElement.dataset.intervalId) {
+          clearInterval(parseInt(numberElement.dataset.intervalId));
+          numberElement.dataset.intervalId = null;
+        }
+
+        numberElement.dataset.animating = "false";
         numberElement.style.transform = "scale(0.8)";
         numberElement.style.opacity = "0";
+
+        // Reset the counter value
+        const suffix = h3.dataset.suffix || "";
+        h3.textContent = `0${suffix}`;
       }
     });
   };
@@ -233,17 +254,19 @@ function setupNumberAnimations() {
   numbers.forEach((number) => {
     number.style.transform = "scale(0.8)";
     number.style.opacity = "0";
+    number.style.transition = "transform 0.6s ease, opacity 0.6s ease";
     observer.observe(number);
   });
 }
 
-function animateCounter(element, targetNumber) {
+function animateCounter(element, targetNumber, onComplete) {
   const countDuration = 2000;
   const frameRate = 30;
   const totalFrames = Math.round((countDuration / 1000) * frameRate);
   const increment = targetNumber / totalFrames;
 
   const suffix = element.dataset.suffix || "";
+  const numberElement = element.closest(".numbers");
 
   let currentNumber = 0;
   let frame = 0;
@@ -255,10 +278,17 @@ function animateCounter(element, targetNumber) {
     if (frame >= totalFrames) {
       currentNumber = targetNumber;
       clearInterval(counterInterval);
+      if (numberElement) numberElement.dataset.intervalId = null;
+      if (onComplete) onComplete();
     }
 
     element.textContent = `${Math.round(currentNumber)}${suffix}`;
   }, 1000 / frameRate);
+
+  // Store interval ID so it can be cancelled if needed
+  if (numberElement) {
+    numberElement.dataset.intervalId = counterInterval;
+  }
 }
 
 function setupHighlightsObserver() {
