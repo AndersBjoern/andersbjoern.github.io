@@ -1,7 +1,6 @@
 window.addEventListener("sectionsLoaded", (event) => {
   if (event.detail.isMobile) {
     initializeVideoPreloading();
-    initializeConnectButtonEffect();
     initializeVideoScrollTrigger();
     initializeVideoMaskEffect();
     projectShowcaseButtons();
@@ -74,30 +73,6 @@ function initializeVideoPreloading() {
       },
       { once: true },
     );
-  });
-}
-
-function initializeConnectButtonEffect() {
-  ScrollTrigger.create({
-    trigger: ".contact-button",
-    start: "top bottom",
-    end: "bottom top",
-    onEnter: () => {
-      document.querySelector(".connect-button").style.opacity = "0";
-      document.querySelector(".connect-button").style.pointerEvents = "none";
-    },
-    onLeaveBack: () => {
-      document.querySelector(".connect-button").style.opacity = "1";
-      document.querySelector(".connect-button").style.pointerEvents = "auto";
-    },
-    onLeave: () => {
-      document.querySelector(".connect-button").style.opacity = "1";
-      document.querySelector(".connect-button").style.pointerEvents = "auto";
-    },
-    onEnterBack: () => {
-      document.querySelector(".connect-button").style.opacity = "0";
-      document.querySelector(".connect-button").style.pointerEvents = "none";
-    },
   });
 }
 
