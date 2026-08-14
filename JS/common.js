@@ -28,38 +28,46 @@ function dynamicTextBoxForAudience() {
     }, 100);
   });
 
+  // Observe the landing section bottom for size changes
   if (sectionBottom) {
     resizeObserver.observe(sectionBottom);
   }
 
   const audienceData = {
     anyone: {
+      image: "../Images/heroBackground.png",
       theme: "audience-anyone",
       text: `
-        I'm a Project Leader & Product Innovator, creating ecosystems that enable people to work, learn and play.
-        <br><br>
-        Throughout my career, I've led multidisciplinary teams, driven product development and contributed with software and UI design to products that are live today
-    
+        I design and build products and experiences that connect digital technology with real-world interactions in meaningful and intuitive ways.
       `,
     },
 
     recruiters: {
+      image: "../Images/heroBackground.png",
       theme: "audience-recruiters",
       text: `
-        I’ve worked across digital products, interactive play, immersive XR and digital-physical experiences, taking ideas from discovery and user research through prototyping, development and delivery - while keeping teams focused on what actually creates value.
-        <br><br>
-        I’m particularly drawn to products that connect multiple systems, disciplines or physical and digital touchpoints, where creating the right experience means understanding not just the interface, but the ecosystem behind it.
+        I design and build connected, cross-platform product experiences at the intersection of UX, systems thinking, and product strategy.
+        <br>
+        I focus on simplifying complexity while aligning business goals with user needs.
+      `,
+    },
+
+    "product-designers": {
+      image: "../Images/heroBackground.png",
+      theme: "audience-product-designers",
+      text: `
+        At the intersection of UX, systems thinking, and product strategy - I shape connected experiences across digital and physical ecosystems.
       `,
     },
 
     engineers: {
+      image: "../Images/heroBackground.png",
       theme: "audience-engineers",
       text: `
-    <p>I'm a <span class="accent">highly_technical</span> product designer.</p>
-    <p>This.includes() {</p>
-    <p>   developing and designing physical and digital experiences, product strategy and project management };</p>
-    <p>while (I'm != software_engineer) {</p>
-    <p>   I do have skills in = <span class="accent"><i class="fab fa-unity"></i> Unity</span>, <span class="accent"><i class="fas fa-code"></i> .NET</span>, <span class="accent"><i class="fab fa-node-js"></i> Node.js</span>, <span class="accent"><i class="fas fa-database"></i> SQL</span>;</p>
+    I'm a <span class="accent"> highly_technical</span> product designer.
+    <br>This.includes() { developing and designing physical and digital experiences, product strategy and project management };
+    <br>while (I'm!=software_engineer) {
+    I do have skills in = <span class="accent"><i class="fab fa-unity"></i> Unity</span>, <span class="accent"><i class="fas fa-code"></i> .NET</span>, <span class="accent"><i class="fab fa-node-js"></i> Node.js</span>, <span class="accent"><i class="fas fa-database"></i> SQL</span>;
       `,
     },
   };
@@ -91,6 +99,12 @@ function dynamicTextBoxForAudience() {
         dynamicText.innerHTML = data.text;
         sectionBottom.className = `landing-section-bottom ${data.theme}`;
 
+        // Update background image
+        sectionBackground.style.setProperty(
+          "--background-image",
+          `url('${data.image}')`,
+        );
+
         // Fade in container
         contentContainer.style.opacity = 1;
       }, 300);
@@ -106,6 +120,12 @@ function dynamicTextBoxForAudience() {
         // Update content and theme
         dynamicText.innerHTML = data.text;
         sectionBottom.className = `landing-section-bottom ${data.theme}`;
+
+        // Update background image
+        sectionBackground.style.setProperty(
+          "--background-image",
+          `url('${data.image}')`,
+        );
 
         // Allow container to measure new content height
         contentContainer.style.height = "auto";
@@ -149,12 +169,9 @@ function initializeShowMoreButton() {
     showMoreButton.addEventListener("click", function () {
       const container = document.querySelector(".cert-container");
       container.classList.toggle("show-all");
-
-      // Preserve the icon by updating innerHTML instead of textContent
-      const isExpanded = container.classList.contains("show-all");
-      this.innerHTML = isExpanded
-        ? 'Show Less <i class="fas fa-chevron-up"></i>'
-        : 'Show More <i class="fas fa-chevron-down"></i>';
+      this.textContent = container.classList.contains("show-all")
+        ? "Show Less"
+        : "Show More";
     });
   }
 }
@@ -186,11 +203,13 @@ function setupSkillsAnimation() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const scrollers = document.querySelectorAll(".skills-scroller");
+  console.log(scrollers.length);
   scrollers.forEach((scroller) => {
     scroller.setAttribute("data-animated", true);
 
     const scrollerInner = scroller.querySelector(".scroller_inner");
     const scrollerContent = Array.from(scrollerInner.children);
+    console.log(scrollerContent.length);
     scrollerContent.forEach((item) => {
       const duplicatedItem = item.cloneNode(true);
       duplicatedItem.setAttribute("aria-hidden", true);
@@ -206,47 +225,26 @@ function setupNumberAnimations() {
 
   const observerOptions = {
     root: null,
-    rootMargin: "-10% 0px -10% 0px", // Add margin to prevent edge flickering
-    threshold: 0.5,
+    rootMargin: "0px",
+    threshold: 0.8,
   };
 
   const observerCallback = (entries) => {
     entries.forEach((entry) => {
-      const numberElement = entry.target;
-      const h3 = numberElement.querySelector("h3");
-      if (!h3) return;
-
       if (entry.isIntersecting) {
-        // Only animate if not currently animating
-        if (numberElement.dataset.animating === "true") return;
+        const numberElement = entry.target;
+        const h3 = numberElement.querySelector("h3");
+        if (!h3) return;
 
         const target = parseInt(h3.dataset.target, 10);
 
         numberElement.style.transform = "scale(1)";
         numberElement.style.opacity = "1";
-
-        // Mark as animating to prevent re-triggering during animation
-        numberElement.dataset.animating = "true";
-
-        animateCounter(h3, target, () => {
-          // Clear animating flag after animation completes
-          numberElement.dataset.animating = "false";
-        });
+        animateCounter(h3, target);
       } else {
-        // Reset when leaving viewport
-        // Cancel any ongoing animation first
-        if (numberElement.dataset.intervalId) {
-          clearInterval(parseInt(numberElement.dataset.intervalId));
-          numberElement.dataset.intervalId = null;
-        }
-
-        numberElement.dataset.animating = "false";
+        const numberElement = entry.target;
         numberElement.style.transform = "scale(0.8)";
         numberElement.style.opacity = "0";
-
-        // Reset the counter value
-        const suffix = h3.dataset.suffix || "";
-        h3.textContent = `0${suffix}`;
       }
     });
   };
@@ -256,19 +254,15 @@ function setupNumberAnimations() {
   numbers.forEach((number) => {
     number.style.transform = "scale(0.8)";
     number.style.opacity = "0";
-    number.style.transition = "transform 0.6s ease, opacity 0.6s ease";
     observer.observe(number);
   });
 }
 
-function animateCounter(element, targetNumber, onComplete) {
+function animateCounter(element, targetNumber) {
   const countDuration = 2000;
   const frameRate = 30;
   const totalFrames = Math.round((countDuration / 1000) * frameRate);
   const increment = targetNumber / totalFrames;
-
-  const suffix = element.dataset.suffix || "";
-  const numberElement = element.closest(".numbers");
 
   let currentNumber = 0;
   let frame = 0;
@@ -280,23 +274,16 @@ function animateCounter(element, targetNumber, onComplete) {
     if (frame >= totalFrames) {
       currentNumber = targetNumber;
       clearInterval(counterInterval);
-      if (numberElement) numberElement.dataset.intervalId = null;
-      if (onComplete) onComplete();
     }
 
-    element.textContent = `${Math.round(currentNumber)}${suffix}`;
+    element.textContent = `${Math.round(currentNumber)}+`;
   }, 1000 / frameRate);
-
-  if (numberElement) {
-    numberElement.dataset.intervalId = counterInterval;
-  }
 }
 
 function setupHighlightsObserver() {
   const highlightsSection = document.querySelector(".highlights-section");
   const blackBackground = document.querySelector(".black-background");
   const highlightedTitles = document.querySelectorAll(".highlights-accent");
-  const hobbyItems = document.querySelectorAll(".hobby-item");
   const body = document.body;
 
   const root = document.documentElement;
@@ -309,12 +296,14 @@ function setupHighlightsObserver() {
 
   if (!highlightsSection || !blackBackground) return;
 
+  // Ensure transitions are set on all elements before any state changes
   body.style.transition = "background-color 1.5s ease";
   blackBackground.style.transition = "all 1.5s ease";
   highlightedTitles.forEach((title) => {
     title.style.transition = "color 1.5s ease";
   });
 
+  // Use lower threshold on mobile since the section is taller relative to viewport
   const isMobile = window.innerWidth <= 900;
   const observerOptions = {
     root: null,
@@ -327,6 +316,7 @@ function setupHighlightsObserver() {
       const isIntersecting = entry.isIntersecting;
 
       if (isIntersecting) {
+        // Use requestAnimationFrame to ensure all style changes happen together
         requestAnimationFrame(() => {
           body.style.backgroundColor = "white";
           blackBackground.style.color = fontColor;
@@ -334,18 +324,11 @@ function setupHighlightsObserver() {
           blackBackground.style.borderTopRightRadius = "40px";
           blackBackground.style.borderBottomRightRadius = "40px";
 
+          // Force a reflow to ensure color changes are applied after layout changes
           void blackBackground.offsetHeight;
 
           highlightedTitles.forEach((title) => {
             title.style.color = accentFontColor;
-          });
-
-          hobbyItems.forEach((item) => {
-            item.classList.add("animate-hobbies");
-            const icon = item.querySelector("i");
-            if (icon) {
-              icon.style.color = fontColor;
-            }
           });
         });
       } else {
@@ -356,18 +339,11 @@ function setupHighlightsObserver() {
           blackBackground.style.borderTopRightRadius = "0";
           blackBackground.style.borderBottomRightRadius = "0";
 
+          // Force a reflow to ensure color changes are applied after layout changes
           void blackBackground.offsetHeight;
 
           highlightedTitles.forEach((title) => {
             title.style.color = backgroundcolor;
-          });
-
-          hobbyItems.forEach((item) => {
-            item.classList.remove("animate-hobbies");
-            const icon = item.querySelector("i");
-            if (icon) {
-              icon.style.color = "black";
-            }
           });
         });
       }
@@ -378,7 +354,10 @@ function setupHighlightsObserver() {
   observer.observe(highlightsSection);
 }
 
+// Testimonial drag/scroll functionality for both mobile and desktop
 function initializeTestimonialDragScroll() {
+  // This function runs after testimonials are initialized by mobile.js or desktop.js
+  // It finds all testimonial scrollers (1 on mobile, 2 on desktop) and adds drag functionality
   const scrollers = document.querySelectorAll(".testimonials-scroller");
 
   scrollers.forEach((scroller) => {
