@@ -5,7 +5,10 @@ window.addEventListener("sectionsLoaded", (event) => {
   setupSkillsAnimation();
   setupNumberAnimations();
   initializeTestimonialDragScroll();
-  //setupHighlightsObserver();
+  requestAnimationFrame(() => {
+    setupHighlightsObserver();
+    ScrollTrigger.refresh();
+  });
 });
 
 function dynamicTextBoxForAudience() {

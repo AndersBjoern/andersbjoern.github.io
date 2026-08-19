@@ -1869,6 +1869,7 @@ body {
 }
 .skills-section .scroller_inner {
   padding-block: 1rem;
+  padding-inline: 10%;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -1918,7 +1919,7 @@ body {
 
 @keyframes scroll {
   to {
-    transform: translate(calc(-50% - 0.5rem));
+    transform: translate(-60%);
   }
 }
 @media screen and (max-width: 900px) {
